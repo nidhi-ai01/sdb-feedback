@@ -3,123 +3,135 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>She Deserves the Best – Feedback</title>
+  <title>She Deserves the Best - Reviews</title>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display&family=Roboto&display=swap" rel="stylesheet">
   <style>
     * {
-      margin: 0;
-      padding: 0;
       box-sizing: border-box;
     }
     body {
+      margin: 0;
       font-family: 'Roboto', sans-serif;
-      background: linear-gradient(-45deg, #ffe8f0, #e3f2fd, #fff0f0, #fce4ec);
+      background: linear-gradient(270deg, #ffdde1, #ee9ca7);
       background-size: 400% 400%;
-      animation: gradientBG 10s ease infinite;
-      min-height: 100vh;
-      overflow-x: hidden;
+      animation: gradientBG 15s ease infinite;
+      color: #333;
     }
     @keyframes gradientBG {
-      0% {background-position: 0% 50%;}
-      50% {background-position: 100% 50%;}
-      100% {background-position: 0% 50%;}
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
     }
     header {
+      background-color: rgba(0,0,0,0.6);
+      color: #f8f8f8;
+      padding: 2rem;
       text-align: center;
-      padding: 2rem 1rem;
-      animation: slideDown 1s ease-out;
+      animation: fadeIn 1.5s ease;
     }
     header h1 {
       font-family: 'Playfair Display', serif;
       font-size: 2.5rem;
-      color: #c44569;
+      margin: 0.5rem 0;
     }
     header p {
       font-size: 1.1rem;
-      color: #555;
-    }
-    @keyframes slideDown {
-      from { transform: translateY(-50px); opacity: 0; }
-      to { transform: translateY(0); opacity: 1; }
-    }
-    .intro-message {
-      text-align: center;
-      margin: 1rem auto 2rem;
-      padding: 1.2rem;
-      max-width: 700px;
-      font-size: 1.2rem;
-      background-color: rgba(255, 255, 255, 0.85);
-      border-radius: 10px;
-      animation: fadeIn 1.5s ease-in;
-      color: #444;
-    }
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(30px); }
-      to { opacity: 1; transform: translateY(0); }
+      color: #fddde6;
     }
     .container {
-      max-width: 700px;
+      max-width: 800px;
       margin: 2rem auto;
-      padding: 2rem;
-      background-color: #ffffffdd;
-      border-radius: 10px;
-      box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+      padding: 0 1rem;
     }
-    h2 {
+    .intro {
       text-align: center;
-      margin-bottom: 1rem;
+      margin-bottom: 2rem;
+      animation: fadeIn 2s ease;
+    }
+    .intro h2 {
       color: #c44569;
     }
-    label {
+    .intro p {
+      font-size: 1.1rem;
+    }
+    form {
+      background-color: #fff;
+      padding: 1.5rem;
+      border-radius: 12px;
+      box-shadow: 0 6px 12px rgba(0,0,0,0.1);
+      animation: slideUp 2s ease;
+    }
+    form label {
       display: block;
       margin-top: 1rem;
       font-weight: 500;
     }
-    input, textarea {
+    form input, form textarea {
       width: 100%;
       padding: 0.75rem;
-      margin-top: 0.3rem;
-      border-radius: 5px;
+      margin-top: 0.5rem;
       border: 1px solid #ccc;
-      font-family: 'Roboto', sans-serif;
-      font-size: 1rem;
-      transition: 0.3s ease;
+      border-radius: 6px;
+      transition: all 0.3s ease;
     }
-    input:focus, textarea:focus {
+    form input:focus, form textarea:focus {
       border-color: #c44569;
       outline: none;
-      background-color: #fffafc;
+      box-shadow: 0 0 8px #f4a1bc;
     }
-    button {
+    form button {
       margin-top: 1.5rem;
-      padding: 0.8rem 2rem;
       background-color: #c44569;
       color: white;
+      padding: 0.75rem 1.5rem;
       border: none;
+      border-radius: 4px;
       font-size: 1rem;
-      border-radius: 5px;
       cursor: pointer;
-      transition: background 0.3s ease, transform 0.2s;
+      transition: background 0.3s ease;
     }
-    button:hover {
+    form button:hover {
       background-color: #a83a58;
-      transform: scale(1.05);
     }
-    #thankyou {
+    .thankyou-message {
       display: none;
-      text-align: center;
+      background: #fff;
+      padding: 2rem;
       margin-top: 2rem;
-      font-size: 1.3rem;
-      color: #28a745;
-      animation: fadeIn 1s ease-in;
+      border-radius: 10px;
+      text-align: center;
+      animation: fadeIn 1s ease-in-out;
+    }
+    .review-section {
+      background: #fff;
+      padding: 1.5rem;
+      margin-top: 3rem;
+      border-radius: 10px;
+      box-shadow: 0 6px 12px rgba(0,0,0,0.1);
+    }
+    .review {
+      margin-bottom: 1rem;
+      padding: 1rem;
+      border-left: 3px solid #c44569;
+      background: #fefefe;
+      border-radius: 6px;
     }
     footer {
       text-align: center;
       padding: 2rem;
       font-size: 0.9rem;
-      color: #888;
+      color: #666;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes slideUp {
+      from { opacity: 0; transform: translateY(40px); }
+      to { opacity: 1; transform: translateY(0); }
     }
   </style>
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
 </head>
 <body>
   <header>
@@ -127,38 +139,64 @@
     <p>A Journey Through Love, Pain, and Healing</p>
   </header>
 
-  <div class="intro-message">
-    🌸 Thank you for reading <strong>She Deserves the Best</strong>. Your support means the world to me. Now, I'd be truly honored to hear your thoughts. 🌸
-  </div>
-
   <div class="container">
-    <h2>💬 Share Your Review</h2>
-    <form action="https://formspree.io/f/xjkrzkrn" method="POST" onsubmit="return showThankYou()">
+    <div class="intro">
+      <h2>Thank you for reading!</h2>
+      <p>We'd love to hear your thoughts. Share your feedback below — your words matter more than you know.</p>
+    </div>
+
+    <form id="review-form" action="https://formspree.io/f/xjkrzkrn" method="POST">
       <label for="name">Your Name:</label>
-      <input type="text" name="name" id="name" required />
+      <input type="text" id="name" name="name" required>
 
       <label for="email">Your Email (optional):</label>
-      <input type="email" name="email" id="email" />
+      <input type="email" id="email" name="email">
 
       <label for="review">Your Review:</label>
-      <textarea name="review" id="review" rows="6" required></textarea>
+      <textarea id="review" name="review" rows="6" required></textarea>
 
       <button type="submit">Submit Review</button>
     </form>
-    <div id="thankyou">🌟 Thank you for your kind words! 🌟</div>
+
+    <div class="thankyou-message" id="thankyou">
+      <h3>🎉 Thank you for your review!</h3>
+      <p>We're truly grateful for your feedback. 🌸</p>
+    </div>
+
+    <div class="review-section">
+      <h2>What Readers Are Saying</h2>
+      <div class="review"><strong>Aarushi:</strong> "This novel broke me, healed me, and made me feel seen. Absolutely unforgettable."</div>
+      <div class="review"><strong>Ishita:</strong> "I cried. I smiled. I felt every word. A masterpiece for every girl who's ever felt invisible."</div>
+      <div class="review"><strong>Megha:</strong> "Sanya's journey is so real. I wish I had this book in college. Thank you, Nidhi."</div>
+    </div>
   </div>
 
   <footer>
-    &copy; 2025 Nidhi S | <a href="https://bit.ly/3I4eq0Z" target="_blank">More about the book</a>
+    &copy; 2025 Nidhi S | All Rights Reserved
   </footer>
 
   <script>
-    function showThankYou() {
-      const form = document.querySelector("form");
-      form.style.display = "none";
-      document.getElementById("thankyou").style.display = "block";
-      return true;
-    }
+    const form = document.getElementById("review-form");
+    const thankyou = document.getElementById("thankyou");
+
+    form.addEventListener("submit", function(event) {
+      event.preventDefault();
+      const formData = new FormData(form);
+
+      fetch(form.action, {
+        method: "POST",
+        body: formData,
+        headers: { 'Accept': 'application/json' }
+      }).then(() => {
+        form.style.display = "none";
+        thankyou.style.display = "block";
+        confetti({
+          particleCount: 150,
+          spread: 70,
+          origin: { y: 0.6 }
+        });
+      });
+    });
   </script>
 </body>
 </html>
