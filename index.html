@@ -3,135 +3,126 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>She Deserves the Best - Reviews</title>
+  <title>She Deserves the Best - Feedback</title>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display&family=Roboto&display=swap" rel="stylesheet">
   <style>
+    :root {
+      --main-color: #c44569;
+      --accent-color: #f8f1f1;
+      --bg-color: #fff8f0;
+      --dark-color: #2b2d42;
+    }
     * {
       box-sizing: border-box;
+      margin: 0;
+      padding: 0;
     }
     body {
-      margin: 0;
       font-family: 'Roboto', sans-serif;
-      background: linear-gradient(270deg, #ffdde1, #ee9ca7);
+      background: linear-gradient(-45deg, #fbeaff, #f0f4ff, #fcefed, #f3faff);
       background-size: 400% 400%;
       animation: gradientBG 15s ease infinite;
       color: #333;
     }
     @keyframes gradientBG {
-      0% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
+      0% {background-position: 0% 50%;}
+      50% {background-position: 100% 50%;}
+      100% {background-position: 0% 50%;}
     }
     header {
-      background-color: rgba(0,0,0,0.6);
-      color: #f8f8f8;
+      background-color: var(--dark-color);
+      color: white;
       padding: 2rem;
       text-align: center;
-      animation: fadeIn 1.5s ease;
     }
     header h1 {
       font-family: 'Playfair Display', serif;
       font-size: 2.5rem;
-      margin: 0.5rem 0;
-    }
-    header p {
-      font-size: 1.1rem;
-      color: #fddde6;
-    }
-    .container {
-      max-width: 800px;
-      margin: 2rem auto;
-      padding: 0 1rem;
     }
     .intro {
       text-align: center;
-      margin-bottom: 2rem;
-      animation: fadeIn 2s ease;
+      margin: 2rem auto;
+      max-width: 700px;
     }
     .intro h2 {
-      color: #c44569;
-    }
-    .intro p {
-      font-size: 1.1rem;
+      color: var(--main-color);
+      margin-bottom: 1rem;
     }
     form {
-      background-color: #fff;
-      padding: 1.5rem;
-      border-radius: 12px;
-      box-shadow: 0 6px 12px rgba(0,0,0,0.1);
-      animation: slideUp 2s ease;
+      background-color: white;
+      margin: 2rem auto;
+      padding: 2rem;
+      border-radius: 10px;
+      max-width: 600px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      transition: transform 0.3s;
     }
-    form label {
-      display: block;
+    form:hover {
+      transform: scale(1.02);
+    }
+    label {
       margin-top: 1rem;
-      font-weight: 500;
+      display: block;
     }
-    form input, form textarea {
+    input, textarea {
       width: 100%;
       padding: 0.75rem;
       margin-top: 0.5rem;
       border: 1px solid #ccc;
-      border-radius: 6px;
-      transition: all 0.3s ease;
+      border-radius: 5px;
     }
-    form input:focus, form textarea:focus {
-      border-color: #c44569;
-      outline: none;
-      box-shadow: 0 0 8px #f4a1bc;
-    }
-    form button {
+    button {
       margin-top: 1.5rem;
-      background-color: #c44569;
+      background-color: var(--main-color);
       color: white;
       padding: 0.75rem 1.5rem;
       border: none;
-      border-radius: 4px;
-      font-size: 1rem;
+      border-radius: 5px;
       cursor: pointer;
-      transition: background 0.3s ease;
+      transition: background 0.3s;
     }
-    form button:hover {
+    button:hover {
       background-color: #a83a58;
     }
-    .thankyou-message {
+    .thankyou {
       display: none;
-      background: #fff;
-      padding: 2rem;
-      margin-top: 2rem;
-      border-radius: 10px;
       text-align: center;
-      animation: fadeIn 1s ease-in-out;
-    }
-    .review-section {
-      background: #fff;
       padding: 1.5rem;
-      margin-top: 3rem;
-      border-radius: 10px;
-      box-shadow: 0 6px 12px rgba(0,0,0,0.1);
+      background-color: #e8fce8;
+      color: green;
+      margin: 2rem auto;
+      border-radius: 8px;
+      width: 80%;
+      max-width: 600px;
     }
-    .review {
+    .reviews {
+      margin: 3rem auto;
+      max-width: 700px;
+      background-color: #ffffffd9;
+      padding: 2rem;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+    }
+    .reviews h3 {
+      text-align: center;
+      margin-bottom: 1.5rem;
+      color: var(--dark-color);
+    }
+    .review-item {
+      background: #f9f9f9;
       margin-bottom: 1rem;
       padding: 1rem;
-      border-left: 3px solid #c44569;
-      background: #fefefe;
       border-radius: 6px;
+      border-left: 4px solid var(--main-color);
     }
     footer {
-      text-align: center;
+      margin-top: 4rem;
       padding: 2rem;
-      font-size: 0.9rem;
-      color: #666;
-    }
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(-20px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-    @keyframes slideUp {
-      from { opacity: 0; transform: translateY(40px); }
-      to { opacity: 1; transform: translateY(0); }
+      text-align: center;
+      background-color: var(--dark-color);
+      color: white;
     }
   </style>
-  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
 </head>
 <body>
   <header>
@@ -139,64 +130,74 @@
     <p>A Journey Through Love, Pain, and Healing</p>
   </header>
 
-  <div class="container">
-    <div class="intro">
-      <h2>Thank you for reading!</h2>
-      <p>We'd love to hear your thoughts. Share your feedback below — your words matter more than you know.</p>
-    </div>
+  <section class="intro">
+    <h2>Thank you for reading my novel ❤️</h2>
+    <p>I’d love to hear your thoughts. Share your review below!</p>
+  </section>
 
-    <form id="review-form" action="https://formspree.io/f/xjkrzkrn" method="POST">
-      <label for="name">Your Name:</label>
-      <input type="text" id="name" name="name" required>
+  <form action="https://formspree.io/f/xjkrzkrn" method="POST" id="feedback-form">
+    <label for="name">Your Name:</label>
+    <input type="text" id="name" name="name" required>
 
-      <label for="email">Your Email (optional):</label>
-      <input type="email" id="email" name="email">
+    <label for="email">Your Email (optional):</label>
+    <input type="email" id="email" name="email">
 
-      <label for="review">Your Review:</label>
-      <textarea id="review" name="review" rows="6" required></textarea>
+    <label for="review">Your Review:</label>
+    <textarea id="review" name="review" rows="5" required></textarea>
 
-      <button type="submit">Submit Review</button>
-    </form>
+    <button type="submit">Submit Review</button>
+  </form>
 
-    <div class="thankyou-message" id="thankyou">
-      <h3>🎉 Thank you for your review!</h3>
-      <p>We're truly grateful for your feedback. 🌸</p>
-    </div>
-
-    <div class="review-section">
-      <h2>What Readers Are Saying</h2>
-      <div class="review"><strong>Aarushi:</strong> "This novel broke me, healed me, and made me feel seen. Absolutely unforgettable."</div>
-      <div class="review"><strong>Ishita:</strong> "I cried. I smiled. I felt every word. A masterpiece for every girl who's ever felt invisible."</div>
-      <div class="review"><strong>Megha:</strong> "Sanya's journey is so real. I wish I had this book in college. Thank you, Nidhi."</div>
-    </div>
+  <div class="thankyou" id="thankyou-message">
+    <h3>🎉 Thank you for your review!</h3>
+    <p>Your feedback means the world to me.</p>
   </div>
 
+  <section class="reviews">
+    <h3>Recent Reader Reviews</h3>
+    <div class="review-item">
+      <strong>Aarav:</strong> <br/> "Sanya’s journey made me cry and smile at the same time. Beautifully written."
+    </div>
+    <div class="review-item">
+      <strong>Meera:</strong> <br/> "I felt seen in every chapter. Thank you for writing this."
+    </div>
+    <div class="review-item">
+      <strong>Riya:</strong> <br/> "This story healed something in me. A must-read!"
+    </div>
+  </section>
+
   <footer>
-    &copy; 2025 Nidhi S | All Rights Reserved
+    &copy; 2025 Nidhi S | <a href="https://nidhi-ai01.github.io/sdb-feedback/" style="color:#f8f8f8; text-decoration:underline">Feedback Website</a>
   </footer>
 
   <script>
-    const form = document.getElementById("review-form");
-    const thankyou = document.getElementById("thankyou");
-
-    form.addEventListener("submit", function(event) {
-      event.preventDefault();
-      const formData = new FormData(form);
-
+    document.getElementById("feedback-form").addEventListener("submit", function(e) {
+      e.preventDefault();
+      const form = e.target;
       fetch(form.action, {
         method: "POST",
-        body: formData,
-        headers: { 'Accept': 'application/json' }
-      }).then(() => {
-        form.style.display = "none";
-        thankyou.style.display = "block";
-        confetti({
-          particleCount: 150,
-          spread: 70,
-          origin: { y: 0.6 }
-        });
+        body: new FormData(form),
+        headers: {
+          'Accept': 'application/json'
+        }
+      }).then(response => {
+        if (response.ok) {
+          form.style.display = 'none';
+          document.getElementById("thankyou-message").style.display = 'block';
+          confetti();
+        }
       });
     });
+
+    function confetti() {
+      const jsConfetti = new JSConfetti();
+      jsConfetti.addConfetti({
+        emojis: ['🎉','✨','🌸','💫','🌟'],
+        confettiRadius: 6,
+        confettiNumber: 100,
+      });
+    }
   </script>
+  <script src="https://cdn.jsdelivr.net/npm/js-confetti@latest/dist/js-confetti.browser.js"></script>
 </body>
 </html>
