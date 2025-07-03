@@ -2,158 +2,205 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>She Deserves the Best - Feedback</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>She Deserves the Best - Reader Reviews</title>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display&family=Roboto&display=swap" rel="stylesheet">
   <style>
+    * {
+      box-sizing: border-box;
+      scroll-behavior: smooth;
+    }
     body {
       margin: 0;
       font-family: 'Roboto', sans-serif;
-      background: linear-gradient(135deg, #fff6e5, #ffe6f0);
+      background: linear-gradient(to right, #fff8f0, #ffe7e0);
       color: #333;
-      overflow-x: hidden;
+      animation: fadeIn 1.2s ease-in;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
     }
     header {
-      background-color: #2b2d42;
-      color: white;
-      text-align: center;
+      background: linear-gradient(45deg, #2b2d42, #1d1f2f);
+      color: #f8f8f8;
       padding: 2rem 1rem;
-      animation: fadeIn 1.5s ease;
+      text-align: center;
+      animation: slideInTop 1s ease-out;
+    }
+    @keyframes slideInTop {
+      from { transform: translateY(-100%); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
     }
     header h1 {
-      margin: 0;
       font-family: 'Playfair Display', serif;
+      margin: 0;
       font-size: 2.5rem;
     }
     .container {
       max-width: 800px;
       margin: 2rem auto;
-      padding: 1rem;
-      animation: slideUp 1s ease;
+      padding: 0 1rem;
+    }
+    .intro {
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+    .intro h2 {
+      color: #c44569;
+      animation: popIn 0.6s ease-out;
+    }
+    @keyframes popIn {
+      0% { transform: scale(0.8); opacity: 0; }
+      100% { transform: scale(1); opacity: 1; }
     }
     form {
       background-color: #fff;
       padding: 2rem;
       border-radius: 12px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+      animation: fadeIn 1.5s ease;
+    }
+    form label {
+      display: block;
+      margin-top: 1rem;
+      font-weight: 600;
     }
     form input, form textarea {
       width: 100%;
-      margin-top: 1rem;
-      padding: 0.8rem;
+      padding: 0.9rem;
+      margin-top: 0.5rem;
       border: 1px solid #ccc;
       border-radius: 6px;
+      font-family: 'Roboto', sans-serif;
+      transition: border-color 0.3s ease;
+    }
+    form input:focus, form textarea:focus {
+      border-color: #c44569;
+      outline: none;
     }
     form button {
-      margin-top: 1rem;
-      padding: 0.8rem 2rem;
+      margin-top: 1.5rem;
       background-color: #c44569;
       color: white;
+      padding: 0.8rem 1.8rem;
       border: none;
       border-radius: 6px;
       font-size: 1rem;
       cursor: pointer;
+      transition: background 0.3s ease;
     }
     form button:hover {
       background-color: #a83a58;
-    }
-    .reviews {
-      margin-top: 3rem;
-    }
-    .review-card {
-      background: white;
-      border-left: 4px solid #c44569;
-      margin-bottom: 1.5rem;
-      padding: 1rem;
-      border-radius: 8px;
-      animation: fadeInUp 0.8s ease;
-    }
-    .review-card h3 {
-      margin: 0 0 0.5rem 0;
-      color: #c44569;
     }
     .thank-you {
       display: none;
       text-align: center;
       font-size: 1.2rem;
       color: green;
-      margin-top: 1rem;
-      animation: popIn 0.6s ease;
+      margin-top: 2rem;
+      animation: fadeIn 1s ease;
     }
-
-    @keyframes fadeIn { from { opacity: 0 } to { opacity: 1 } }
-    @keyframes slideUp { from { transform: translateY(20px); opacity: 0 } to { transform: translateY(0); opacity: 1 } }
-    @keyframes fadeInUp { from { transform: translateY(20px); opacity: 0 } to { transform: translateY(0); opacity: 1 } }
-    @keyframes popIn { from { transform: scale(0.8); opacity: 0 } to { transform: scale(1); opacity: 1 } }
+    .confetti {
+      position: fixed;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      pointer-events: none;
+      z-index: 1000;
+    }
+    footer {
+      text-align: center;
+      padding: 2rem;
+      font-size: 0.9rem;
+      color: #888;
+    }
   </style>
 </head>
 <body>
-
   <header>
     <h1>She Deserves the Best</h1>
-    <p>Thank you for reading — we’d love to hear your thoughts!</p>
+    <p>A Journey Through Love, Pain, and Healing</p>
   </header>
 
   <div class="container">
-    <form id="reviewForm">
-      <input type="text" id="name" placeholder="Your Name" required />
-      <input type="email" id="email" placeholder="Your Email (optional)" />
-      <textarea id="review" placeholder="Your Review..." rows="6" required></textarea>
-      <button type="submit">Submit Review</button>
-      <div class="thank-you" id="thankYouMsg">🌸 Thank you for your feedback! 🌸</div>
-    </form>
-
-    <div class="reviews" id="reviews">
-      <h2 style="margin-bottom: 1rem;">✨ Reader Reviews ✨</h2>
+    <div class="intro">
+      <h2>Thank You for Reading!</h2>
+      <p>If this story touched your heart, we’d love to hear your thoughts. Share your feedback and let the journey continue through your words.</p>
     </div>
+
+    <form id="review-form" action="https://formspree.io/f/xjkrzkrn" method="POST">
+      <label for="name">Your Name:</label>
+      <input type="text" id="name" name="name" required>
+
+      <label for="email">Your Email (optional):</label>
+      <input type="email" id="email" name="email">
+
+      <label for="review">Your Review:</label>
+      <textarea id="review" name="review" rows="6" required></textarea>
+
+      <button type="submit">Submit Review</button>
+      <div class="thank-you" id="thank-you">🎉 Thank you for your review!</div>
+    </form>
   </div>
 
+  <canvas class="confetti" id="confetti-canvas"></canvas>
+
+  <footer>
+    &copy; 2025 Nidhi S | All Rights Reserved
+  </footer>
+
   <script>
-    const scriptURL = "<https://script.google.com/u/2/home/projects/1pEDqyRnvvw8m7xpDJ_fqjhSCDENIWCKw4I-DtQYmZ6dyPnEv2t8J0bBq/edit?aaac=true&pli=1>"; 
+    const form = document.getElementById('review-form');
+    const thankYou = document.getElementById('thank-you');
 
-    const form = document.getElementById("reviewForm");
-    const thankYouMsg = document.getElementById("thankYouMsg");
-    const reviewsContainer = document.getElementById("reviews");
-
-    form.addEventListener("submit", (e) => {
+    form.addEventListener('submit', function(e) {
       e.preventDefault();
-      const data = {
-        name: document.getElementById("name").value,
-        email: document.getElementById("email").value,
-        review: document.getElementById("review").value
-      };
+      const data = new FormData(form);
 
-      fetch(scriptURL, {
-        method: "POST",
-        body: JSON.stringify(data),
+      fetch(form.action, {
+        method: form.method,
+        body: data,
         headers: {
-          "Content-Type": "application/json"
+          'Accept': 'application/json'
         }
-      }).then(res => {
-        thankYouMsg.style.display = "block";
-        form.reset();
-        loadReviews();
+      }).then(response => {
+        if (response.ok) {
+          thankYou.style.display = 'block';
+          form.reset();
+          launchConfetti();
+        }
       });
     });
 
-    function loadReviews() {
-      fetch(scriptURL)
-        .then(res => res.json())
-        .then(data => {
-          let html = "";
-          data.slice(0, 5).forEach(r => {
-            html += `
-              <div class="review-card">
-                <h3>${r.name}</h3>
-                <p>${r.review}</p>
-              </div>`;
-          });
-          reviewsContainer.innerHTML += html;
+    function launchConfetti() {
+      const duration = 1.5 * 1000;
+      const animationEnd = Date.now() + duration;
+      const defaults = { startVelocity: 30, spread: 360, ticks: 60, zIndex: 1000 };
+
+      function randomInRange(min, max) {
+        return Math.random() * (max - min) + min;
+      }
+
+      const interval = setInterval(function() {
+        const timeLeft = animationEnd - Date.now();
+
+        if (timeLeft <= 0) {
+          return clearInterval(interval);
+        }
+
+        confetti({
+          particleCount: 50,
+          origin: {
+            x: randomInRange(0.1, 0.9),
+            y: Math.random() - 0.2
+          },
+          ...defaults
         });
+      }, 250);
     }
-
-    window.onload = loadReviews;
   </script>
-
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.4.0/dist/confetti.browser.min.js"></script>
 </body>
 </html>
