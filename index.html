@@ -8,6 +8,7 @@
   <meta name="keywords" content="novel, emotional healing, friendship, Nidhi S" />
   <meta name="author" content="Nidhi S" />
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display&family=Roboto&display=swap" rel="stylesheet">
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
   <style>
     :root {
       --primary-color: #c44569;
@@ -178,6 +179,9 @@
       width: 150px;
       margin-bottom: 1rem;
     }
+    .aos-animate[data-aos] {
+      transition: all 0.6s ease-in-out !important;
+    }
     @media (max-width: 768px) {
       nav {
         flex-direction: column;
@@ -194,13 +198,12 @@
 <body>
   <div id="loader"><div class="spinner"></div></div>
   <div class="stars" id="stars"></div>
-
   <div class="cat-popup" id="catPopup">
     <img src="https://media.giphy.com/media/JIX9t2j0ZTN9S/giphy.gif" alt="Thank you cat">
     <p>Thank you for your feedback! 💖</p>
   </div>
 
-  <header>
+  <header data-aos="fade-down">
     <h1 class="typing">She Deserves the Best – A Journey Through Love, Pain, and Healing</h1>
   </header>
 
@@ -220,8 +223,12 @@
   <button class="floating-btn" onclick="document.getElementById('feedback').scrollIntoView({ behavior: 'smooth' })">💌</button>
 
   <audio id="thankYouAudio" src="https://www.soundjay.com/human/sounds/applause-8.mp3"></audio>
+  <audio id="bgMusic" src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_4ba0f3d0f7.mp3?filename=inspiring-cinematic-meditation-114998.mp3" loop autoplay></audio>
 
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
   <script>
+    AOS.init();
+
     window.addEventListener("load", function() {
       document.getElementById("loader").style.display = "none";
       generateStars();
