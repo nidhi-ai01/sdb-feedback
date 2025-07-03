@@ -13,15 +13,58 @@
     }
     body {
       font-family: 'Roboto', sans-serif;
-      background: url('blurred_front_cover.jpg') no-repeat center center fixed;
-      background-size: cover;
+      background: #fdf6f8;
       color: #333;
       scroll-behavior: smooth;
       transition: background-color 0.5s, color 0.5s;
+      position: relative;
+      overflow-x: hidden;
     }
     body.dark-mode {
       background-color: #121212;
       color: #f0f0f0;
+    }
+
+    /* Animated background hearts */
+    .animated-bg {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+      overflow: hidden;
+      pointer-events: none;
+    }
+    .animated-bg::before, .animated-bg::after {
+      content: '';
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      background-image:
+        radial-gradient(circle at 10% 20%, rgba(255,192,203,0.3) 0%, transparent 60%),
+        radial-gradient(circle at 80% 30%, rgba(255,105,180,0.3) 0%, transparent 60%),
+        radial-gradient(circle at 50% 80%, rgba(255,182,193,0.25) 0%, transparent 60%);
+      animation: float 20s linear infinite;
+    }
+    @keyframes float {
+      0% {
+        transform: translateY(0);
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(-100%);
+        opacity: 0;
+      }
+    }
+
+    .theme-toggle {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      font-size: 1.2rem;
+      cursor: pointer;
+      color: #c44569;
     }
     header {
       background-color: rgba(43, 45, 66, 0.85);
@@ -32,11 +75,11 @@
     }
     header h1 {
       font-family: 'Playfair Display', serif;
-      font-size: 2.5rem;
+      font-size: 2rem;
       overflow: hidden;
-      border-right: .15em solid #fff;
       white-space: nowrap;
-      animation: typing 4s steps(30, end), blink-caret .75s step-end infinite;
+      border-right: 0.15em solid #fff;
+      animation: typing 4s steps(40, end), blink-caret 0.75s step-end infinite;
     }
     @keyframes typing {
       from { width: 0 }
@@ -46,6 +89,7 @@
       from, to { border-color: transparent }
       50% { border-color: white; }
     }
+
     nav {
       background: rgba(196, 69, 105, 0.85);
       display: flex;
@@ -54,23 +98,18 @@
       gap: 2rem;
       padding: 1rem;
     }
-    nav a, .theme-toggle {
+    nav a {
       color: white;
       text-decoration: none;
       font-weight: bold;
       transition: color 0.3s ease, transform 0.3s ease;
       cursor: pointer;
     }
-    nav a:hover, .theme-toggle:hover {
+    nav a:hover {
       color: #ffe6ea;
       transform: scale(1.1);
     }
-    .theme-toggle {
-      position: absolute;
-      top: 1rem;
-      right: 1rem;
-      font-size: 1.2rem;
-    }
+
     .section {
       padding: 2rem;
       text-align: center;
@@ -97,6 +136,7 @@
     .reviews:hover {
       transform: scale(1.02);
     }
+
     .modal {
       display: none;
       position: fixed;
@@ -123,6 +163,7 @@
       background-color: #222;
       color: #fff;
     }
+
     .close {
       position: absolute;
       top: 10px;
@@ -135,6 +176,7 @@
     .close:hover {
       color: black;
     }
+
     label, input, textarea {
       display: block;
       width: 100%;
@@ -145,6 +187,7 @@
       border: 1px solid #ccc;
       border-radius: 4px;
     }
+
     button {
       background-color: #c44569;
       color: white;
@@ -159,12 +202,14 @@
     button:hover {
       background-color: #a83a58;
     }
+
     footer {
       text-align: center;
       padding: 2rem;
       font-size: 0.9rem;
       color: #fff;
     }
+
     @keyframes fadeIn {
       from {opacity: 0;}
       to {opacity: 1;}
@@ -173,9 +218,11 @@
       from {opacity: 0; transform: translateY(20px);}
       to {opacity: 1; transform: translateY(0);}
     }
+
     #thankyou-cat {
       display: none;
       text-align: center;
+      margin-top: 1rem;
     }
     #thankyou-cat img {
       width: 150px;
@@ -184,20 +231,26 @@
   </style>
 </head>
 <body>
+  <div class="animated-bg"></div>
   <div class="theme-toggle" onclick="toggleTheme()">🌞/🌙 Theme</div>
+
   <header>
     <h1>She Deserves the Best – A Journey Through Love, Pain, and Healing</h1>
   </header>
+
   <nav>
     <a href="#reviews">Reader Reviews</a>
     <a onclick="openModal('feedbackModal')">Share Your Thoughts</a>
     <a onclick="openModal('aboutModal')">About</a>
     <a onclick="openModal('contactModal')">Contact</a>
   </nav>
+
   <section class="section" id="reviews">
     <h2 class="highlight">Real Reader Reviews</h2>
     <div id="reviewContainer"></div>
   </section>
+
+  <!-- Feedback Modal -->
   <div id="feedbackModal" class="modal">
     <div class="modal-content">
       <span class="close" onclick="closeModal('feedbackModal')">&times;</span>
@@ -217,6 +270,8 @@
       </div>
     </div>
   </div>
+
+  <!-- About Modal -->
   <div id="aboutModal" class="modal">
     <div class="modal-content">
       <span class="close" onclick="closeModal('aboutModal')">&times;</span>
@@ -225,6 +280,8 @@
       <p><a href="https://www.amazon.in">Buy the Book</a> | <a href="https://github.com/nidhi-ai01">GitHub</a> | <a href="mailto:inkbynidhi@gmail.com">Email</a></p>
     </div>
   </div>
+
+  <!-- Contact Modal -->
   <div id="contactModal" class="modal">
     <div class="modal-content">
       <span class="close" onclick="closeModal('contactModal')">&times;</span>
@@ -233,25 +290,31 @@
       <p>Email: <a href="mailto:inkbynidhi@gmail.com">inkbynidhi@gmail.com</a></p>
     </div>
   </div>
+
   <footer>
     &copy; 2025 Nidhi S | All Rights Reserved
   </footer>
+
   <script>
     function toggleTheme() {
       document.body.classList.toggle('dark-mode');
     }
+
     function openModal(id) {
       document.getElementById(id).style.display = "block";
     }
+
     function closeModal(id) {
       document.getElementById(id).style.display = "none";
     }
+
     window.onclick = function(event) {
       ['feedbackModal', 'aboutModal', 'contactModal'].forEach(id => {
         const modal = document.getElementById(id);
         if (event.target == modal) closeModal(id);
       });
     }
+
     function showThankYou() {
       document.getElementById('thankyou-cat').style.display = 'block';
       setTimeout(() => {
@@ -260,19 +323,23 @@
       }, 5000);
       return true;
     }
+
     const reviews = [
       "Heart-touching, raw and real. Sanya's journey mirrored mine.",
       "Loved the emotional depth and honesty. A must-read for every woman.",
       "I felt seen. I felt heard. This book made me feel less alone.",
       "A soulful and empowering read. Truly inspiring.",
-      "A literary hug for the broken-hearted."
+      "A literary hug for the broken-hearted.",
+      "Every chapter felt like a warm hug and a quiet revolution."
     ];
+
     function displayRandomReviews() {
       const shuffled = reviews.sort(() => 0.5 - Math.random());
       const selected = shuffled.slice(0, 3);
       const container = document.getElementById('reviewContainer');
       container.innerHTML = selected.map(text => `<div class="reviews">“${text}”</div>`).join('');
     }
+
     window.onload = displayRandomReviews;
   </script>
 </body>
