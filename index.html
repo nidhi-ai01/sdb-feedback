@@ -1,134 +1,116 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>She Deserves the Best - Author Website</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Leave Your Review – She Deserves the Best</title>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display&family=Roboto&display=swap" rel="stylesheet">
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
     body {
       font-family: 'Roboto', sans-serif;
-      background-color: #fff8f0;
+      background: linear-gradient(to right, #f8ecec, #fef6f6);
+      margin: 0;
+      padding: 0;
       color: #333;
-      scroll-behavior: smooth;
-    }
-    header {
-      background-color: #2b2d42;
-      color: #fff;
-      padding: 2rem;
-      text-align: center;
-    }
-    header h1 {
-      font-family: 'Playfair Display', serif;
-      font-size: 2.5rem;
-      animation: fadeIn 2s ease;
-    }
-    nav {
       display: flex;
-      justify-content: center;
-      background: #1a1a2e;
-      padding: 1rem;
+      flex-direction: column;
+      align-items: center;
     }
-    nav a {
-      color: #fff;
-      margin: 0 1rem;
-      text-decoration: none;
-      transition: color 0.3s;
+
+    header {
+      background-color: #a94466;
+      color: white;
+      padding: 2rem;
+      width: 100%;
+      text-align: center;
+      font-family: 'Playfair Display', serif;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
     }
-    nav a:hover {
-      color: #c44569;
+
+    h1 {
+      margin: 0;
+      font-size: 2.5rem;
     }
-    section {
-      max-width: 800px;
+
+    .container {
+      max-width: 700px;
+      width: 100%;
       margin: 2rem auto;
-      padding: 1rem;
+      background: white;
+      padding: 2rem;
+      border-radius: 12px;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+      animation: fadeIn 1.2s ease-in;
     }
-    .intro {
-      text-align: center;
-      animation: fadeInUp 1.5s ease;
-    }
-    .review-box {
-      background: #fff;
-      padding: 1rem;
-      margin-top: 1rem;
-      border-left: 5px solid #c44569;
-      border-radius: 6px;
-      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-      animation: fadeIn 1s ease;
-    }
-    footer {
-      background: #2b2d42;
-      color: #eee;
-      text-align: center;
-      padding: 1.5rem;
-    }
+
     @keyframes fadeIn {
-      from { opacity: 0; }
-      to { opacity: 1; }
+      from { opacity: 0; transform: translateY(40px); }
+      to { opacity: 1; transform: translateY(0); }
     }
-    @keyframes fadeInUp {
-      from {
-        opacity: 0;
-        transform: translateY(20px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
+
+    label {
+      display: block;
+      margin-top: 1rem;
+      font-weight: bold;
+    }
+
+    input, textarea {
+      width: 100%;
+      padding: 0.8rem;
+      margin-top: 0.3rem;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      font-size: 1rem;
+    }
+
+    button {
+      background-color: #a94466;
+      color: white;
+      padding: 0.8rem 1.8rem;
+      border: none;
+      border-radius: 6px;
+      margin-top: 1.5rem;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    button:hover {
+      background-color: #922f54;
+    }
+
+    .footer {
+      text-align: center;
+      margin-top: 3rem;
+      padding: 1rem;
+      font-size: 0.85rem;
+      color: #666;
     }
   </style>
 </head>
 <body>
   <header>
-    <h1>She Deserves the Best</h1>
-    <p>A Journey Through Love, Pain, and Healing</p>
+    <h1>We'd Love Your Feedback!</h1>
+    <p>Tell us what you felt after reading <em>She Deserves the Best</em></p>
   </header>
 
-  <nav>
-    <a href="#reviews">Reader Reviews</a>
-    <a href="#about">About the Author</a>
-    <a href="#buy">Buy the Book</a>
-    <a href="#contact">Connect</a>
-  </nav>
+  <div class="container">
+    <form action="https://formspree.io/f/xjkrzkrn" method="POST">
+      <label for="name">Name</label>
+      <input type="text" name="name" id="name" required>
 
-  <section class="intro">
-    <h2>Welcome, Dear Reader! ✨</h2>
-    <p>Thank you for being a part of this journey. We’d love to hear what this story meant to you.</p>
-  </section>
+      <label for="email">Email (optional)</label>
+      <input type="email" name="email" id="email">
 
-  <section id="reviews">
-    <h2>Reader Reviews</h2>
-    <div class="review-box">"This novel broke me and healed me — page by page."</div>
-    <div class="review-box">"I saw myself in Sanya. Thank you for writing this."</div>
-    <div class="review-box">"The emotional depth, the soft healing, the friendship... Beautiful!"</div>
-    <p style="text-align:center; margin-top:1rem; font-style:italic;">(More reviews coming soon...)</p>
-  </section>
+      <label for="review">Your Feedback</label>
+      <textarea name="review" id="review" rows="6" required></textarea>
 
-  <section id="about">
-    <h2>About the Author</h2>
-    <p>Nidhi S is a storyteller, dreamer, and quiet observer of emotions. <em>She Deserves the Best</em> is her heartfelt tribute to those navigating healing, silence, and rediscovering love — especially the kind that starts from within.</p>
-  </section>
+      <button type="submit">Submit Review</button>
+    </form>
+  </div>
 
-  <section id="buy">
-    <h2>Buy the Book</h2>
-    <p>Available on Amazon: <a href="https://www.amazon.in/dp/B0ZXXXXXXX" target="_blank">Click here to get your copy</a></p>
-  </section>
-
-  <section id="contact">
-    <h2>Connect with the Author</h2>
-    <p><strong>Email:</strong> <a href="mailto:inkbynidhi@gmail.com">inkbynidhi@gmail.com</a></p>
-    <p><strong>Discord:</strong> haxor_13</p>
-    <p><strong>GitHub:</strong> <a href="https://github.com/nidhi-ai01" target="_blank">github.com/nidhi-ai01</a></p>
-    <p><strong>Feedback Form:</strong> <a href="https://nidhi-ai01.github.io/sdb-feedback/" target="_blank">Share your thoughts</a></p>
-  </section>
-
-  <footer>
-    &copy; 2025 Nidhi S | All Rights Reserved
-  </footer>
+  <div class="footer">
+    &copy; 2025 Nidhi S | Thank you for reading my novel 💖
+  </div>
 </body>
 </html>
