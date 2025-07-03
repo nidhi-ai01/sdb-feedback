@@ -2,123 +2,158 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Reader Feedback | She Deserves the Best</title>
+  <title>She Deserves the Best - Feedback</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display&family=Roboto&display=swap" rel="stylesheet">
   <style>
     body {
       margin: 0;
       font-family: 'Roboto', sans-serif;
-      background: linear-gradient(to right, #fff1f8, #fefcea);
+      background: linear-gradient(135deg, #fff6e5, #ffe6f0);
       color: #333;
+      overflow-x: hidden;
     }
     header {
-      background-color: #4b2e83;
+      background-color: #2b2d42;
       color: white;
-      padding: 2rem 1rem;
       text-align: center;
-      animation: fadeIn 1.5s ease-in-out;
+      padding: 2rem 1rem;
+      animation: fadeIn 1.5s ease;
     }
     header h1 {
+      margin: 0;
       font-family: 'Playfair Display', serif;
-      margin-bottom: 0.2rem;
+      font-size: 2.5rem;
     }
-    .intro {
-      text-align: center;
-      padding: 1.5rem;
-      font-size: 1.2rem;
-      animation: slideUp 1s ease-in-out;
+    .container {
+      max-width: 800px;
+      margin: 2rem auto;
+      padding: 1rem;
+      animation: slideUp 1s ease;
+    }
+    form {
+      background-color: #fff;
+      padding: 2rem;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+    form input, form textarea {
+      width: 100%;
+      margin-top: 1rem;
+      padding: 0.8rem;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+    }
+    form button {
+      margin-top: 1rem;
+      padding: 0.8rem 2rem;
+      background-color: #c44569;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      font-size: 1rem;
+      cursor: pointer;
+    }
+    form button:hover {
+      background-color: #a83a58;
     }
     .reviews {
-      max-width: 900px;
-      margin: 0 auto;
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 1.5rem;
-      padding: 1rem;
+      margin-top: 3rem;
     }
     .review-card {
-      background-color: #fff;
-      border-left: 5px solid #c44569;
-      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+      background: white;
+      border-left: 4px solid #c44569;
+      margin-bottom: 1.5rem;
       padding: 1rem;
       border-radius: 8px;
-      width: 280px;
-      animation: popIn 0.8s ease forwards;
-      opacity: 0;
+      animation: fadeInUp 0.8s ease;
     }
-    .review-card:nth-child(odd) {
-      animation-delay: 0.3s;
+    .review-card h3 {
+      margin: 0 0 0.5rem 0;
+      color: #c44569;
     }
-    .review-card:nth-child(even) {
-      animation-delay: 0.6s;
-    }
-    .reviewer {
-      font-weight: bold;
-      margin-bottom: 0.5rem;
-      color: #4b2e83;
-    }
-    footer {
+    .thank-you {
+      display: none;
       text-align: center;
-      padding: 2rem 1rem;
-      font-size: 0.9rem;
-      color: #777;
+      font-size: 1.2rem;
+      color: green;
+      margin-top: 1rem;
+      animation: popIn 0.6s ease;
     }
 
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(-20px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-    @keyframes slideUp {
-      from { opacity: 0; transform: translateY(40px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-    @keyframes popIn {
-      to { opacity: 1; transform: scale(1); }
-      from { opacity: 0; transform: scale(0.9); }
-    }
+    @keyframes fadeIn { from { opacity: 0 } to { opacity: 1 } }
+    @keyframes slideUp { from { transform: translateY(20px); opacity: 0 } to { transform: translateY(0); opacity: 1 } }
+    @keyframes fadeInUp { from { transform: translateY(20px); opacity: 0 } to { transform: translateY(0); opacity: 1 } }
+    @keyframes popIn { from { transform: scale(0.8); opacity: 0 } to { transform: scale(1); opacity: 1 } }
   </style>
 </head>
 <body>
+
   <header>
-    <h1>Reader Reflections</h1>
-    <p>Real feedback from the hearts you've touched.</p>
+    <h1>She Deserves the Best</h1>
+    <p>Thank you for reading — we’d love to hear your thoughts!</p>
   </header>
 
-  <div class="intro">
-    <p>Thank you for being part of <strong>She Deserves the Best</strong>. Here's what readers had to say about their journey with the story:</p>
+  <div class="container">
+    <form id="reviewForm">
+      <input type="text" id="name" placeholder="Your Name" required />
+      <input type="email" id="email" placeholder="Your Email (optional)" />
+      <textarea id="review" placeholder="Your Review..." rows="6" required></textarea>
+      <button type="submit">Submit Review</button>
+      <div class="thank-you" id="thankYouMsg">🌸 Thank you for your feedback! 🌸</div>
+    </form>
+
+    <div class="reviews" id="reviews">
+      <h2 style="margin-bottom: 1rem;">✨ Reader Reviews ✨</h2>
+    </div>
   </div>
 
-  <section class="reviews">
-    <div class="review-card">
-      <div class="reviewer">Aarohi 🌸</div>
-      <div class="review-text">“This book healed parts of me I didn’t even know were broken. Thank you, Nidhi.”</div>
-    </div>
-    <div class="review-card">
-      <div class="reviewer">Meghna 💬</div>
-      <div class="review-text">“So raw and beautiful. It felt like reading my own journal out loud.”</div>
-    </div>
-    <div class="review-card">
-      <div class="reviewer">Tanya ✨</div>
-      <div class="review-text">“I cried, I smiled, I felt seen. This story is a soft revolution.”</div>
-    </div>
-    <div class="review-card">
-      <div class="reviewer">Sushma R.</div>
-      <div class="review-text">“More than a novel — it’s an experience. Every girl deserves to read this.”</div>
-    </div>
-    <div class="review-card">
-      <div class="reviewer">Zoya 📚</div>
-      <div class="review-text">“Sanya’s journey reminded me of mine. And now I feel a little less alone.”</div>
-    </div>
-    <div class="review-card">
-      <div class="reviewer">Saanvi 💖</div>
-      <div class="review-text">“This isn’t just fiction. It’s therapy.”</div>
-    </div>
-  </section>
+  <script>
+    const scriptURL = "<https://script.google.com/u/2/home/projects/1pEDqyRnvvw8m7xpDJ_fqjhSCDENIWCKw4I-DtQYmZ6dyPnEv2t8J0bBq/edit?aaac=true&pli=1>"; 
 
-  <footer>
-    &copy; 2025 Nidhi S | inkbynidhi@gmail.com | <a href="https://nidhi-ai01.github.io/sdb-feedback" style="color:#c44569;text-decoration:none;">Submit Your Review</a>
-  </footer>
+    const form = document.getElementById("reviewForm");
+    const thankYouMsg = document.getElementById("thankYouMsg");
+    const reviewsContainer = document.getElementById("reviews");
+
+    form.addEventListener("submit", (e) => {
+      e.preventDefault();
+      const data = {
+        name: document.getElementById("name").value,
+        email: document.getElementById("email").value,
+        review: document.getElementById("review").value
+      };
+
+      fetch(scriptURL, {
+        method: "POST",
+        body: JSON.stringify(data),
+        headers: {
+          "Content-Type": "application/json"
+        }
+      }).then(res => {
+        thankYouMsg.style.display = "block";
+        form.reset();
+        loadReviews();
+      });
+    });
+
+    function loadReviews() {
+      fetch(scriptURL)
+        .then(res => res.json())
+        .then(data => {
+          let html = "";
+          data.slice(0, 5).forEach(r => {
+            html += `
+              <div class="review-card">
+                <h3>${r.name}</h3>
+                <p>${r.review}</p>
+              </div>`;
+          });
+          reviewsContainer.innerHTML += html;
+        });
+    }
+
+    window.onload = loadReviews;
+  </script>
+
 </body>
 </html>
