@@ -2,245 +2,214 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>She Deserves the Best — Reader Space</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>She Deserves the Best - Feedback & Reviews</title>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display&family=Roboto&display=swap" rel="stylesheet">
   <style>
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-    body {
-      font-family: 'Roboto', sans-serif;
-      background: linear-gradient(135deg, #fff0f5, #f0fff0);
-      color: #333;
-      overflow-x: hidden;
+    * {
+      box-sizing: border-box;
+      scroll-behavior: smooth;
     }
-
+    body {
+      margin: 0;
+      font-family: 'Roboto', sans-serif;
+      background: linear-gradient(135deg, #fdfbfb 0%, #ebedee 100%);
+      color: #333;
+    }
     header {
       background-color: #2b2d42;
-      color: #fff;
-      padding: 2rem 1rem;
+      color: white;
       text-align: center;
-      animation: fadeInDown 1s ease;
+      padding: 2rem 1rem;
+      animation: fadeIn 2s ease-in;
     }
-
     header h1 {
       font-family: 'Playfair Display', serif;
-      font-size: 2.5rem;
+      font-size: 2.8rem;
+      margin-bottom: 0.2rem;
     }
-
+    header p {
+      font-size: 1.1rem;
+      color: #ccc;
+    }
     nav {
       display: flex;
       justify-content: center;
+      background-color: #edf2f4;
       gap: 2rem;
-      background-color: #eaeaea;
-      padding: 1rem 0;
-      position: sticky;
-      top: 0;
-      z-index: 10;
+      padding: 1rem;
     }
-
     nav a {
-      text-decoration: none;
       color: #2b2d42;
+      text-decoration: none;
       font-weight: bold;
-      transition: 0.3s;
+      transition: all 0.3s;
     }
-
     nav a:hover {
       color: #c44569;
-      transform: scale(1.05);
     }
-
     section {
-      padding: 3rem 1rem;
       max-width: 900px;
       margin: auto;
+      padding: 2rem 1rem;
     }
-
-    .hero {
+    .intro h2 {
       text-align: center;
-      animation: fadeInUp 1s ease;
-    }
-
-    .hero h2 {
-      font-size: 1.8rem;
-      margin-bottom: 1rem;
       color: #c44569;
+      animation: slideIn 1.5s ease-out;
     }
-
-    .hero p {
-      font-size: 1.1rem;
-      margin-bottom: 2rem;
-    }
-
-    .btn {
-      display: inline-block;
-      background-color: #c44569;
-      color: #fff;
-      padding: 0.7rem 1.5rem;
-      border-radius: 5px;
-      text-decoration: none;
-      transition: 0.3s;
-    }
-
-    .btn:hover {
-      background-color: #a83a58;
-      transform: scale(1.05);
-    }
-
-    .reviews {
-      background: #fff;
-      border-radius: 10px;
-      padding: 2rem;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-      animation: fadeIn 1s ease;
-    }
-
-    .reviews p {
-      font-style: italic;
+    .intro p {
       text-align: center;
-      margin-bottom: 1rem;
     }
-
-    .form-section form {
-      margin-top: 2rem;
+    .review-block {
+      background: #fff;
+      padding: 1.5rem;
+      margin: 1rem 0;
+      border-radius: 10px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+      animation: fadeIn 1.5s;
     }
-
-    label {
+    form {
+      background: #fff;
+      padding: 1.5rem;
+      border-radius: 10px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    }
+    form label {
       display: block;
       margin-top: 1rem;
     }
-
-    input, textarea {
+    form input, form textarea {
       width: 100%;
       padding: 0.8rem;
-      margin-top: 0.5rem;
-      border-radius: 4px;
       border: 1px solid #ccc;
+      border-radius: 5px;
     }
-
-    button {
+    form button {
       margin-top: 1.5rem;
-      background-color: #c44569;
+      padding: 0.8rem 2rem;
+      background: #c44569;
       color: white;
-      padding: 0.75rem 1.5rem;
       border: none;
-      border-radius: 4px;
+      border-radius: 5px;
       font-size: 1rem;
       cursor: pointer;
+      transition: 0.3s ease;
     }
-
-    button:hover {
-      background-color: #a83a58;
+    form button:hover {
+      background: #a83a58;
     }
-
-    .about, .connect, .buy {
-      background-color: #fffafc;
-      border-radius: 10px;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.06);
-      padding: 2rem;
+    .thank-you {
+      display: none;
+      text-align: center;
+      color: green;
+      font-weight: bold;
+      margin-top: 1rem;
+    }
+    .author-info, .buy, .contact {
+      background-color: #f9f9f9;
+      border-left: 4px solid #c44569;
+      padding: 1rem;
       margin-top: 2rem;
     }
-
+    .contact a {
+      display: inline-block;
+      margin: 0.5rem;
+      color: #2b2d42;
+      text-decoration: none;
+      font-weight: 500;
+    }
+    .contact a:hover {
+      color: #c44569;
+    }
     footer {
       text-align: center;
-      padding: 2rem 1rem;
+      padding: 2rem;
       font-size: 0.9rem;
-      color: #888;
-      background-color: #f5f5f5;
-      margin-top: 3rem;
+      background-color: #2b2d42;
+      color: white;
     }
-
     @keyframes fadeIn {
-      from { opacity: 0; }
-      to { opacity: 1; }
-    }
-
-    @keyframes fadeInDown {
-      from { opacity: 0; transform: translateY(-20px); }
+      from { opacity: 0; transform: translateY(20px); }
       to { opacity: 1; transform: translateY(0); }
     }
-
-    @keyframes fadeInUp {
-      from { opacity: 0; transform: translateY(30px); }
-      to { opacity: 1; transform: translateY(0); }
+    @keyframes slideIn {
+      from { transform: translateX(-100%); opacity: 0; }
+      to { transform: translateX(0); opacity: 1; }
     }
   </style>
 </head>
 <body>
+  <header>
+    <h1>She Deserves the Best</h1>
+    <p>A Journey Through Love, Pain, and Healing</p>
+  </header>
 
-<header>
-  <h1>She Deserves the Best</h1>
-  <p>A Journey Through Love, Pain, and Healing</p>
-</header>
+  <nav>
+    <a href="#reviews">Reader Reviews</a>
+    <a href="#feedback">Share Feedback</a>
+    <a href="#about">About Author</a>
+    <a href="#buy">Buy Book</a>
+    <a href="#contact">Contact</a>
+  </nav>
 
-<nav>
-  <a href="#reviews">Reader Reviews</a>
-  <a href="#feedback">Share Your Thoughts</a>
-  <a href="#about">About</a>
-  <a href="#buy">Buy Book</a>
-  <a href="#connect">Connect</a>
-</nav>
+  <section class="intro">
+    <h2>Welcome, Beautiful Reader 🌸</h2>
+    <p>Thank you for picking up <em>She Deserves the Best</em>. Your voice matters — please share your thoughts below.</p>
+  </section>
 
-<section class="hero">
-  <h2>Thank You for Reading 💖</h2>
-  <p>Every reader has a story. If this one touched your heart, we’d love to hear yours.</p>
-  <a href="#feedback" class="btn">Share Your Thoughts</a>
-</section>
+  <section id="reviews">
+    <h2>Reader Reviews</h2>
+    <div class="review-block">“This book broke me and healed me in the same breath.” — Aanya R.</div>
+    <div class="review-block">“I saw myself in Sanya. Her strength gave me hope.” — Meera P.</div>
+    <div class="review-block">“Delicately raw and honest — truly a mirror for many.” — Priyanka T.</div>
+  </section>
 
-<section class="reviews" id="reviews">
-  <h2 style="text-align:center; margin-bottom:1.5rem;">🌟 Featured Reader Review</h2>
-  <p id="randomReview"></p>
-</section>
+  <section id="feedback">
+    <h2>Share Your Thoughts</h2>
+    <form action="https://formspree.io/f/xjkrzkrn" method="POST" id="review-form">
+      <label for="name">Your Name:</label>
+      <input type="text" id="name" name="name" required />
 
-<section class="form-section" id="feedback">
-  <h2 style="text-align:center;">💬 Submit Your Review</h2>
-  <form action="https://formspree.io/f/xjkrzkrn" method="POST">
-    <label for="name">Your Name:</label>
-    <input type="text" name="name" required>
+      <label for="email">Your Email (optional):</label>
+      <input type="email" id="email" name="email" />
 
-    <label for="email">Your Email (optional):</label>
-    <input type="email" name="email">
+      <label for="review">Your Review:</label>
+      <textarea id="review" name="review" rows="5" required></textarea>
 
-    <label for="review">Your Review:</label>
-    <textarea name="review" rows="6" required></textarea>
+      <button type="submit">Submit Review</button>
+      <div class="thank-you">Thank you for your feedback! 💌</div>
+    </form>
+  </section>
 
-    <button type="submit">Submit</button>
-  </form>
-</section>
+  <section id="about" class="author-info">
+    <h2>About the Author</h2>
+    <p><strong>Nidhi S</strong> writes from the heart — about women who rise, hearts that heal, and friendships that save us. This debut novel is a reflection of her own journey through pain, self-discovery, and the quiet magic of emotional connection.</p>
+  </section>
 
-<section class="about" id="about">
-  <h2>📖 About the Author</h2>
-  <p>Nidhi S is a passionate storyteller who believes in writing from the heart. “She Deserves the Best” is her debut novel that reflects deep emotional healing, friendship, and self-worth. She writes for those who cry in silence, love without limits, and hope without reason.</p>
-</section>
+  <section id="buy" class="buy">
+    <h2>Buy the Book</h2>
+    <p>Available on Amazon. <a href="https://www.amazon.in/dp/B0XYZ12345" target="_blank">Click here to buy</a></p>
+  </section>
 
-<section class="buy" id="buy">
-  <h2>🛍 Buy the Book</h2>
-  <p>You can find <strong>She Deserves the Best</strong> on Amazon. Add it to your bookshelf or gift it to someone who needs healing.</p>
-  <p><a class="btn" href="https://www.amazon.in/dp/B0XXXXX" target="_blank">Buy on Amazon</a></p>
-</section>
+  <section id="contact" class="contact">
+    <h2>Connect with Nidhi</h2>
+    <p>💬 <a href="mailto:inkbynidhi@gmail.com">inkbynidhi@gmail.com</a><br />
+       🤖 <a href="https://discordapp.com/users/haxor_13" target="_blank">Discord: haxor_13</a><br />
+       💼 <a href="https://www.linkedin.com/in/nidhis13/" target="_blank">LinkedIn</a>
+    </p>
+  </section>
 
-<section class="connect" id="connect">
-  <h2>📬 Connect with the Author</h2>
-  <p><strong>Email:</strong> inkbynidhi@gmail.com</p>
-  <p><strong>Discord:</strong> haxor_13</p>
-  <p><strong>GitHub:</strong> <a href="https://github.com/nidhi-ai01" target="_blank">github.com/nidhi-ai01</a></p>
-  <p><strong>Feedback Link:</strong> <a href="https://nidhi-ai01.github.io/sdb-feedback/" target="_blank">Leave a Review</a></p>
-</section>
+  <footer>
+    &copy; 2025 Nidhi S. All Rights Reserved.
+  </footer>
 
-<footer>
-  &copy; 2025 Nidhi S | All Rights Reserved
-</footer>
-
-<script>
-  const reviews = [
-    "“This story made me cry and smile — sometimes at once. Thank you for writing this.”",
-    "“I saw myself in Sanya. Her journey healed something in me.”",
-    "“A raw, tender, and unforgettable read. I wish I had this book years ago.”",
-    "“Every line was a hug. Every chapter, a mirror.”",
-    "“Real, honest, and full of hope. I’m still thinking about it.”"
-  ];
-  document.getElementById("randomReview").innerText = reviews[Math.floor(Math.random() * reviews.length)];
-</script>
-
+  <script>
+    document.getElementById('review-form').addEventListener('submit', function (e) {
+      setTimeout(() => {
+        document.querySelector('.thank-you').style.display = 'block';
+      }, 500);
+    });
+  </script>
 </body>
 </html>
