@@ -2,160 +2,245 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>She Deserves the Best - Reader Space</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>She Deserves the Best — Reader Space</title>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display&family=Roboto&display=swap" rel="stylesheet">
   <style>
-    :root {
-      --main-bg: #fff8f0;
-      --primary: #c44569;
-      --dark: #2b2d42;
-    }
-    * {
-      box-sizing: border-box;
-    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
     body {
-      margin: 0;
       font-family: 'Roboto', sans-serif;
-      background: var(--main-bg);
-      color: var(--dark);
-      scroll-behavior: smooth;
+      background: linear-gradient(135deg, #fff0f5, #f0fff0);
+      color: #333;
+      overflow-x: hidden;
     }
+
     header {
-      background: var(--dark);
-      color: white;
-      text-align: center;
+      background-color: #2b2d42;
+      color: #fff;
       padding: 2rem 1rem;
+      text-align: center;
+      animation: fadeInDown 1s ease;
     }
+
     header h1 {
       font-family: 'Playfair Display', serif;
-      margin: 0;
+      font-size: 2.5rem;
     }
+
     nav {
       display: flex;
       justify-content: center;
-      background: var(--primary);
-      padding: 0.5rem;
+      gap: 2rem;
+      background-color: #eaeaea;
+      padding: 1rem 0;
+      position: sticky;
+      top: 0;
+      z-index: 10;
     }
+
     nav a {
-      margin: 0 1rem;
-      color: white;
       text-decoration: none;
+      color: #2b2d42;
       font-weight: bold;
       transition: 0.3s;
     }
+
     nav a:hover {
-      text-decoration: underline;
-      color: #fff1f5;
+      color: #c44569;
+      transform: scale(1.05);
     }
-    .container {
-      max-width: 800px;
-      margin: 2rem auto;
-      padding: 1rem;
+
+    section {
+      padding: 3rem 1rem;
+      max-width: 900px;
+      margin: auto;
+    }
+
+    .hero {
       text-align: center;
+      animation: fadeInUp 1s ease;
     }
-    .reviews {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 1rem;
-      margin-top: 2rem;
+
+    .hero h2 {
+      font-size: 1.8rem;
+      margin-bottom: 1rem;
+      color: #c44569;
     }
-    .review {
-      background: white;
-      padding: 1rem;
-      border-radius: 8px;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-      animation: fadeIn 1s ease-in-out;
+
+    .hero p {
+      font-size: 1.1rem;
+      margin-bottom: 2rem;
     }
-    @keyframes fadeIn {
-      from {opacity: 0; transform: translateY(20px)}
-      to {opacity: 1; transform: translateY(0)}
-    }
-    .feedback-button {
+
+    .btn {
       display: inline-block;
-      margin-top: 2rem;
-      padding: 0.75rem 1.5rem;
-      background: var(--primary);
-      color: white;
+      background-color: #c44569;
+      color: #fff;
+      padding: 0.7rem 1.5rem;
       border-radius: 5px;
       text-decoration: none;
-      font-weight: bold;
-      transition: background 0.3s;
+      transition: 0.3s;
     }
-    .feedback-button:hover {
-      background: #a83a58;
+
+    .btn:hover {
+      background-color: #a83a58;
+      transform: scale(1.05);
     }
+
+    .reviews {
+      background: #fff;
+      border-radius: 10px;
+      padding: 2rem;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      animation: fadeIn 1s ease;
+    }
+
+    .reviews p {
+      font-style: italic;
+      text-align: center;
+      margin-bottom: 1rem;
+    }
+
+    .form-section form {
+      margin-top: 2rem;
+    }
+
+    label {
+      display: block;
+      margin-top: 1rem;
+    }
+
+    input, textarea {
+      width: 100%;
+      padding: 0.8rem;
+      margin-top: 0.5rem;
+      border-radius: 4px;
+      border: 1px solid #ccc;
+    }
+
+    button {
+      margin-top: 1.5rem;
+      background-color: #c44569;
+      color: white;
+      padding: 0.75rem 1.5rem;
+      border: none;
+      border-radius: 4px;
+      font-size: 1rem;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #a83a58;
+    }
+
+    .about, .connect, .buy {
+      background-color: #fffafc;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.06);
+      padding: 2rem;
+      margin-top: 2rem;
+    }
+
     footer {
       text-align: center;
+      padding: 2rem 1rem;
       font-size: 0.9rem;
-      padding: 2rem;
       color: #888;
+      background-color: #f5f5f5;
+      margin-top: 3rem;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    @keyframes fadeInDown {
+      from { opacity: 0; transform: translateY(-20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
     }
   </style>
 </head>
 <body>
-  <header>
-    <h1>She Deserves the Best</h1>
-    <p>A Journey Through Love, Pain, and Healing</p>
-  </header>
-  <nav>
-    <a href="#reviews">Readers' Reviews</a>
-    <a href="#about">About</a>
-    <a href="#feedback">Share Your Thoughts</a>
-    <a href="#contact">Contact</a>
-  </nav>
 
-  <div class="container" id="reviews">
-    <h2>🌟 Readers’ Reviews</h2>
-    <div class="reviews" id="reviews-container">
-      <!-- Reviews will be loaded here -->
-    </div>
-  </div>
+<header>
+  <h1>She Deserves the Best</h1>
+  <p>A Journey Through Love, Pain, and Healing</p>
+</header>
 
-  <div class="container" id="about">
-    <h2>📖 About the Novel</h2>
-    <p><em>She Deserves the Best</em> is a heartwarming story of emotional healing, friendship, and rediscovering self-worth. Follow Sanya’s journey through the shadows of trauma into a light of hope and connection.</p>
-  </div>
+<nav>
+  <a href="#reviews">Reader Reviews</a>
+  <a href="#feedback">Share Your Thoughts</a>
+  <a href="#about">About</a>
+  <a href="#buy">Buy Book</a>
+  <a href="#connect">Connect</a>
+</nav>
 
-  <div class="container" id="feedback">
-    <h2>✍️ Share Your Thoughts</h2>
-    <p>We’d love to hear what this story meant to you.</p>
-    <a class="feedback-button" href="feedback.html">Submit a Review</a>
-  </div>
+<section class="hero">
+  <h2>Thank You for Reading 💖</h2>
+  <p>Every reader has a story. If this one touched your heart, we’d love to hear yours.</p>
+  <a href="#feedback" class="btn">Share Your Thoughts</a>
+</section>
 
-  <div class="container" id="contact">
-    <h2>📬 Connect With the Author</h2>
-    <p>📧 <strong>Email:</strong> inkbynidhi@gmail.com<br>
-    💬 <strong>Discord:</strong> haxor_13<br>
-    💻 <a href="https://github.com/nidhi-ai01" target="_blank">GitHub</a> | <a href="https://linkedin.com/in/nidhis13" target="_blank">LinkedIn</a></p>
-  </div>
+<section class="reviews" id="reviews">
+  <h2 style="text-align:center; margin-bottom:1.5rem;">🌟 Featured Reader Review</h2>
+  <p id="randomReview"></p>
+</section>
 
-  <footer>
-    &copy; 2025 Nidhi S | All Rights Reserved
-  </footer>
+<section class="form-section" id="feedback">
+  <h2 style="text-align:center;">💬 Submit Your Review</h2>
+  <form action="https://formspree.io/f/xjkrzkrn" method="POST">
+    <label for="name">Your Name:</label>
+    <input type="text" name="name" required>
 
-  <script>
-    const reviewsData = [
-      "This story made me cry, but it healed me too. Thank you for writing this.",
-      "Sanya’s journey felt so personal. I saw myself in her.",
-      "Every chapter touched something in me. Beautifully written.",
-      "I wish I had this book when I was younger. It gave me so much courage.",
-      "The characters felt like real people. I’ll carry them with me."
-    ];
+    <label for="email">Your Email (optional):</label>
+    <input type="email" name="email">
 
-    function loadRandomReviews() {
-      const shuffled = reviewsData.sort(() => 0.5 - Math.random());
-      const reviewsContainer = document.getElementById('reviews-container');
-      reviewsContainer.innerHTML = '';
-      shuffled.slice(0, 3).forEach(review => {
-        const div = document.createElement('div');
-        div.className = 'review';
-        div.textContent = review;
-        reviewsContainer.appendChild(div);
-      });
-    }
+    <label for="review">Your Review:</label>
+    <textarea name="review" rows="6" required></textarea>
 
-    window.onload = loadRandomReviews;
-  </script>
+    <button type="submit">Submit</button>
+  </form>
+</section>
+
+<section class="about" id="about">
+  <h2>📖 About the Author</h2>
+  <p>Nidhi S is a passionate storyteller who believes in writing from the heart. “She Deserves the Best” is her debut novel that reflects deep emotional healing, friendship, and self-worth. She writes for those who cry in silence, love without limits, and hope without reason.</p>
+</section>
+
+<section class="buy" id="buy">
+  <h2>🛍 Buy the Book</h2>
+  <p>You can find <strong>She Deserves the Best</strong> on Amazon. Add it to your bookshelf or gift it to someone who needs healing.</p>
+  <p><a class="btn" href="https://www.amazon.in/dp/B0XXXXX" target="_blank">Buy on Amazon</a></p>
+</section>
+
+<section class="connect" id="connect">
+  <h2>📬 Connect with the Author</h2>
+  <p><strong>Email:</strong> inkbynidhi@gmail.com</p>
+  <p><strong>Discord:</strong> haxor_13</p>
+  <p><strong>GitHub:</strong> <a href="https://github.com/nidhi-ai01" target="_blank">github.com/nidhi-ai01</a></p>
+  <p><strong>Feedback Link:</strong> <a href="https://nidhi-ai01.github.io/sdb-feedback/" target="_blank">Leave a Review</a></p>
+</section>
+
+<footer>
+  &copy; 2025 Nidhi S | All Rights Reserved
+</footer>
+
+<script>
+  const reviews = [
+    "“This story made me cry and smile — sometimes at once. Thank you for writing this.”",
+    "“I saw myself in Sanya. Her journey healed something in me.”",
+    "“A raw, tender, and unforgettable read. I wish I had this book years ago.”",
+    "“Every line was a hug. Every chapter, a mirror.”",
+    "“Real, honest, and full of hope. I’m still thinking about it.”"
+  ];
+  document.getElementById("randomReview").innerText = reviews[Math.floor(Math.random() * reviews.length)];
+</script>
+
 </body>
 </html>
