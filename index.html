@@ -6,15 +6,6 @@
   <title>She Deserves the Best - Feedback</title>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display&family=Roboto&display=swap" rel="stylesheet">
   <style>
-    :root {
-      --primary-color: #c44569;
-      --dark-bg: #1c1c1c;
-      --light-bg: #fdfcfb;
-      --text-dark: #eee;
-      --text-light: #333;
-      --accent-light: #ffe6ea;
-    }
-
     * {
       margin: 0;
       padding: 0;
@@ -22,17 +13,18 @@
     }
     body {
       font-family: 'Roboto', sans-serif;
-      background-color: var(--light-bg);
-      color: var(--text-light);
+      background: url('blurred_front_cover.jpg') no-repeat center center fixed;
+      background-size: cover;
+      color: #333;
       scroll-behavior: smooth;
-      transition: background 0.3s ease, color 0.3s ease;
+      transition: background-color 0.5s, color 0.5s;
     }
-    body.dark {
-      background-color: var(--dark-bg);
-      color: var(--text-dark);
+    body.dark-mode {
+      background-color: #121212;
+      color: #f0f0f0;
     }
     header {
-      background-color: #2b2d42;
+      background-color: rgba(43, 45, 66, 0.85);
       color: #fff;
       padding: 2rem;
       text-align: center;
@@ -41,26 +33,14 @@
     header h1 {
       font-family: 'Playfair Display', serif;
       font-size: 2.5rem;
-      white-space: nowrap;
-      overflow: hidden;
-      border-right: 2px solid;
-      animation: typing 4s steps(40, end), blink-caret 0.75s step-end infinite;
-    }
-    @keyframes typing {
-      from { width: 0; }
-      to { width: 100%; }
-    }
-    @keyframes blink-caret {
-      from, to { border-color: transparent; }
-      50% { border-color: white; }
     }
     nav {
-      background: var(--primary-color);
+      background: rgba(196, 69, 105, 0.85);
       display: flex;
       justify-content: center;
+      flex-wrap: wrap;
       gap: 2rem;
       padding: 1rem;
-      flex-wrap: wrap;
     }
     nav a, .theme-toggle {
       color: white;
@@ -70,10 +50,13 @@
       cursor: pointer;
     }
     nav a:hover, .theme-toggle:hover {
-      color: var(--accent-light);
-      transform: scale(1.05);
+      color: #ffe6ea;
+      transform: scale(1.1);
     }
     .theme-toggle {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
       font-size: 1.2rem;
     }
     .section {
@@ -82,21 +65,16 @@
       animation: fadeInUp 1.5s ease forwards;
     }
     .highlight {
-      color: var(--primary-color);
+      color: #c44569;
     }
     .reviews {
-      background: #fff;
+      background: rgba(255, 255, 255, 0.9);
       border-radius: 10px;
       padding: 2rem;
       margin: 1rem auto;
       max-width: 700px;
       box-shadow: 0 4px 12px rgba(0,0,0,0.1);
       transition: transform 0.3s ease;
-      color: #333;
-    }
-    body.dark .reviews {
-      background: #2e2e2e;
-      color: var(--text-dark);
     }
     .reviews:hover {
       transform: scale(1.02);
@@ -122,10 +100,6 @@
       border-radius: 10px;
       position: relative;
     }
-    body.dark .modal-content {
-      background-color: #2c2c2c;
-      color: var(--text-dark);
-    }
     .close {
       position: absolute;
       top: 10px;
@@ -147,15 +121,9 @@
       padding: 0.75rem;
       border: 1px solid #ccc;
       border-radius: 4px;
-      background: #f9f9f9;
-    }
-    body.dark input, body.dark textarea {
-      background: #3a3a3a;
-      color: #eee;
-      border: 1px solid #555;
     }
     button {
-      background-color: var(--primary-color);
+      background-color: #c44569;
       color: white;
       padding: 0.8rem 1.5rem;
       border: none;
@@ -172,7 +140,7 @@
       text-align: center;
       padding: 2rem;
       font-size: 0.9rem;
-      color: #888;
+      color: #fff;
     }
     @keyframes fadeIn {
       from {opacity: 0;}
@@ -182,26 +150,32 @@
       from {opacity: 0; transform: translateY(20px);}
       to {opacity: 1; transform: translateY(0);}
     }
+    #thankyou-cat {
+      display: none;
+      text-align: center;
+    }
+    #thankyou-cat img {
+      width: 150px;
+      animation: fadeInUp 1s ease-in-out;
+    }
   </style>
 </head>
 <body>
+  <div class="theme-toggle" onclick="toggleTheme()">🌞/🌙 Theme</div>
   <header>
-    <h1>She Deserves the Best – A Journey Through Love, Pain, and Healing</h1>
+    <h1>She Deserves the Best</h1>
+    <p>A Journey Through Love, Pain, and Healing</p>
   </header>
-
   <nav>
     <a href="#reviews">Reader Reviews</a>
     <a onclick="openModal('feedbackModal')">Share Your Thoughts</a>
     <a onclick="openModal('aboutModal')">About</a>
     <a onclick="openModal('contactModal')">Contact</a>
-    <span class="theme-toggle" onclick="toggleTheme()">🌞 / 🌙</span>
   </nav>
-
   <section class="section" id="reviews">
     <h2 class="highlight">Real Reader Reviews</h2>
-    <div class="reviews" id="reviewBox"></div>
+    <div id="reviewContainer"></div>
   </section>
-
   <div id="feedbackModal" class="modal">
     <div class="modal-content">
       <span class="close" onclick="closeModal('feedbackModal')">&times;</span>
@@ -209,19 +183,18 @@
       <form action="https://formspree.io/f/xjkrzkrn" method="POST" onsubmit="return showThankYou();">
         <label for="name">Your Name:</label>
         <input type="text" id="name" name="name" required>
-
         <label for="email">Email (optional):</label>
         <input type="email" id="email" name="email">
-
         <label for="message">Your Feedback:</label>
         <textarea id="message" name="message" rows="5" required></textarea>
-
         <button type="submit">Submit</button>
       </form>
-      <p id="thankyou" style="display:none; margin-top:1.5rem; font-weight:bold; color:#2b2d42;">Thank you so much for your feedback! 💖</p>
+      <div id="thankyou-cat">
+        <p>Thank you for your feedback! 💖</p>
+        <img src="https://media.giphy.com/media/JIX9t2j0ZTN9S/giphy.gif" alt="Cute Cat Thank You">
+      </div>
     </div>
   </div>
-
   <div id="aboutModal" class="modal">
     <div class="modal-content">
       <span class="close" onclick="closeModal('aboutModal')">&times;</span>
@@ -230,7 +203,6 @@
       <p><a href="https://www.amazon.in">Buy the Book</a> | <a href="https://github.com/nidhi-ai01">GitHub</a> | <a href="mailto:inkbynidhi@gmail.com">Email</a></p>
     </div>
   </div>
-
   <div id="contactModal" class="modal">
     <div class="modal-content">
       <span class="close" onclick="closeModal('contactModal')">&times;</span>
@@ -239,26 +211,14 @@
       <p>Email: <a href="mailto:inkbynidhi@gmail.com">inkbynidhi@gmail.com</a></p>
     </div>
   </div>
-
   <footer>
     &copy; 2025 Nidhi S | All Rights Reserved
   </footer>
-
+  <audio id="thankYouSound" src="https://www.myinstants.com/media/sounds/anime-wow-sound-effect.mp3"></audio>
   <script>
-    const reviews = [
-      "“Heart-touching, raw and real. Sanya's journey mirrored mine.”",
-      "“Loved the emotional depth and honesty. A must-read for every woman.”",
-      "“I felt seen. I felt heard. This book made me feel less alone.”",
-      "“This novel is a warm hug to the soul.”",
-      "“She Deserves the Best changed how I view healing.”"
-    ];
-
-    function randomReview() {
-      const box = document.getElementById('reviewBox');
-      const pick = Math.floor(Math.random() * reviews.length);
-      box.textContent = reviews[pick];
+    function toggleTheme() {
+      document.body.classList.toggle('dark-mode');
     }
-
     function openModal(id) {
       document.getElementById(id).style.display = "block";
     }
@@ -268,25 +228,32 @@
     window.onclick = function(event) {
       ['feedbackModal', 'aboutModal', 'contactModal'].forEach(id => {
         const modal = document.getElementById(id);
-        if (event.target == modal) {
-          closeModal(id);
-        }
+        if (event.target == modal) closeModal(id);
       });
     }
     function showThankYou() {
-      document.getElementById('thankyou').style.display = 'block';
+      document.getElementById('thankyou-cat').style.display = 'block';
+      document.getElementById('thankYouSound').play();
       setTimeout(() => {
-        document.getElementById('thankyou').style.display = 'none';
+        document.getElementById('thankyou-cat').style.display = 'none';
         closeModal('feedbackModal');
       }, 5000);
       return true;
     }
-    function toggleTheme() {
-      document.body.classList.toggle('dark');
+    const reviews = [
+      "Heart-touching, raw and real. Sanya's journey mirrored mine.",
+      "Loved the emotional depth and honesty. A must-read for every woman.",
+      "I felt seen. I felt heard. This book made me feel less alone.",
+      "A soulful and empowering read. Truly inspiring.",
+      "A literary hug for the broken-hearted."
+    ];
+    function displayRandomReviews() {
+      const shuffled = reviews.sort(() => 0.5 - Math.random());
+      const selected = shuffled.slice(0, 3);
+      const container = document.getElementById('reviewContainer');
+      container.innerHTML = selected.map(text => `<div class="reviews">“${text}”</div>`).join('');
     }
-    document.addEventListener('DOMContentLoaded', () => {
-      randomReview();
-    });
+    window.onload = displayRandomReviews;
   </script>
 </body>
 </html>
