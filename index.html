@@ -3,118 +3,83 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>She Deserves the Best - Reader Reviews</title>
+  <title>She Deserves the Best - Author Website</title>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display&family=Roboto&display=swap" rel="stylesheet">
   <style>
     * {
+      margin: 0;
+      padding: 0;
       box-sizing: border-box;
-      scroll-behavior: smooth;
     }
     body {
-      margin: 0;
       font-family: 'Roboto', sans-serif;
-      background: linear-gradient(to right, #fff8f0, #ffe7e0);
+      background-color: #fff8f0;
       color: #333;
-      animation: fadeIn 1.2s ease-in;
-    }
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(20px); }
-      to { opacity: 1; transform: translateY(0); }
+      scroll-behavior: smooth;
     }
     header {
-      background: linear-gradient(45deg, #2b2d42, #1d1f2f);
-      color: #f8f8f8;
-      padding: 2rem 1rem;
+      background-color: #2b2d42;
+      color: #fff;
+      padding: 2rem;
       text-align: center;
-      animation: slideInTop 1s ease-out;
-    }
-    @keyframes slideInTop {
-      from { transform: translateY(-100%); opacity: 0; }
-      to { transform: translateY(0); opacity: 1; }
     }
     header h1 {
       font-family: 'Playfair Display', serif;
-      margin: 0;
       font-size: 2.5rem;
+      animation: fadeIn 2s ease;
     }
-    .container {
+    nav {
+      display: flex;
+      justify-content: center;
+      background: #1a1a2e;
+      padding: 1rem;
+    }
+    nav a {
+      color: #fff;
+      margin: 0 1rem;
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+    nav a:hover {
+      color: #c44569;
+    }
+    section {
       max-width: 800px;
       margin: 2rem auto;
-      padding: 0 1rem;
+      padding: 1rem;
     }
     .intro {
       text-align: center;
-      margin-bottom: 2rem;
+      animation: fadeInUp 1.5s ease;
     }
-    .intro h2 {
-      color: #c44569;
-      animation: popIn 0.6s ease-out;
-    }
-    @keyframes popIn {
-      0% { transform: scale(0.8); opacity: 0; }
-      100% { transform: scale(1); opacity: 1; }
-    }
-    form {
-      background-color: #fff;
-      padding: 2rem;
-      border-radius: 12px;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-      animation: fadeIn 1.5s ease;
-    }
-    form label {
-      display: block;
+    .review-box {
+      background: #fff;
+      padding: 1rem;
       margin-top: 1rem;
-      font-weight: 600;
-    }
-    form input, form textarea {
-      width: 100%;
-      padding: 0.9rem;
-      margin-top: 0.5rem;
-      border: 1px solid #ccc;
+      border-left: 5px solid #c44569;
       border-radius: 6px;
-      font-family: 'Roboto', sans-serif;
-      transition: border-color 0.3s ease;
-    }
-    form input:focus, form textarea:focus {
-      border-color: #c44569;
-      outline: none;
-    }
-    form button {
-      margin-top: 1.5rem;
-      background-color: #c44569;
-      color: white;
-      padding: 0.8rem 1.8rem;
-      border: none;
-      border-radius: 6px;
-      font-size: 1rem;
-      cursor: pointer;
-      transition: background 0.3s ease;
-    }
-    form button:hover {
-      background-color: #a83a58;
-    }
-    .thank-you {
-      display: none;
-      text-align: center;
-      font-size: 1.2rem;
-      color: green;
-      margin-top: 2rem;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
       animation: fadeIn 1s ease;
     }
-    .confetti {
-      position: fixed;
-      width: 100%;
-      height: 100%;
-      top: 0;
-      left: 0;
-      pointer-events: none;
-      z-index: 1000;
-    }
     footer {
+      background: #2b2d42;
+      color: #eee;
       text-align: center;
-      padding: 2rem;
-      font-size: 0.9rem;
-      color: #888;
+      padding: 1.5rem;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
   </style>
 </head>
@@ -124,83 +89,46 @@
     <p>A Journey Through Love, Pain, and Healing</p>
   </header>
 
-  <div class="container">
-    <div class="intro">
-      <h2>Thank You for Reading!</h2>
-      <p>If this story touched your heart, we’d love to hear your thoughts. Share your feedback and let the journey continue through your words.</p>
-    </div>
+  <nav>
+    <a href="#reviews">Reader Reviews</a>
+    <a href="#about">About the Author</a>
+    <a href="#buy">Buy the Book</a>
+    <a href="#contact">Connect</a>
+  </nav>
 
-    <form id="review-form" action="https://formspree.io/f/xjkrzkrn" method="POST">
-      <label for="name">Your Name:</label>
-      <input type="text" id="name" name="name" required>
+  <section class="intro">
+    <h2>Welcome, Dear Reader! ✨</h2>
+    <p>Thank you for being a part of this journey. We’d love to hear what this story meant to you.</p>
+  </section>
 
-      <label for="email">Your Email (optional):</label>
-      <input type="email" id="email" name="email">
+  <section id="reviews">
+    <h2>Reader Reviews</h2>
+    <div class="review-box">"This novel broke me and healed me — page by page."</div>
+    <div class="review-box">"I saw myself in Sanya. Thank you for writing this."</div>
+    <div class="review-box">"The emotional depth, the soft healing, the friendship... Beautiful!"</div>
+    <p style="text-align:center; margin-top:1rem; font-style:italic;">(More reviews coming soon...)</p>
+  </section>
 
-      <label for="review">Your Review:</label>
-      <textarea id="review" name="review" rows="6" required></textarea>
+  <section id="about">
+    <h2>About the Author</h2>
+    <p>Nidhi S is a storyteller, dreamer, and quiet observer of emotions. <em>She Deserves the Best</em> is her heartfelt tribute to those navigating healing, silence, and rediscovering love — especially the kind that starts from within.</p>
+  </section>
 
-      <button type="submit">Submit Review</button>
-      <div class="thank-you" id="thank-you">🎉 Thank you for your review!</div>
-    </form>
-  </div>
+  <section id="buy">
+    <h2>Buy the Book</h2>
+    <p>Available on Amazon: <a href="https://www.amazon.in/dp/B0ZXXXXXXX" target="_blank">Click here to get your copy</a></p>
+  </section>
 
-  <canvas class="confetti" id="confetti-canvas"></canvas>
+  <section id="contact">
+    <h2>Connect with the Author</h2>
+    <p><strong>Email:</strong> <a href="mailto:inkbynidhi@gmail.com">inkbynidhi@gmail.com</a></p>
+    <p><strong>Discord:</strong> haxor_13</p>
+    <p><strong>GitHub:</strong> <a href="https://github.com/nidhi-ai01" target="_blank">github.com/nidhi-ai01</a></p>
+    <p><strong>Feedback Form:</strong> <a href="https://nidhi-ai01.github.io/sdb-feedback/" target="_blank">Share your thoughts</a></p>
+  </section>
 
   <footer>
     &copy; 2025 Nidhi S | All Rights Reserved
   </footer>
-
-  <script>
-    const form = document.getElementById('review-form');
-    const thankYou = document.getElementById('thank-you');
-
-    form.addEventListener('submit', function(e) {
-      e.preventDefault();
-      const data = new FormData(form);
-
-      fetch(form.action, {
-        method: form.method,
-        body: data,
-        headers: {
-          'Accept': 'application/json'
-        }
-      }).then(response => {
-        if (response.ok) {
-          thankYou.style.display = 'block';
-          form.reset();
-          launchConfetti();
-        }
-      });
-    });
-
-    function launchConfetti() {
-      const duration = 1.5 * 1000;
-      const animationEnd = Date.now() + duration;
-      const defaults = { startVelocity: 30, spread: 360, ticks: 60, zIndex: 1000 };
-
-      function randomInRange(min, max) {
-        return Math.random() * (max - min) + min;
-      }
-
-      const interval = setInterval(function() {
-        const timeLeft = animationEnd - Date.now();
-
-        if (timeLeft <= 0) {
-          return clearInterval(interval);
-        }
-
-        confetti({
-          particleCount: 50,
-          origin: {
-            x: randomInRange(0.1, 0.9),
-            y: Math.random() - 0.2
-          },
-          ...defaults
-        });
-      }, 250);
-    }
-  </script>
-  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.4.0/dist/confetti.browser.min.js"></script>
 </body>
 </html>
