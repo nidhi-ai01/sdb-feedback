@@ -13,7 +13,8 @@
     }
     body {
       font-family: 'Roboto', sans-serif;
-      background: url('blurred_front_cover.jpg') center / cover no-repeat;
+      background: url('blurred_front_cover.jpg') no-repeat center center fixed;
+      background-size: cover;
       color: #333;
       scroll-behavior: smooth;
       transition: background-color 0.5s, color 0.5s;
@@ -32,6 +33,18 @@
     header h1 {
       font-family: 'Playfair Display', serif;
       font-size: 2.5rem;
+      overflow: hidden;
+      border-right: .15em solid #fff;
+      white-space: nowrap;
+      animation: typing 4s steps(30, end), blink-caret .75s step-end infinite;
+    }
+    @keyframes typing {
+      from { width: 0 }
+      to { width: 100% }
+    }
+    @keyframes blink-caret {
+      from, to { border-color: transparent }
+      50% { border-color: white; }
     }
     nav {
       background: rgba(196, 69, 105, 0.85);
@@ -74,6 +87,12 @@
       max-width: 700px;
       box-shadow: 0 4px 12px rgba(0,0,0,0.1);
       transition: transform 0.3s ease;
+      color: #000;
+    }
+    body.dark-mode .reviews {
+      background: rgba(255, 255, 255, 0.05);
+      color: #fff;
+      border: 1px solid #444;
     }
     .reviews:hover {
       transform: scale(1.02);
@@ -98,6 +117,11 @@
       max-width: 700px;
       border-radius: 10px;
       position: relative;
+      color: #000;
+    }
+    body.dark-mode .modal-content {
+      background-color: #222;
+      color: #fff;
     }
     .close {
       position: absolute;
@@ -162,8 +186,7 @@
 <body>
   <div class="theme-toggle" onclick="toggleTheme()">🌞/🌙 Theme</div>
   <header>
-    <h1>She Deserves the Best</h1>
-    <p>A Journey Through Love, Pain, and Healing</p>
+    <h1>She Deserves the Best – A Journey Through Love, Pain, and Healing</h1>
   </header>
   <nav>
     <a href="#reviews">Reader Reviews</a>
