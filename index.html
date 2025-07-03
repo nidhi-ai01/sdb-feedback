@@ -8,7 +8,6 @@
   <meta name="keywords" content="novel, emotional healing, friendship, Nidhi S" />
   <meta name="author" content="Nidhi S" />
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display&family=Roboto&display=swap" rel="stylesheet">
-  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
   <style>
     :root {
       --primary-color: #c44569;
@@ -18,7 +17,6 @@
       --box-bg: #ffffff;
       --text-dark: #333;
       --text-light: #f9f9f9;
-      --dark-accent: #8d99ae;
     }
     * {
       margin: 0;
@@ -31,6 +29,7 @@
       color: var(--text-dark);
       scroll-behavior: smooth;
       transition: background 0.3s, color 0.3s;
+      overflow-x: hidden;
     }
     body.dark-mode {
       background: var(--dark-bg);
@@ -63,10 +62,23 @@
       color: #fff;
       padding: 4rem 2rem;
       text-align: center;
+      position: relative;
     }
-    header h1 {
+    header h1.typing {
       font-family: 'Playfair Display', serif;
-      font-size: 2.5rem;
+      font-size: 2rem;
+      border-right: 2px solid #fff;
+      white-space: nowrap;
+      overflow: hidden;
+      width: 0;
+      animation: typing 5s steps(40, end) forwards, blink 0.75s step-end infinite;
+    }
+    @keyframes typing {
+      from { width: 0 }
+      to { width: 100% }
+    }
+    @keyframes blink {
+      50% { border-color: transparent }
     }
     nav {
       background: var(--primary-color);
@@ -75,6 +87,7 @@
       flex-wrap: wrap;
       gap: 1rem;
       padding: 1rem;
+      position: relative;
     }
     nav a, nav button {
       color: white;
@@ -93,226 +106,155 @@
       color: var(--secondary-color);
       transform: scale(1.05);
     }
-    .theme-toggle {
-      background-color: #444;
-      color: white;
-      padding: 0.4rem 1rem;
-      border-radius: 25px;
-      font-size: 0.95rem;
-      transition: all 0.3s ease;
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-    }
-    .theme-toggle:hover {
-      background-color: #666;
-      transform: scale(1.1);
-    }
-    .section {
-      padding: 3rem 1rem;
-      text-align: center;
-      background-attachment: fixed;
-      background-size: cover;
-      background-repeat: no-repeat;
-    }
-    #reviews.section {
-      background-image: url('https://images.unsplash.com/photo-1526403228882-b4fba6c42c33?auto=format&fit=crop&w=1470&q=80');
-    }
-    .highlight {
-      color: var(--primary-color);
-      font-size: 2rem;
-      margin-bottom: 1rem;
-    }
-    .reviews, form {
-      background: var(--box-bg);
-      border-radius: 10px;
-      padding: 2rem;
-      margin: 1rem auto;
-      max-width: 700px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-      transition: transform 0.3s ease, background 0.3s ease;
-    }
-    body.dark-mode .reviews, body.dark-mode form, body.dark-mode .modal-content {
-      background: #2a2a2a;
-      color: var(--text-light);
-    }
-    .reviews:hover {
-      transform: scale(1.02);
-    }
-    label, input, textarea {
-      display: block;
-      width: 100%;
-      margin-top: 1rem;
-    }
-    input, textarea {
-      padding: 0.75rem;
-      border: 1px solid #ccc;
-      border-radius: 4px;
-      background: #fff;
-    }
-    body.dark-mode input,
-    body.dark-mode textarea {
-      background: #1e1e1e;
-      border-color: #555;
-      color: #f0f0f0;
-    }
-    button {
-      background-color: var(--primary-color);
-      color: white;
-      padding: 0.8rem 1.5rem;
-      border: none;
-      margin-top: 1rem;
-      font-size: 1rem;
-      border-radius: 5px;
-      cursor: pointer;
-      transition: background 0.3s ease;
-    }
-    button:hover {
-      background-color: #a83a58;
-    }
-    footer {
-      text-align: center;
-      padding: 2rem;
-      font-size: 0.9rem;
-      color: #888;
-    }
-    .modal {
+    .hamburger {
       display: none;
+      flex-direction: column;
+      cursor: pointer;
+    }
+    .hamburger div {
+      background: white;
+      height: 3px;
+      margin: 5px;
+      width: 25px;
+    }
+    .mobile-nav {
+      display: none;
+      flex-direction: column;
+      background: var(--primary-color);
+      padding: 1rem;
+      gap: 1rem;
+    }
+    .floating-btn {
       position: fixed;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
-      background: rgba(0, 0, 0, 0.6);
-      justify-content: center;
-      align-items: center;
+      bottom: 20px;
+      right: 20px;
+      background: var(--primary-color);
+      color: white;
+      border: none;
+      border-radius: 50%;
+      width: 60px;
+      height: 60px;
+      font-size: 24px;
+      cursor: pointer;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
       z-index: 999;
     }
-    .modal-content {
-      background: var(--box-bg);
-      padding: 2rem;
-      border-radius: 10px;
-      max-width: 600px;
-      text-align: left;
-      animation: fadeInUp 0.5s ease;
+    .stars {
+      position: fixed;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      background: transparent;
+      pointer-events: none;
+      overflow: hidden;
+      z-index: 1;
     }
-    .close {
-      float: right;
-      font-size: 1.5rem;
-      cursor: pointer;
-      color: var(--primary-color);
+    .stars span {
+      position: absolute;
+      background: #fff;
+      border-radius: 50%;
+      animation: twinkle 5s linear infinite;
     }
-    #cat-thankyou {
+    @keyframes twinkle {
+      0% { transform: scale(1); opacity: 0; }
+      50% { transform: scale(1.2); opacity: 1; }
+      100% { transform: scale(1); opacity: 0; }
+    }
+    .cat-popup {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 1000;
       display: none;
+      background: #fff;
+      padding: 1rem;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
       text-align: center;
-      margin-top: 1rem;
     }
-    #cat-thankyou img {
+    .cat-popup img {
       width: 150px;
-      animation: popIn 1s ease;
+      margin-bottom: 1rem;
     }
-    @keyframes popIn {
-      0% { transform: scale(0.5); opacity: 0; }
-      100% { transform: scale(1); opacity: 1; }
+    @media (max-width: 768px) {
+      nav {
+        flex-direction: column;
+      }
+      .hamburger {
+        display: flex;
+      }
+      .mobile-nav.show {
+        display: flex;
+      }
     }
   </style>
 </head>
 <body>
-  <div id="loader">
-    <div class="spinner"></div>
+  <div id="loader"><div class="spinner"></div></div>
+  <div class="stars" id="stars"></div>
+
+  <div class="cat-popup" id="catPopup">
+    <img src="https://media.giphy.com/media/JIX9t2j0ZTN9S/giphy.gif" alt="Thank you cat">
+    <p>Thank you for your feedback! 💖</p>
   </div>
 
   <header>
-    <h1>She Deserves the Best</h1>
-    <p>A Journey Through Love, Pain, and Healing</p>
+    <h1 class="typing">She Deserves the Best – A Journey Through Love, Pain, and Healing</h1>
   </header>
 
   <nav>
-    <a href="#reviews">Reader Reviews</a>
-    <button onclick="openModal('feedbackModal')">Share Your Thoughts</button>
-    <button onclick="openModal('aboutModal')">About</button>
-    <button onclick="openModal('connectModal')">Contact</button>
-    <button class="theme-toggle" onclick="toggleTheme()">🌞 / 🌙 Theme</button>
+    <div class="hamburger" onclick="toggleMobileMenu()">
+      <div></div><div></div><div></div>
+    </div>
+    <div class="mobile-nav" id="mobileNav">
+      <a href="#reviews">Reader Reviews</a>
+      <button onclick="document.getElementById('feedback').scrollIntoView({ behavior: 'smooth' })">Share Your Thoughts</button>
+      <button onclick="document.getElementById('about').scrollIntoView({ behavior: 'smooth' })">About</button>
+      <a href="mailto:inkbynidhi@gmail.com">Contact</a>
+      <button class="theme-toggle" onclick="toggleTheme()">🌞 / 🌙 Theme</button>
+    </div>
   </nav>
 
-  <audio id="bgmusic" src="https://www.bensound.com/bensound-music/bensound-sweet.mp3" loop autoplay hidden></audio>
-  <audio id="thankyouSound" src="https://www.soundjay.com/human/sounds/applause-8.mp3" preload="auto"></audio>
+  <button class="floating-btn" onclick="document.getElementById('feedback').scrollIntoView({ behavior: 'smooth' })">💌</button>
 
-  <section class="section" id="reviews" data-aos="fade-up">
-    <h2 class="highlight">Real Reader Reviews</h2>
-    <div class="reviews" data-aos="zoom-in">“Heart-touching, raw and real. Sanya's journey mirrored mine.”</div>
-    <div class="reviews" data-aos="zoom-in">“Loved the emotional depth and honesty. A must-read for every woman.”</div>
-    <div class="reviews" data-aos="zoom-in">“I felt seen. I felt heard. This book made me feel less alone.”</div>
-  </section>
+  <audio id="thankYouAudio" src="https://www.soundjay.com/human/sounds/applause-8.mp3"></audio>
 
-  <div class="modal" id="feedbackModal">
-    <div class="modal-content">
-      <span class="close" onclick="closeModal('feedbackModal')">&times;</span>
-      <h2 class="highlight">We’d Love to Hear From You</h2>
-      <form onsubmit="return showThankYou();" action="https://formspree.io/f/xjkrzkrn" method="POST">
-        <label for="name">Your Name:</label>
-        <input type="text" id="name" name="name" required>
-        <label for="email">Email (optional):</label>
-        <input type="email" id="email" name="email">
-        <label for="message">Your Feedback:</label>
-        <textarea id="message" name="message" rows="5" required></textarea>
-        <button type="submit">Submit</button>
-        <div id="cat-thankyou">
-          <p style="margin: 1rem 0;">Thank you! 🐾</p>
-          <img src="https://media.giphy.com/media/JIX9t2j0ZTN9S/giphy.gif" alt="Thank you cat">
-        </div>
-      </form>
-    </div>
-  </div>
-
-  <div class="modal" id="aboutModal">
-    <div class="modal-content">
-      <span class="close" onclick="closeModal('aboutModal')">&times;</span>
-      <h2 class="highlight">About the Author</h2>
-      <p>Nidhi S is a storyteller who believes in the power of emotions and soft healing. This novel is a love letter to everyone who ever felt invisible and still chose to rise.</p>
-      <p><a href="https://www.amazon.in">Buy the Book</a> | <a href="https://github.com/nidhi-ai01">GitHub</a> | <a href="mailto:inkbynidhi@gmail.com">Email</a></p>
-    </div>
-  </div>
-
-  <div class="modal" id="connectModal">
-    <div class="modal-content">
-      <span class="close" onclick="closeModal('connectModal')">&times;</span>
-      <h2 class="highlight">Let’s Connect</h2>
-      <p>You can reach out anytime via email: <a href="mailto:inkbynidhi@gmail.com">inkbynidhi@gmail.com</a></p>
-    </div>
-  </div>
-
-  <footer>
-    &copy; 2025 Nidhi S | All Rights Reserved
-  </footer>
-
-  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
   <script>
-    AOS.init();
     window.addEventListener("load", function() {
       document.getElementById("loader").style.display = "none";
+      generateStars();
     });
-    function showThankYou() {
-      document.getElementById("thankyouSound").play();
-      document.getElementById("cat-thankyou").style.display = "block";
-      setTimeout(() => {
-        document.getElementById("cat-thankyou").style.display = "none";
-        closeModal('feedbackModal');
-      }, 6000);
-      return true;
+
+    function toggleMobileMenu() {
+      document.getElementById("mobileNav").classList.toggle("show");
     }
-    function openModal(id) {
-      document.getElementById(id).style.display = 'flex';
-    }
-    function closeModal(id) {
-      document.getElementById(id).style.display = 'none';
-    }
-    window.onclick = function(event) {
-      const modals = document.querySelectorAll('.modal');
-      modals.forEach(modal => {
-        if (event.target === modal) modal.style.display = 'none';
-      });
-    }
+
     function toggleTheme() {
-      document.body.classList.toggle('dark-mode');
+      document.body.classList.toggle("dark-mode");
+    }
+
+    function generateStars() {
+      const stars = document.getElementById("stars");
+      for (let i = 0; i < 50; i++) {
+        const star = document.createElement("span");
+        star.style.width = star.style.height = `${Math.random() * 4 + 1}px`;
+        star.style.top = `${Math.random() * 100}%`;
+        star.style.left = `${Math.random() * 100}%`;
+        star.style.animationDelay = `${Math.random() * 5}s`;
+        stars.appendChild(star);
+      }
+    }
+
+    function showThankYou() {
+      document.getElementById('thankYouAudio').play();
+      const popup = document.getElementById('catPopup');
+      popup.style.display = 'block';
+      setTimeout(() => {
+        popup.style.display = 'none';
+      }, 5000);
+      return true;
     }
   </script>
 </body>
