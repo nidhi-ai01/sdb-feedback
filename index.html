@@ -5,23 +5,35 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>She Deserves the Best - Feedback</title>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display&family=Roboto&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
   <style>
     * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
     }
-    body {
+
+    html, body {
       font-family: 'Roboto', sans-serif;
+      height: 100%;
       background: linear-gradient(135deg, #fff5f7, #fceef5);
       color: #333;
       scroll-behavior: smooth;
       transition: background-color 0.5s, color 0.5s;
     }
+
     body.dark-mode {
       background: linear-gradient(135deg, #1a1a1a, #2c2c2c);
       color: #f0f0f0;
     }
+
+    #particles-js {
+      position: fixed;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+    }
+
     header {
       background-color: #2b2d42;
       color: #fff;
@@ -29,6 +41,7 @@
       text-align: center;
       animation: fadeIn 2s ease-in-out;
     }
+
     header h1 {
       font-family: 'Playfair Display', serif;
       font-size: 2rem;
@@ -37,14 +50,7 @@
       border-right: 0.15em solid white;
       animation: typing 4s steps(40, end), blink-caret 0.75s step-end infinite;
     }
-    @keyframes typing {
-      from { width: 0 }
-      to { width: 100% }
-    }
-    @keyframes blink-caret {
-      from, to { border-color: transparent }
-      50% { border-color: white; }
-    }
+
     nav {
       background: #c44569;
       display: flex;
@@ -53,6 +59,7 @@
       gap: 2rem;
       padding: 1rem;
     }
+
     nav a, .theme-toggle {
       color: white;
       text-decoration: none;
@@ -60,24 +67,30 @@
       transition: color 0.3s ease, transform 0.3s ease;
       cursor: pointer;
     }
+
     nav a:hover, .theme-toggle:hover {
       color: #ffe6ea;
       transform: scale(1.1);
     }
+
     .theme-toggle {
-      position: absolute;
+      position: fixed;
       top: 1rem;
       right: 1rem;
       font-size: 1.2rem;
+      z-index: 10;
     }
+
     .section {
       padding: 2rem;
       text-align: center;
       animation: fadeInUp 1.5s ease forwards;
     }
+
     .highlight {
       color: #c44569;
     }
+
     .reviews {
       background: rgba(255, 255, 255, 0.9);
       border-radius: 10px;
@@ -88,14 +101,17 @@
       transition: transform 0.3s ease;
       color: #000;
     }
+
     body.dark-mode .reviews {
       background: rgba(255, 255, 255, 0.05);
       color: #fff;
       border: 1px solid #444;
     }
+
     .reviews:hover {
       transform: scale(1.02);
     }
+
     .modal {
       display: none;
       position: fixed;
@@ -107,6 +123,7 @@
       overflow: auto;
       background-color: rgba(0,0,0,0.6);
     }
+
     .modal-content {
       background-color: #fff;
       margin: 10% auto;
@@ -118,10 +135,12 @@
       position: relative;
       color: #000;
     }
+
     body.dark-mode .modal-content {
       background-color: #222;
       color: #fff;
     }
+
     .close {
       position: absolute;
       top: 10px;
@@ -131,19 +150,23 @@
       font-weight: bold;
       cursor: pointer;
     }
+
     .close:hover {
       color: black;
     }
+
     label, input, textarea {
       display: block;
       width: 100%;
       margin-top: 1rem;
     }
+
     input, textarea {
       padding: 0.75rem;
       border: 1px solid #ccc;
       border-radius: 4px;
     }
+
     button {
       background-color: #c44569;
       color: white;
@@ -155,9 +178,11 @@
       cursor: pointer;
       transition: background 0.3s ease;
     }
+
     button:hover {
       background-color: #a83a58;
     }
+
     footer {
       text-align: center;
       padding: 2rem;
@@ -169,6 +194,7 @@
       from {opacity: 0;}
       to {opacity: 1;}
     }
+
     @keyframes fadeInUp {
       from {opacity: 0; transform: translateY(20px);}
       to {opacity: 1; transform: translateY(0);}
@@ -188,14 +214,17 @@
       animation: popupFade 0.6s ease-out;
       z-index: 2000;
     }
+
     body.dark-mode #thankyou-cat {
       background: #1e1e1e;
       color: #fff;
     }
+
     #thankyou-cat img {
       width: 120px;
       margin-top: 1rem;
     }
+
     @keyframes popupFade {
       0% {
         opacity: 0;
@@ -206,9 +235,30 @@
         transform: translate(-50%, -50%) scale(1);
       }
     }
+
+    #scrollTopBtn {
+      display: none;
+      position: fixed;
+      bottom: 30px;
+      right: 20px;
+      z-index: 999;
+      background-color: #c44569;
+      color: white;
+      border: none;
+      padding: 10px 15px;
+      border-radius: 50%;
+      font-size: 1.5rem;
+      cursor: pointer;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    }
+
+    #scrollTopBtn:hover {
+      background-color: #a83a58;
+    }
   </style>
 </head>
 <body>
+  <div id="particles-js"></div>
   <div class="theme-toggle" onclick="toggleTheme()">🌞/🌙 Theme</div>
 
   <header>
@@ -247,7 +297,7 @@
     <p>Thank you for your feedback! 💖</p>
     <img src="https://media.giphy.com/media/JIX9t2j0ZTN9S/giphy.gif" alt="Cute Cat" />
     <audio id="thankYouSound" autoplay>
-      <source src="https://cdn.pixabay.com/download/audio/2023/03/28/audio_51d19f5379.mp3" type="audio/mp3">
+      <source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_cdf9075234.mp3" type="audio/mp3">
     </audio>
   </div>
 
@@ -272,6 +322,8 @@
     &copy; 2025 Nidhi S | All Rights Reserved
   </footer>
 
+  <button onclick="scrollToTop()" id="scrollTopBtn" title="Go to top">↑</button>
+
   <script>
     function toggleTheme() {
       document.body.classList.toggle('dark-mode');
@@ -285,20 +337,21 @@
       document.getElementById(id).style.display = "none";
     }
 
+    function showThankYou() {
+      document.getElementById('thankyou-cat').style.display = 'block';
+      document.getElementById('thankYouSound').play();
+      setTimeout(() => {
+        document.getElementById('thankyou-cat').style.display = 'none';
+        closeModal('feedbackModal');
+      }, 4000);
+      return false;
+    }
+
     window.onclick = function(event) {
       ['feedbackModal', 'aboutModal', 'contactModal'].forEach(id => {
         const modal = document.getElementById(id);
         if (event.target == modal) closeModal(id);
       });
-    }
-
-    function showThankYou() {
-      document.getElementById('thankyou-cat').style.display = 'block';
-      setTimeout(() => {
-        document.getElementById('thankyou-cat').style.display = 'none';
-        closeModal('feedbackModal');
-      }, 5000);
-      return false; // prevent actual form submission for demo
     }
 
     const reviews = [
@@ -316,7 +369,32 @@
       container.innerHTML = selected.map(text => `<div class="reviews">“${text}”</div>`).join('');
     }
 
-    window.onload = displayRandomReviews;
+    function scrollToTop() {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    window.onscroll = function() {
+      document.getElementById("scrollTopBtn").style.display =
+        document.body.scrollTop > 100 || document.documentElement.scrollTop > 100
+          ? "block" : "none";
+    };
+
+    window.onload = () => {
+      displayRandomReviews();
+      particlesJS('particles-js', {
+        particles: {
+          number: { value: 60 },
+          color: { value: "#c44569" },
+          shape: { type: "circle" },
+          opacity: { value: 0.5 },
+          size: { value: 3 },
+          move: {
+            enable: true,
+            speed: 1.5
+          }
+        }
+      });
+    };
   </script>
 </body>
 </html>
