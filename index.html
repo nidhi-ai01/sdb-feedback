@@ -13,13 +13,13 @@
     }
     body {
       font-family: 'Roboto', sans-serif;
-      background: url('https://cdn.openai.com/chatgpt/illustrations/thank-you-book-blur.jpg') center/cover no-repeat fixed;
+      background: linear-gradient(to right, #fdfcfb, #e2d1c3);
       color: #333;
       scroll-behavior: smooth;
       transition: background 0.5s, color 0.5s;
     }
     body.dark-mode {
-      background: #121212;
+      background: linear-gradient(to right, #1a1a1a, #333);
       color: #eee;
     }
     header {
@@ -33,6 +33,26 @@
       font-family: 'Playfair Display', serif;
       font-size: 2.5rem;
     }
+    .theme-toggle {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      cursor: pointer;
+      font-size: 1.5rem;
+      background: #c44569;
+      color: #fff;
+      border: none;
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: transform 0.3s;
+    }
+    .theme-toggle:hover {
+      transform: rotate(180deg);
+    }
     nav {
       background: #c44569;
       display: flex;
@@ -40,26 +60,24 @@
       gap: 2rem;
       padding: 1rem;
       position: relative;
-      z-index: 10;
     }
     nav a {
       color: white;
       text-decoration: none;
       font-weight: bold;
-      transition: transform 0.3s ease, color 0.3s ease;
+      transition: color 0.3s ease, transform 0.3s ease;
       position: relative;
     }
     nav a:hover {
       color: #ffe6ea;
       transform: scale(1.1);
     }
-    nav a::after {
-      content: '❤️';
+    nav a:hover::after {
+      content: '💖';
       position: absolute;
       top: -10px;
-      right: -15px;
-      font-size: 0.8rem;
-      animation: pulse 2s infinite;
+      right: -10px;
+      font-size: 1rem;
     }
     .section {
       padding: 2rem;
@@ -70,16 +88,16 @@
       color: #c44569;
     }
     .reviews {
-      background: rgba(255,255,255,0.9);
+      background: #fff;
       border-radius: 10px;
       padding: 2rem;
       margin: 1rem auto;
       max-width: 700px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
       transition: transform 0.3s ease;
     }
     .reviews:hover {
-      transform: scale(1.05);
+      transform: scale(1.02);
     }
     .modal {
       display: none;
@@ -101,7 +119,6 @@
       max-width: 700px;
       border-radius: 10px;
       position: relative;
-      animation: fadeInUp 0.8s ease-in-out;
     }
     .close {
       position: absolute;
@@ -145,24 +162,6 @@
       font-size: 0.9rem;
       color: #888;
     }
-    #themeToggle {
-      position: fixed;
-      top: 1rem;
-      right: 1rem;
-      background: #fff;
-      color: #333;
-      border: none;
-      padding: 0.5rem 1rem;
-      border-radius: 25px;
-      cursor: pointer;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.2);
-      z-index: 100;
-      transition: all 0.3s;
-    }
-    #themeToggle:hover {
-      background: #c44569;
-      color: #fff;
-    }
     @keyframes fadeIn {
       from {opacity: 0;}
       to {opacity: 1;}
@@ -171,15 +170,10 @@
       from {opacity: 0; transform: translateY(20px);}
       to {opacity: 1; transform: translateY(0);}
     }
-    @keyframes pulse {
-      0% { transform: scale(1); }
-      50% { transform: scale(1.2); }
-      100% { transform: scale(1); }
-    }
   </style>
 </head>
 <body>
-  <button id="themeToggle">🌞 / 🌙</button>
+  <button class="theme-toggle" onclick="toggleTheme()">🌙</button>
   <header>
     <h1>She Deserves the Best</h1>
     <p>A Journey Through Love, Pain, and Healing</p>
@@ -199,8 +193,43 @@
     <div class="reviews">“I felt seen. I felt heard. This book made me feel less alone.”</div>
   </section>
 
-  <!-- Modals remain the same -->
-  <!-- ... -->
+  <div id="feedbackModal" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="closeModal('feedbackModal')">&times;</span>
+      <h2 class="highlight">We’d Love to Hear From You</h2>
+      <form action="https://formspree.io/f/xjkrzkrn" method="POST" onsubmit="return showThankYou();">
+        <label for="name">Your Name:</label>
+        <input type="text" id="name" name="name" required>
+
+        <label for="email">Email (optional):</label>
+        <input type="email" id="email" name="email">
+
+        <label for="message">Your Feedback:</label>
+        <textarea id="message" name="message" rows="5" required></textarea>
+
+        <button type="submit">Submit</button>
+      </form>
+      <p id="thankyou" style="display:none; margin-top:1.5rem; font-weight:bold; color:#2b2d42;">Thank you so much for your feedback! 💖</p>
+    </div>
+  </div>
+
+  <div id="aboutModal" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="closeModal('aboutModal')">&times;</span>
+      <h2 class="highlight">About the Author</h2>
+      <p>Nidhi S is a storyteller who believes in the power of emotions and soft healing. This novel is a love letter to everyone who ever felt invisible and still chose to rise.</p>
+      <p><a href="https://www.amazon.in">Buy the Book</a> | <a href="https://github.com/nidhi-ai01">GitHub</a> | <a href="mailto:inkbynidhi@gmail.com">Email</a></p>
+    </div>
+  </div>
+
+  <div id="contactModal" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="closeModal('contactModal')">&times;</span>
+      <h2 class="highlight">Get in Touch</h2>
+      <p>Feel free to reach out for collaborations, queries, or just to share your love for the story.</p>
+      <p>Email: <a href="mailto:inkbynidhi@gmail.com">inkbynidhi@gmail.com</a></p>
+    </div>
+  </div>
 
   <footer>
     &copy; 2025 Nidhi S | All Rights Reserved
@@ -229,11 +258,11 @@
       }, 5000);
       return true;
     }
-    const toggle = document.getElementById('themeToggle');
-    toggle.addEventListener('click', () => {
+    function toggleTheme() {
       document.body.classList.toggle('dark-mode');
-      toggle.textContent = document.body.classList.contains('dark-mode') ? '🌙' : '🌞';
-    });
+      const icon = document.querySelector('.theme-toggle');
+      icon.textContent = document.body.classList.contains('dark-mode') ? '🌞' : '🌙';
+    }
   </script>
 </body>
 </html>
