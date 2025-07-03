@@ -4,21 +4,8 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>She Deserves the Best - Feedback</title>
-  <meta name="description" content="A novel by Nidhi S exploring themes of love, healing, and emotional strength." />
-  <meta name="keywords" content="novel, emotional healing, friendship, Nidhi S" />
-  <meta name="author" content="Nidhi S" />
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display&family=Roboto&display=swap" rel="stylesheet">
-  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
   <style>
-    :root {
-      --primary-color: #c44569;
-      --secondary-color: #ffe6ea;
-      --dark-bg: #1a1a1a;
-      --light-bg: #fdfcfb;
-      --box-bg: #ffffff;
-      --text-dark: #333;
-      --text-light: #f9f9f9;
-    }
     * {
       margin: 0;
       padding: 0;
@@ -26,240 +13,213 @@
     }
     body {
       font-family: 'Roboto', sans-serif;
-      background: var(--light-bg);
-      color: var(--text-dark);
+      background: linear-gradient(to right, #fdfcfb, #e2d1c3);
+      color: #333;
       scroll-behavior: smooth;
-      transition: background 0.3s, color 0.3s;
-      overflow-x: hidden;
-    }
-    body.dark-mode {
-      background: var(--dark-bg);
-      color: var(--text-light);
-    }
-    #loader {
-      position: fixed;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
-      background: white;
-      z-index: 1000;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
-    .spinner {
-      border: 8px solid #f3f3f3;
-      border-top: 8px solid var(--primary-color);
-      border-radius: 50%;
-      width: 60px;
-      height: 60px;
-      animation: spin 1s linear infinite;
-    }
-    @keyframes spin {
-      0% { transform: rotate(0deg); }
-      100% { transform: rotate(360deg); }
     }
     header {
-      background: url('https://images.unsplash.com/photo-1503264116251-35a269479413?auto=format&fit=crop&w=1470&q=80') center/cover fixed no-repeat;
+      background-color: #2b2d42;
       color: #fff;
-      padding: 4rem 2rem;
+      padding: 2rem;
       text-align: center;
-      position: relative;
+      animation: fadeIn 2s ease-in-out;
     }
-    header h1.typing {
+    header h1 {
       font-family: 'Playfair Display', serif;
-      font-size: 2rem;
-      border-right: 2px solid #fff;
-      white-space: nowrap;
-      overflow: hidden;
-      width: 0;
-      animation: typing 5s steps(40, end) forwards, blink 0.75s step-end infinite;
-    }
-    @keyframes typing {
-      from { width: 0 }
-      to { width: 100% }
-    }
-    @keyframes blink {
-      50% { border-color: transparent }
+      font-size: 2.5rem;
     }
     nav {
-      background: var(--primary-color);
+      background: #c44569;
       display: flex;
       justify-content: center;
-      flex-wrap: wrap;
-      gap: 1rem;
+      gap: 2rem;
       padding: 1rem;
-      position: relative;
     }
-    nav a, nav button {
+    nav a {
       color: white;
       text-decoration: none;
       font-weight: bold;
-      background: none;
-      border: none;
+      transition: color 0.3s ease;
       cursor: pointer;
-      font-size: 1rem;
-      padding: 0.5rem 1rem;
-      border-radius: 5px;
-      transition: all 0.3s ease;
     }
-    nav a:hover, nav button:hover {
-      background-color: rgba(255, 255, 255, 0.2);
-      color: var(--secondary-color);
-      transform: scale(1.05);
+    nav a:hover {
+      color: #ffe6ea;
     }
-    .hamburger {
+    .section {
+      padding: 2rem;
+      text-align: center;
+      animation: fadeInUp 1.5s ease forwards;
+    }
+    .highlight {
+      color: #c44569;
+    }
+    .reviews {
+      background: #fff;
+      border-radius: 10px;
+      padding: 2rem;
+      margin: 1rem auto;
+      max-width: 700px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      transition: transform 0.3s ease;
+    }
+    .reviews:hover {
+      transform: scale(1.02);
+    }
+    .modal {
       display: none;
-      flex-direction: column;
-      cursor: pointer;
-    }
-    .hamburger div {
-      background: white;
-      height: 3px;
-      margin: 5px;
-      width: 25px;
-    }
-    .mobile-nav {
-      display: none;
-      flex-direction: column;
-      background: var(--primary-color);
-      padding: 1rem;
-      gap: 1rem;
-    }
-    .floating-btn {
       position: fixed;
-      bottom: 20px;
-      right: 20px;
-      background: var(--primary-color);
-      color: white;
-      border: none;
-      border-radius: 50%;
-      width: 60px;
-      height: 60px;
-      font-size: 24px;
-      cursor: pointer;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-      z-index: 999;
-    }
-    .stars {
-      position: fixed;
+      z-index: 1000;
+      left: 0;
+      top: 0;
       width: 100%;
       height: 100%;
-      top: 0;
-      left: 0;
-      background: transparent;
-      pointer-events: none;
-      overflow: hidden;
-      z-index: 1;
+      overflow: auto;
+      background-color: rgba(0,0,0,0.6);
     }
-    .stars span {
+    .modal-content {
+      background-color: #fff;
+      margin: 10% auto;
+      padding: 2rem;
+      border: 1px solid #888;
+      width: 90%;
+      max-width: 700px;
+      border-radius: 10px;
+      position: relative;
+    }
+    .close {
       position: absolute;
-      background: #fff;
-      border-radius: 50%;
-      animation: twinkle 5s linear infinite;
+      top: 10px;
+      right: 20px;
+      color: #aaa;
+      font-size: 28px;
+      font-weight: bold;
+      cursor: pointer;
     }
-    @keyframes twinkle {
-      0% { transform: scale(1); opacity: 0; }
-      50% { transform: scale(1.2); opacity: 1; }
-      100% { transform: scale(1); opacity: 0; }
+    .close:hover {
+      color: black;
     }
-    .cat-popup {
-      position: fixed;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      z-index: 1000;
-      display: none;
-      background: #fff;
-      padding: 1rem;
-      border-radius: 12px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    label, input, textarea {
+      display: block;
+      width: 100%;
+      margin-top: 1rem;
+    }
+    input, textarea {
+      padding: 0.75rem;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+    button {
+      background-color: #c44569;
+      color: white;
+      padding: 0.8rem 1.5rem;
+      border: none;
+      margin-top: 1rem;
+      font-size: 1rem;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+    button:hover {
+      background-color: #a83a58;
+    }
+    footer {
       text-align: center;
+      padding: 2rem;
+      font-size: 0.9rem;
+      color: #888;
     }
-    .cat-popup img {
-      width: 150px;
-      margin-bottom: 1rem;
+    @keyframes fadeIn {
+      from {opacity: 0;}
+      to {opacity: 1;}
     }
-    .aos-animate[data-aos] {
-      transition: all 0.6s ease-in-out !important;
-    }
-    @media (max-width: 768px) {
-      nav {
-        flex-direction: column;
-      }
-      .hamburger {
-        display: flex;
-      }
-      .mobile-nav.show {
-        display: flex;
-      }
+    @keyframes fadeInUp {
+      from {opacity: 0; transform: translateY(20px);}
+      to {opacity: 1; transform: translateY(0);}
     }
   </style>
 </head>
 <body>
-  <div id="loader"><div class="spinner"></div></div>
-  <div class="stars" id="stars"></div>
-  <div class="cat-popup" id="catPopup">
-    <img src="https://media.giphy.com/media/JIX9t2j0ZTN9S/giphy.gif" alt="Thank you cat">
-    <p>Thank you for your feedback! 💖</p>
-  </div>
-
-  <header data-aos="fade-down">
-    <h1 class="typing">She Deserves the Best – A Journey Through Love, Pain, and Healing</h1>
+  <header>
+    <h1>She Deserves the Best</h1>
+    <p>A Journey Through Love, Pain, and Healing</p>
   </header>
 
   <nav>
-    <div class="hamburger" onclick="toggleMobileMenu()">
-      <div></div><div></div><div></div>
-    </div>
-    <div class="mobile-nav" id="mobileNav">
-      <a href="#reviews">Reader Reviews</a>
-      <button onclick="document.getElementById('feedback').scrollIntoView({ behavior: 'smooth' })">Share Your Thoughts</button>
-      <button onclick="document.getElementById('about').scrollIntoView({ behavior: 'smooth' })">About</button>
-      <a href="mailto:inkbynidhi@gmail.com">Contact</a>
-      <button class="theme-toggle" onclick="toggleTheme()">🌞 / 🌙 Theme</button>
-    </div>
+    <a href="#reviews">Reader Reviews</a>
+    <a onclick="openModal('feedbackModal')">Share Your Thoughts</a>
+    <a onclick="openModal('aboutModal')">About</a>
+    <a onclick="openModal('contactModal')">Contact</a>
   </nav>
 
-  <button class="floating-btn" onclick="document.getElementById('feedback').scrollIntoView({ behavior: 'smooth' })">💌</button>
+  <section class="section" id="reviews">
+    <h2 class="highlight">Real Reader Reviews</h2>
+    <div class="reviews">“Heart-touching, raw and real. Sanya's journey mirrored mine.”</div>
+    <div class="reviews">“Loved the emotional depth and honesty. A must-read for every woman.”</div>
+    <div class="reviews">“I felt seen. I felt heard. This book made me feel less alone.”</div>
+  </section>
 
-  <audio id="thankYouAudio" src="https://www.soundjay.com/human/sounds/applause-8.mp3"></audio>
-  <audio id="bgMusic" src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_4ba0f3d0f7.mp3?filename=inspiring-cinematic-meditation-114998.mp3" loop autoplay></audio>
+  <div id="feedbackModal" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="closeModal('feedbackModal')">&times;</span>
+      <h2 class="highlight">We’d Love to Hear From You</h2>
+      <form action="https://formspree.io/f/xjkrzkrn" method="POST" onsubmit="return showThankYou();">
+        <label for="name">Your Name:</label>
+        <input type="text" id="name" name="name" required>
 
-  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+        <label for="email">Email (optional):</label>
+        <input type="email" id="email" name="email">
+
+        <label for="message">Your Feedback:</label>
+        <textarea id="message" name="message" rows="5" required></textarea>
+
+        <button type="submit">Submit</button>
+      </form>
+      <p id="thankyou" style="display:none; margin-top:1.5rem; font-weight:bold; color:#2b2d42;">Thank you so much for your feedback! 💖</p>
+    </div>
+  </div>
+
+  <div id="aboutModal" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="closeModal('aboutModal')">&times;</span>
+      <h2 class="highlight">About the Author</h2>
+      <p>Nidhi S is a storyteller who believes in the power of emotions and soft healing. This novel is a love letter to everyone who ever felt invisible and still chose to rise.</p>
+      <p><a href="https://www.amazon.in">Buy the Book</a> | <a href="https://github.com/nidhi-ai01">GitHub</a> | <a href="mailto:inkbynidhi@gmail.com">Email</a></p>
+    </div>
+  </div>
+
+  <div id="contactModal" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="closeModal('contactModal')">&times;</span>
+      <h2 class="highlight">Get in Touch</h2>
+      <p>Feel free to reach out for collaborations, queries, or just to share your love for the story.</p>
+      <p>Email: <a href="mailto:inkbynidhi@gmail.com">inkbynidhi@gmail.com</a></p>
+    </div>
+  </div>
+
+  <footer>
+    &copy; 2025 Nidhi S | All Rights Reserved
+  </footer>
+
   <script>
-    AOS.init();
-
-    window.addEventListener("load", function() {
-      document.getElementById("loader").style.display = "none";
-      generateStars();
-    });
-
-    function toggleMobileMenu() {
-      document.getElementById("mobileNav").classList.toggle("show");
+    function openModal(id) {
+      document.getElementById(id).style.display = "block";
     }
-
-    function toggleTheme() {
-      document.body.classList.toggle("dark-mode");
+    function closeModal(id) {
+      document.getElementById(id).style.display = "none";
     }
-
-    function generateStars() {
-      const stars = document.getElementById("stars");
-      for (let i = 0; i < 50; i++) {
-        const star = document.createElement("span");
-        star.style.width = star.style.height = `${Math.random() * 4 + 1}px`;
-        star.style.top = `${Math.random() * 100}%`;
-        star.style.left = `${Math.random() * 100}%`;
-        star.style.animationDelay = `${Math.random() * 5}s`;
-        stars.appendChild(star);
-      }
+    window.onclick = function(event) {
+      ['feedbackModal', 'aboutModal', 'contactModal'].forEach(id => {
+        const modal = document.getElementById(id);
+        if (event.target == modal) {
+          closeModal(id);
+        }
+      });
     }
-
     function showThankYou() {
-      document.getElementById('thankYouAudio').play();
-      const popup = document.getElementById('catPopup');
-      popup.style.display = 'block';
+      document.getElementById('thankyou').style.display = 'block';
       setTimeout(() => {
-        popup.style.display = 'none';
+        document.getElementById('thankyou').style.display = 'none';
+        closeModal('feedbackModal');
       }, 5000);
       return true;
     }
