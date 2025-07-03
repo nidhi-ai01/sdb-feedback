@@ -18,34 +18,44 @@
   <meta name="twitter:image" content="https://yourwebsite.com/cover.jpg">
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display&family=Roboto&display=swap" rel="stylesheet">
   <style>
+    :root {
+      --primary: #c44569;
+      --dark-bg: #1e1e1e;
+      --light-bg: #fdfcfb;
+      --text-dark: #333;
+      --text-light: #f0f0f0;
+    }
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
     body {
       font-family: 'Roboto', sans-serif;
-      background: #fff;
-      color: #333;
+      background: var(--light-bg);
+      color: var(--text-dark);
       transition: background 0.3s, color 0.3s;
     }
     .dark-mode {
-      background: #1e1e1e;
-      color: #f0f0f0;
+      background: var(--dark-bg);
+      color: var(--text-light);
     }
-    .toggle-btn {
-      padding: 0.4rem 1rem;
-      background: #444;
+    header {
+      background-color: #2b2d42;
       color: #fff;
-      border: none;
-      border-radius: 20px;
-      cursor: pointer;
-      transition: background 0.3s, transform 0.2s;
+      padding: 2rem;
+      text-align: center;
+      animation: fadeIn 2s ease-in-out;
     }
-    .toggle-btn:hover {
-      background: #666;
-      transform: scale(1.1);
+    header h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.5rem;
     }
     nav {
-      background: #c44569;
+      background: var(--primary);
       display: flex;
       justify-content: center;
-      gap: 1rem;
+      gap: 2rem;
       padding: 1rem;
       flex-wrap: wrap;
     }
@@ -53,7 +63,7 @@
       color: white;
       text-decoration: none;
       font-weight: bold;
-      transition: color 0.3s ease, transform 0.3s ease;
+      transition: color 0.3s ease, transform 0.3s;
       position: relative;
     }
     nav a:hover {
@@ -63,14 +73,14 @@
     nav a::after {
       content: attr(title);
       position: absolute;
-      bottom: -1.5rem;
+      bottom: -1.8rem;
       left: 50%;
       transform: translateX(-50%);
-      background: rgba(0, 0, 0, 0.7);
-      color: #fff;
+      background: rgba(0,0,0,0.75);
+      color: white;
       padding: 0.2rem 0.5rem;
-      font-size: 0.8rem;
-      border-radius: 4px;
+      border-radius: 5px;
+      font-size: 0.75rem;
       white-space: nowrap;
       opacity: 0;
       pointer-events: none;
@@ -79,23 +89,142 @@
     nav a:hover::after {
       opacity: 1;
     }
+    .section {
+      padding: 2rem;
+      text-align: center;
+      animation: fadeInUp 1.5s ease forwards;
+    }
+    .highlight {
+      color: var(--primary);
+    }
+    .reviews, form {
+      background: #fff;
+      border-radius: 10px;
+      padding: 2rem;
+      margin: 1rem auto;
+      max-width: 700px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
     .reviews:hover, form:hover {
-      box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+      transform: scale(1.02);
+      box-shadow: 0 6px 20px rgba(0,0,0,0.2);
+    }
+    label, input, textarea {
+      display: block;
+      width: 100%;
+      margin-top: 1rem;
+    }
+    input, textarea {
+      padding: 0.75rem;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+    button {
+      background-color: var(--primary);
+      color: white;
+      padding: 0.8rem 1.5rem;
+      border: none;
+      margin-top: 1rem;
+      font-size: 1rem;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background 0.3s ease, transform 0.2s;
+    }
+    button:hover {
+      background-color: #a83a58;
+      transform: scale(1.05);
+    }
+    .toggle-btn {
+      background: #444;
+      color: white;
+      border: none;
+      border-radius: 20px;
+      padding: 0.5rem 1rem;
+      cursor: pointer;
+      transition: background 0.3s ease, transform 0.3s ease;
+    }
+    .toggle-btn:hover {
+      background: #666;
+      transform: scale(1.1);
+    }
+    footer {
+      text-align: center;
+      padding: 2rem;
+      font-size: 0.9rem;
+      color: #888;
+    }
+    @keyframes fadeIn {
+      from {opacity: 0;}
+      to {opacity: 1;}
+    }
+    @keyframes fadeInUp {
+      from {opacity: 0; transform: translateY(20px);}
+      to {opacity: 1; transform: translateY(0);}
     }
   </style>
 </head>
 <body>
+  <header>
+    <h1>She Deserves the Best</h1>
+    <p>A Journey Through Love, Pain, and Healing</p>
+  </header>
+
   <nav>
-    <a href="#reviews" title="See what others think">Reader Reviews</a>
-    <a href="#feedback" title="Share your feedback">Share Your Thoughts</a>
-    <a href="#about" title="Know the author">About</a>
-    <a href="mailto:inkbynidhi@gmail.com" title="Email us">Contact</a>
-    <button class="toggle-btn" onclick="toggleDarkMode()">🌗 Toggle Theme</button>
+    <a href="#reviews" title="See what readers say">Reader Reviews</a>
+    <a href="#feedback" title="Give your opinion">Share Your Thoughts</a>
+    <a href="#about" title="Know about author">About</a>
+    <a href="mailto:inkbynidhi@gmail.com" title="Mail us">Contact</a>
+    <button class="toggle-btn" onclick="toggleDarkMode()">🌗 Theme</button>
   </nav>
+
+  <section class="section" id="reviews">
+    <h2 class="highlight">Real Reader Reviews</h2>
+    <div class="reviews">“Heart-touching, raw and real. Sanya's journey mirrored mine.”</div>
+    <div class="reviews">“Loved the emotional depth and honesty. A must-read for every woman.”</div>
+    <div class="reviews">“I felt seen. I felt heard. This book made me feel less alone.”</div>
+  </section>
+
+  <section class="section" id="feedback">
+    <h2 class="highlight">We’d Love to Hear From You</h2>
+    <p>If this story moved you, please take a moment to share your thoughts.</p>
+    <form action="https://formspree.io/f/xjkrzkrn" method="POST" onsubmit="return showThankYou();">
+      <label for="name">Your Name:</label>
+      <input type="text" id="name" name="name" required>
+
+      <label for="email">Email (optional):</label>
+      <input type="email" id="email" name="email">
+
+      <label for="message">Your Feedback:</label>
+      <textarea id="message" name="message" rows="5" required></textarea>
+
+      <button type="submit">Submit</button>
+    </form>
+    <p id="thankyou" style="display:none; margin-top:1.5rem; font-weight:bold; color:#2b2d42;">Thank you so much for your feedback! 💖</p>
+  </section>
+
+  <section class="section" id="about">
+    <h2 class="highlight">About the Author</h2>
+    <p>Nidhi S is a storyteller who believes in the power of emotions and soft healing. This novel is a love letter to everyone who ever felt invisible and still chose to rise.</p>
+    <p><a href="https://www.amazon.in">Buy the Book</a> | <a href="https://github.com/nidhi-ai01">GitHub</a> | <a href="mailto:inkbynidhi@gmail.com">Email</a></p>
+  </section>
+
+  <footer>
+    &copy; 2025 Nidhi S | All Rights Reserved
+  </footer>
 
   <script>
     function toggleDarkMode() {
       document.body.classList.toggle('dark-mode');
+    }
+
+    function showThankYou() {
+      const thankyou = document.getElementById('thankyou');
+      thankyou.style.display = 'block';
+      setTimeout(() => {
+        thankyou.style.display = 'none';
+      }, 5000);
+      return true;
     }
   </script>
 </body>
