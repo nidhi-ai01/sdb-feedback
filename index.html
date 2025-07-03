@@ -8,6 +8,7 @@
   <meta name="keywords" content="novel, emotional healing, friendship, Nidhi S" />
   <meta name="author" content="Nidhi S" />
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display&family=Roboto&display=swap" rel="stylesheet">
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
   <style>
     :root {
       --primary-color: #c44569;
@@ -111,7 +112,6 @@
     .section {
       padding: 2.5rem 1rem;
       text-align: center;
-      animation: fadeInUp 1.5s ease forwards;
     }
     .highlight {
       color: var(--primary-color);
@@ -195,17 +195,17 @@
       cursor: pointer;
       color: var(--primary-color);
     }
-    audio {
-      display: block;
-      margin: 1rem auto;
-    }
-    @keyframes fadeIn {
-      from {opacity: 0;}
-      to {opacity: 1;}
-    }
-    @keyframes fadeInUp {
-      from {opacity: 0; transform: translateY(20px);}
-      to {opacity: 1; transform: translateY(0);}
+    .toast {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background: var(--primary-color);
+      color: white;
+      padding: 1rem 1.5rem;
+      border-radius: 5px;
+      display: none;
+      z-index: 1000;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
     }
   </style>
 </head>
@@ -213,6 +213,8 @@
   <div id="loader">
     <div class="spinner"></div>
   </div>
+
+  <div class="toast" id="toast">Thank you for your feedback! 💖</div>
 
   <header>
     <h1>She Deserves the Best</h1>
@@ -232,11 +234,11 @@
     Your browser does not support the audio element.
   </audio>
 
-  <section class="section" id="reviews">
+  <section class="section" id="reviews" data-aos="fade-up">
     <h2 class="highlight">Real Reader Reviews</h2>
-    <div class="reviews">“Heart-touching, raw and real. Sanya's journey mirrored mine.”</div>
-    <div class="reviews">“Loved the emotional depth and honesty. A must-read for every woman.”</div>
-    <div class="reviews">“I felt seen. I felt heard. This book made me feel less alone.”</div>
+    <div class="reviews" data-aos="zoom-in">“Heart-touching, raw and real. Sanya's journey mirrored mine.”</div>
+    <div class="reviews" data-aos="zoom-in">“Loved the emotional depth and honesty. A must-read for every woman.”</div>
+    <div class="reviews" data-aos="zoom-in">“I felt seen. I felt heard. This book made me feel less alone.”</div>
   </section>
 
   <!-- Feedback Modal -->
@@ -253,7 +255,6 @@
         <textarea id="message" name="message" rows="5" required></textarea>
         <button type="submit">Submit</button>
       </form>
-      <p id="thankyou" style="display:none; margin-top:1.5rem; font-weight:bold; color:#2b2d42;">Thank you so much for your feedback! 💖</p>
     </div>
   </div>
 
@@ -280,17 +281,20 @@
     &copy; 2025 Nidhi S | All Rights Reserved
   </footer>
 
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
   <script>
+    AOS.init();
+
     window.addEventListener("load", function() {
       document.getElementById("loader").style.display = "none";
     });
 
     function showThankYou() {
-      const thankyou = document.getElementById('thankyou');
-      thankyou.style.display = 'block';
+      const toast = document.getElementById('toast');
+      toast.style.display = 'block';
       setTimeout(() => {
-        thankyou.style.display = 'none';
-      }, 5000);
+        toast.style.display = 'none';
+      }, 4000);
       return true;
     }
     function openModal(id) {
