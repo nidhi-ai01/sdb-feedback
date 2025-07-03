@@ -13,14 +13,13 @@
     }
     body {
       font-family: 'Roboto', sans-serif;
-      background: url('/mnt/data/Untitled-1.jpg') no-repeat center center fixed;
-      background-size: cover;
+      background: url('Untitled-1.jpg') no-repeat center center/cover fixed;
+      backdrop-filter: blur(6px);
       color: #333;
       scroll-behavior: smooth;
-      backdrop-filter: blur(8px);
     }
     header {
-      background-color: rgba(43, 45, 66, 0.9);
+      background-color: #2b2d42c7;
       color: #fff;
       padding: 2rem;
       text-align: center;
@@ -31,24 +30,44 @@
       font-size: 2.5rem;
     }
     nav {
-      background: rgba(196, 69, 105, 0.9);
+      background: #c44569b4;
       display: flex;
       justify-content: center;
-      flex-wrap: wrap;
-      gap: 1.5rem;
+      gap: 2rem;
       padding: 1rem;
+      position: relative;
     }
     nav a {
       color: white;
       text-decoration: none;
       font-weight: bold;
-      transition: color 0.3s ease, transform 0.3s ease;
-      cursor: pointer;
-      font-size: 1.1rem;
+      transition: transform 0.3s ease, color 0.3s ease;
+      position: relative;
     }
     nav a:hover {
       color: #ffe6ea;
       transform: scale(1.1);
+    }
+    nav a::after {
+      content: '💖';
+      position: absolute;
+      right: -1rem;
+      top: -0.5rem;
+      animation: floatHeart 2s infinite;
+    }
+    .floating-btn {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background-color: #c44569;
+      color: #fff;
+      padding: 1rem;
+      border-radius: 50%;
+      font-size: 1.5rem;
+      border: none;
+      cursor: pointer;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+      z-index: 1000;
     }
     .section {
       padding: 2rem;
@@ -59,7 +78,7 @@
       color: #c44569;
     }
     .reviews {
-      background: rgba(255,255,255,0.85);
+      background: #fff;
       border-radius: 10px;
       padding: 2rem;
       margin: 1rem auto;
@@ -82,7 +101,7 @@
       background-color: rgba(0,0,0,0.6);
     }
     .modal-content {
-      background-color: rgba(255,255,255,0.95);
+      background-color: #fff;
       margin: 10% auto;
       padding: 2rem;
       border: 1px solid #888;
@@ -131,8 +150,15 @@
       text-align: center;
       padding: 2rem;
       font-size: 0.9rem;
-      color: #fff;
-      background-color: rgba(0,0,0,0.5);
+      color: #888;
+    }
+    #thankyouAnimation {
+      display: none;
+      text-align: center;
+      margin-top: 2rem;
+    }
+    #thankyouAnimation img {
+      width: 200px;
     }
     @keyframes fadeIn {
       from {opacity: 0;}
@@ -141,6 +167,11 @@
     @keyframes fadeInUp {
       from {opacity: 0; transform: translateY(20px);}
       to {opacity: 1; transform: translateY(0);}
+    }
+    @keyframes floatHeart {
+      0% { transform: translateY(0); opacity: 1; }
+      50% { transform: translateY(-5px); opacity: 0.6; }
+      100% { transform: translateY(0); opacity: 1; }
     }
   </style>
 </head>
@@ -156,6 +187,8 @@
     <a onclick="openModal('aboutModal')">About</a>
     <a onclick="openModal('contactModal')">Contact</a>
   </nav>
+
+  <button class="floating-btn" onclick="openModal('feedbackModal')">💬</button>
 
   <section class="section" id="reviews">
     <h2 class="highlight">Real Reader Reviews</h2>
@@ -181,6 +214,9 @@
         <button type="submit">Submit</button>
       </form>
       <p id="thankyou" style="display:none; margin-top:1.5rem; font-weight:bold; color:#2b2d42;">Thank you so much for your feedback! 💖</p>
+      <div id="thankyouAnimation">
+        <img src="https://media.giphy.com/media/JIX9t2j0ZTN9S/giphy.gif" alt="cute cat saying thanks">
+      </div>
     </div>
   </div>
 
@@ -206,6 +242,10 @@
     &copy; 2025 Nidhi S | All Rights Reserved
   </footer>
 
+  <audio id="thankYouAudio">
+    <source src="https://assets.mixkit.co/active_storage/sfx/3526/3526-preview.mp3" type="audio/mpeg">
+  </audio>
+
   <script>
     function openModal(id) {
       document.getElementById(id).style.display = "block";
@@ -223,10 +263,13 @@
     }
     function showThankYou() {
       document.getElementById('thankyou').style.display = 'block';
+      document.getElementById('thankyouAnimation').style.display = 'block';
+      document.getElementById('thankYouAudio').play();
       setTimeout(() => {
         document.getElementById('thankyou').style.display = 'none';
+        document.getElementById('thankyouAnimation').style.display = 'none';
         closeModal('feedbackModal');
-      }, 5000);
+      }, 6000);
       return true;
     }
   </script>
