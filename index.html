@@ -2,28 +2,21 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>She Deserves the Best</title>
-  <meta name="description" content="She Deserves the Best – A heartwarming novel by Nidhi S. Dive into a journey of love, healing, and emotional depth.">
-  <meta name="keywords" content="She Deserves the Best, Nidhi S, emotional novel, healing journey, women empowerment">
-  <meta name="author" content="Nidhi S">
-  <meta property="og:title" content="She Deserves the Best">
-  <meta property="og:description" content="A novel exploring love, pain, and healing through the story of Sanya.">
-  <meta property="og:type" content="website">
-  <meta property="og:url" content="https://yourwebsite.com">
-  <meta property="og:image" content="https://yourwebsite.com/cover.jpg">
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="She Deserves the Best">
-  <meta name="twitter:description" content="A novel exploring love, pain, and healing through the story of Sanya.">
-  <meta name="twitter:image" content="https://yourwebsite.com/cover.jpg">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>She Deserves the Best - Feedback</title>
+  <meta name="description" content="A novel by Nidhi S exploring themes of love, healing, and emotional strength." />
+  <meta name="keywords" content="novel, emotional healing, friendship, Nidhi S" />
+  <meta name="author" content="Nidhi S" />
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display&family=Roboto&display=swap" rel="stylesheet">
   <style>
     :root {
-      --primary: #c44569;
-      --dark-bg: #1e1e1e;
+      --primary-color: #c44569;
+      --secondary-color: #ffe6ea;
+      --dark-bg: #2b2d42;
       --light-bg: #fdfcfb;
+      --box-bg: #ffffff;
       --text-dark: #333;
-      --text-light: #f0f0f0;
+      --text-light: #f9f9f9;
     }
     * {
       margin: 0;
@@ -32,16 +25,13 @@
     }
     body {
       font-family: 'Roboto', sans-serif;
-      background: var(--light-bg);
+      background: linear-gradient(to right, var(--light-bg), #e2d1c3);
       color: var(--text-dark);
+      scroll-behavior: smooth;
       transition: background 0.3s, color 0.3s;
     }
-    .dark-mode {
-      background: var(--dark-bg);
-      color: var(--text-light);
-    }
     header {
-      background-color: #2b2d42;
+      background-color: var(--dark-bg);
       color: #fff;
       padding: 2rem;
       text-align: center;
@@ -52,42 +42,25 @@
       font-size: 2.5rem;
     }
     nav {
-      background: var(--primary);
+      background: var(--primary-color);
       display: flex;
       justify-content: center;
       gap: 2rem;
       padding: 1rem;
       flex-wrap: wrap;
     }
-    nav a {
+    nav a, nav button {
       color: white;
       text-decoration: none;
       font-weight: bold;
-      transition: color 0.3s ease, transform 0.3s;
-      position: relative;
+      background: none;
+      border: none;
+      cursor: pointer;
+      transition: color 0.3s ease, transform 0.2s ease;
     }
-    nav a:hover {
-      color: #ffe6ea;
+    nav a:hover, nav button:hover {
+      color: var(--secondary-color);
       transform: scale(1.1);
-    }
-    nav a::after {
-      content: attr(title);
-      position: absolute;
-      bottom: -1.8rem;
-      left: 50%;
-      transform: translateX(-50%);
-      background: rgba(0,0,0,0.75);
-      color: white;
-      padding: 0.2rem 0.5rem;
-      border-radius: 5px;
-      font-size: 0.75rem;
-      white-space: nowrap;
-      opacity: 0;
-      pointer-events: none;
-      transition: opacity 0.3s ease;
-    }
-    nav a:hover::after {
-      opacity: 1;
     }
     .section {
       padding: 2rem;
@@ -95,20 +68,19 @@
       animation: fadeInUp 1.5s ease forwards;
     }
     .highlight {
-      color: var(--primary);
+      color: var(--primary-color);
     }
     .reviews, form {
-      background: #fff;
+      background: var(--box-bg);
       border-radius: 10px;
       padding: 2rem;
       margin: 1rem auto;
       max-width: 700px;
       box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-      transition: transform 0.3s, box-shadow 0.3s;
+      transition: transform 0.3s ease;
     }
-    .reviews:hover, form:hover {
+    .reviews:hover {
       transform: scale(1.02);
-      box-shadow: 0 6px 20px rgba(0,0,0,0.2);
     }
     label, input, textarea {
       display: block;
@@ -121,7 +93,7 @@
       border-radius: 4px;
     }
     button {
-      background-color: var(--primary);
+      background-color: var(--primary-color);
       color: white;
       padding: 0.8rem 1.5rem;
       border: none;
@@ -129,30 +101,40 @@
       font-size: 1rem;
       border-radius: 5px;
       cursor: pointer;
-      transition: background 0.3s ease, transform 0.2s;
+      transition: background 0.3s ease;
     }
     button:hover {
       background-color: #a83a58;
-      transform: scale(1.05);
-    }
-    .toggle-btn {
-      background: #444;
-      color: white;
-      border: none;
-      border-radius: 20px;
-      padding: 0.5rem 1rem;
-      cursor: pointer;
-      transition: background 0.3s ease, transform 0.3s ease;
-    }
-    .toggle-btn:hover {
-      background: #666;
-      transform: scale(1.1);
     }
     footer {
       text-align: center;
       padding: 2rem;
       font-size: 0.9rem;
       color: #888;
+    }
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0, 0, 0, 0.6);
+      justify-content: center;
+      align-items: center;
+      z-index: 999;
+    }
+    .modal-content {
+      background: var(--box-bg);
+      padding: 2rem;
+      border-radius: 10px;
+      max-width: 600px;
+      text-align: left;
+      animation: fadeInUp 0.5s ease;
+    }
+    .close {
+      float: right;
+      font-size: 1.5rem;
+      cursor: pointer;
+      color: var(--primary-color);
     }
     @keyframes fadeIn {
       from {opacity: 0;}
@@ -171,11 +153,10 @@
   </header>
 
   <nav>
-    <a href="#reviews" title="See what readers say">Reader Reviews</a>
-    <a href="#feedback" title="Give your opinion">Share Your Thoughts</a>
-    <a href="#about" title="Know about author">About</a>
-    <a href="mailto:inkbynidhi@gmail.com" title="Mail us">Contact</a>
-    <button class="toggle-btn" onclick="toggleDarkMode()">🌗 Theme</button>
+    <a href="#reviews">Reader Reviews</a>
+    <button onclick="openModal('feedbackModal')">Share Your Thoughts</button>
+    <button onclick="openModal('aboutModal')">About</button>
+    <button onclick="openModal('connectModal')">Contact</button>
   </nav>
 
   <section class="section" id="reviews">
@@ -185,39 +166,52 @@
     <div class="reviews">“I felt seen. I felt heard. This book made me feel less alone.”</div>
   </section>
 
-  <section class="section" id="feedback">
-    <h2 class="highlight">We’d Love to Hear From You</h2>
-    <p>If this story moved you, please take a moment to share your thoughts.</p>
-    <form action="https://formspree.io/f/xjkrzkrn" method="POST" onsubmit="return showThankYou();">
-      <label for="name">Your Name:</label>
-      <input type="text" id="name" name="name" required>
+  <!-- Feedback Modal -->
+  <div class="modal" id="feedbackModal">
+    <div class="modal-content">
+      <span class="close" onclick="closeModal('feedbackModal')">&times;</span>
+      <h2 class="highlight">We’d Love to Hear From You</h2>
+      <p>If this story moved you, please take a moment to share your thoughts.</p>
+      <form action="https://formspree.io/f/xjkrzkrn" method="POST" onsubmit="return showThankYou();">
+        <label for="name">Your Name:</label>
+        <input type="text" id="name" name="name" required>
 
-      <label for="email">Email (optional):</label>
-      <input type="email" id="email" name="email">
+        <label for="email">Email (optional):</label>
+        <input type="email" id="email" name="email">
 
-      <label for="message">Your Feedback:</label>
-      <textarea id="message" name="message" rows="5" required></textarea>
+        <label for="message">Your Feedback:</label>
+        <textarea id="message" name="message" rows="5" required></textarea>
 
-      <button type="submit">Submit</button>
-    </form>
-    <p id="thankyou" style="display:none; margin-top:1.5rem; font-weight:bold; color:#2b2d42;">Thank you so much for your feedback! 💖</p>
-  </section>
+        <button type="submit">Submit</button>
+      </form>
+      <p id="thankyou" style="display:none; margin-top:1.5rem; font-weight:bold; color:#2b2d42;">Thank you so much for your feedback! 💖</p>
+    </div>
+  </div>
 
-  <section class="section" id="about">
-    <h2 class="highlight">About the Author</h2>
-    <p>Nidhi S is a storyteller who believes in the power of emotions and soft healing. This novel is a love letter to everyone who ever felt invisible and still chose to rise.</p>
-    <p><a href="https://www.amazon.in">Buy the Book</a> | <a href="https://github.com/nidhi-ai01">GitHub</a> | <a href="mailto:inkbynidhi@gmail.com">Email</a></p>
-  </section>
+  <!-- About Modal -->
+  <div class="modal" id="aboutModal">
+    <div class="modal-content">
+      <span class="close" onclick="closeModal('aboutModal')">&times;</span>
+      <h2 class="highlight">About the Author</h2>
+      <p>Nidhi S is a storyteller who believes in the power of emotions and soft healing. This novel is a love letter to everyone who ever felt invisible and still chose to rise.</p>
+      <p><a href="https://www.amazon.in">Buy the Book</a> | <a href="https://github.com/nidhi-ai01">GitHub</a> | <a href="mailto:inkbynidhi@gmail.com">Email</a></p>
+    </div>
+  </div>
+
+  <!-- Connect Modal -->
+  <div class="modal" id="connectModal">
+    <div class="modal-content">
+      <span class="close" onclick="closeModal('connectModal')">&times;</span>
+      <h2 class="highlight">Let’s Connect</h2>
+      <p>You can reach out anytime via email: <a href="mailto:inkbynidhi@gmail.com">inkbynidhi@gmail.com</a></p>
+    </div>
+  </div>
 
   <footer>
     &copy; 2025 Nidhi S | All Rights Reserved
   </footer>
 
   <script>
-    function toggleDarkMode() {
-      document.body.classList.toggle('dark-mode');
-    }
-
     function showThankYou() {
       const thankyou = document.getElementById('thankyou');
       thankyou.style.display = 'block';
@@ -225,6 +219,21 @@
         thankyou.style.display = 'none';
       }, 5000);
       return true;
+    }
+
+    function openModal(id) {
+      document.getElementById(id).style.display = 'flex';
+    }
+
+    function closeModal(id) {
+      document.getElementById(id).style.display = 'none';
+    }
+
+    window.onclick = function(event) {
+      const modals = document.querySelectorAll('.modal');
+      modals.forEach(modal => {
+        if (event.target === modal) modal.style.display = 'none';
+      });
     }
   </script>
 </body>
