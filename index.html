@@ -1,116 +1,161 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Leave Your Review – She Deserves the Best</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>She Deserves the Best - Reader Space</title>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display&family=Roboto&display=swap" rel="stylesheet">
   <style>
+    :root {
+      --main-bg: #fff8f0;
+      --primary: #c44569;
+      --dark: #2b2d42;
+    }
+    * {
+      box-sizing: border-box;
+    }
     body {
+      margin: 0;
       font-family: 'Roboto', sans-serif;
-      background: linear-gradient(to right, #f8ecec, #fef6f6);
-      margin: 0;
-      padding: 0;
-      color: #333;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
+      background: var(--main-bg);
+      color: var(--dark);
+      scroll-behavior: smooth;
     }
-
     header {
-      background-color: #a94466;
+      background: var(--dark);
       color: white;
-      padding: 2rem;
-      width: 100%;
       text-align: center;
+      padding: 2rem 1rem;
+    }
+    header h1 {
       font-family: 'Playfair Display', serif;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-    }
-
-    h1 {
       margin: 0;
-      font-size: 2.5rem;
     }
-
-    .container {
-      max-width: 700px;
-      width: 100%;
-      margin: 2rem auto;
-      background: white;
-      padding: 2rem;
-      border-radius: 12px;
-      box-shadow: 0 6px 20px rgba(0,0,0,0.08);
-      animation: fadeIn 1.2s ease-in;
+    nav {
+      display: flex;
+      justify-content: center;
+      background: var(--primary);
+      padding: 0.5rem;
     }
-
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(40px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    label {
-      display: block;
-      margin-top: 1rem;
-      font-weight: bold;
-    }
-
-    input, textarea {
-      width: 100%;
-      padding: 0.8rem;
-      margin-top: 0.3rem;
-      border: 1px solid #ccc;
-      border-radius: 6px;
-      font-size: 1rem;
-    }
-
-    button {
-      background-color: #a94466;
+    nav a {
+      margin: 0 1rem;
       color: white;
-      padding: 0.8rem 1.8rem;
-      border: none;
-      border-radius: 6px;
-      margin-top: 1.5rem;
-      font-size: 1rem;
-      cursor: pointer;
+      text-decoration: none;
+      font-weight: bold;
+      transition: 0.3s;
+    }
+    nav a:hover {
+      text-decoration: underline;
+      color: #fff1f5;
+    }
+    .container {
+      max-width: 800px;
+      margin: 2rem auto;
+      padding: 1rem;
+      text-align: center;
+    }
+    .reviews {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1rem;
+      margin-top: 2rem;
+    }
+    .review {
+      background: white;
+      padding: 1rem;
+      border-radius: 8px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+      animation: fadeIn 1s ease-in-out;
+    }
+    @keyframes fadeIn {
+      from {opacity: 0; transform: translateY(20px)}
+      to {opacity: 1; transform: translateY(0)}
+    }
+    .feedback-button {
+      display: inline-block;
+      margin-top: 2rem;
+      padding: 0.75rem 1.5rem;
+      background: var(--primary);
+      color: white;
+      border-radius: 5px;
+      text-decoration: none;
+      font-weight: bold;
       transition: background 0.3s;
     }
-
-    button:hover {
-      background-color: #922f54;
+    .feedback-button:hover {
+      background: #a83a58;
     }
-
-    .footer {
+    footer {
       text-align: center;
-      margin-top: 3rem;
-      padding: 1rem;
-      font-size: 0.85rem;
-      color: #666;
+      font-size: 0.9rem;
+      padding: 2rem;
+      color: #888;
     }
   </style>
 </head>
 <body>
   <header>
-    <h1>We'd Love Your Feedback!</h1>
-    <p>Tell us what you felt after reading <em>She Deserves the Best</em></p>
+    <h1>She Deserves the Best</h1>
+    <p>A Journey Through Love, Pain, and Healing</p>
   </header>
+  <nav>
+    <a href="#reviews">Readers' Reviews</a>
+    <a href="#about">About</a>
+    <a href="#feedback">Share Your Thoughts</a>
+    <a href="#contact">Contact</a>
+  </nav>
 
-  <div class="container">
-    <form action="https://formspree.io/f/xjkrzkrn" method="POST">
-      <label for="name">Name</label>
-      <input type="text" name="name" id="name" required>
-
-      <label for="email">Email (optional)</label>
-      <input type="email" name="email" id="email">
-
-      <label for="review">Your Feedback</label>
-      <textarea name="review" id="review" rows="6" required></textarea>
-
-      <button type="submit">Submit Review</button>
-    </form>
+  <div class="container" id="reviews">
+    <h2>🌟 Readers’ Reviews</h2>
+    <div class="reviews" id="reviews-container">
+      <!-- Reviews will be loaded here -->
+    </div>
   </div>
 
-  <div class="footer">
-    &copy; 2025 Nidhi S | Thank you for reading my novel 💖
+  <div class="container" id="about">
+    <h2>📖 About the Novel</h2>
+    <p><em>She Deserves the Best</em> is a heartwarming story of emotional healing, friendship, and rediscovering self-worth. Follow Sanya’s journey through the shadows of trauma into a light of hope and connection.</p>
   </div>
+
+  <div class="container" id="feedback">
+    <h2>✍️ Share Your Thoughts</h2>
+    <p>We’d love to hear what this story meant to you.</p>
+    <a class="feedback-button" href="feedback.html">Submit a Review</a>
+  </div>
+
+  <div class="container" id="contact">
+    <h2>📬 Connect With the Author</h2>
+    <p>📧 <strong>Email:</strong> inkbynidhi@gmail.com<br>
+    💬 <strong>Discord:</strong> haxor_13<br>
+    💻 <a href="https://github.com/nidhi-ai01" target="_blank">GitHub</a> | <a href="https://linkedin.com/in/nidhis13" target="_blank">LinkedIn</a></p>
+  </div>
+
+  <footer>
+    &copy; 2025 Nidhi S | All Rights Reserved
+  </footer>
+
+  <script>
+    const reviewsData = [
+      "This story made me cry, but it healed me too. Thank you for writing this.",
+      "Sanya’s journey felt so personal. I saw myself in her.",
+      "Every chapter touched something in me. Beautifully written.",
+      "I wish I had this book when I was younger. It gave me so much courage.",
+      "The characters felt like real people. I’ll carry them with me."
+    ];
+
+    function loadRandomReviews() {
+      const shuffled = reviewsData.sort(() => 0.5 - Math.random());
+      const reviewsContainer = document.getElementById('reviews-container');
+      reviewsContainer.innerHTML = '';
+      shuffled.slice(0, 3).forEach(review => {
+        const div = document.createElement('div');
+        div.className = 'review';
+        div.textContent = review;
+        reviewsContainer.appendChild(div);
+      });
+    }
+
+    window.onload = loadRandomReviews;
+  </script>
 </body>
 </html>
