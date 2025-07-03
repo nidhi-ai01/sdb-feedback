@@ -245,10 +245,13 @@
       "Loved the emotional depth and honesty. A must-read for every woman.",
       "I felt seen. I felt heard. This book made me feel less alone.",
       "A soulful and empowering read. Truly inspiring.",
-      "A literary hug for the broken-hearted."
+      "A literary hug for the broken-hearted.",
+      "The characters stayed with me long after I finished the book.",
+      "Emotional, healing, and beautifully written.",
+      "This story made me cry, smile, and believe in hope again."
     ];
     function displayRandomReviews() {
-      const shuffled = reviews.sort(() => 0.5 - Math.random());
+      const shuffled = [...reviews].sort(() => 0.5 - Math.random());
       const selected = shuffled.slice(0, 3);
       const container = document.getElementById('reviewContainer');
       container.innerHTML = selected.map(text => `<div class="reviews">“${text}”</div>`).join('');
