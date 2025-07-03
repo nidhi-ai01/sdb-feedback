@@ -2,30 +2,28 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>She Deserves the Best - Feedback</title>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display&family=Roboto&display=swap" rel="stylesheet">
   <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
     body {
       font-family: 'Roboto', sans-serif;
-      background: linear-gradient(120deg, #ffe0ec, #f8e1ff, #e0f7fa);
-      background-size: 300% 300%;
-      animation: gradientBG 10s ease infinite;
+      background: linear-gradient(135deg, #fff5f7, #fceef5);
       color: #333;
+      scroll-behavior: smooth;
       transition: background-color 0.5s, color 0.5s;
     }
-    @keyframes gradientBG {
-      0% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
-    }
     body.dark-mode {
-      background: linear-gradient(120deg, #1a1a1a, #2a2a2a);
+      background: linear-gradient(135deg, #1a1a1a, #2c2c2c);
       color: #f0f0f0;
     }
     header {
-      background-color: rgba(43, 45, 66, 0.85);
+      background-color: #2b2d42;
       color: #fff;
       padding: 2rem;
       text-align: center;
@@ -33,10 +31,22 @@
     }
     header h1 {
       font-family: 'Playfair Display', serif;
-      font-size: 2.5rem;
+      font-size: 2rem;
+      white-space: nowrap;
+      overflow: hidden;
+      border-right: 0.15em solid white;
+      animation: typing 4s steps(40, end), blink-caret 0.75s step-end infinite;
+    }
+    @keyframes typing {
+      from { width: 0 }
+      to { width: 100% }
+    }
+    @keyframes blink-caret {
+      from, to { border-color: transparent }
+      50% { border-color: white; }
     }
     nav {
-      background: rgba(196, 69, 105, 0.85);
+      background: #c44569;
       display: flex;
       justify-content: center;
       flex-wrap: wrap;
@@ -69,7 +79,7 @@
       color: #c44569;
     }
     .reviews {
-      background: rgba(255, 255, 255, 0.95);
+      background: rgba(255, 255, 255, 0.9);
       border-radius: 10px;
       padding: 2rem;
       margin: 1rem auto;
@@ -83,13 +93,17 @@
       color: #fff;
       border: 1px solid #444;
     }
-    .reviews:hover { transform: scale(1.02); }
+    .reviews:hover {
+      transform: scale(1.02);
+    }
     .modal {
       display: none;
       position: fixed;
       z-index: 1000;
-      left: 0; top: 0;
-      width: 100%; height: 100%;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
       overflow: auto;
       background-color: rgba(0,0,0,0.6);
     }
@@ -117,7 +131,9 @@
       font-weight: bold;
       cursor: pointer;
     }
-    .close:hover { color: black; }
+    .close:hover {
+      color: black;
+    }
     label, input, textarea {
       display: block;
       width: 100%;
@@ -148,6 +164,7 @@
       font-size: 0.9rem;
       color: #fff;
     }
+
     @keyframes fadeIn {
       from {opacity: 0;}
       to {opacity: 1;}
@@ -156,46 +173,65 @@
       from {opacity: 0; transform: translateY(20px);}
       to {opacity: 1; transform: translateY(0);}
     }
-    #thankyouPopup {
+
+    #thankyou-cat {
       display: none;
+      text-align: center;
       position: fixed;
-      z-index: 2000;
-      top: 50%;
+      top: 30%;
       left: 50%;
       transform: translate(-50%, -50%);
-      background: white;
+      background: #fff;
       padding: 2rem;
-      border-radius: 10px;
-      text-align: center;
-      box-shadow: 0 0 20px rgba(0,0,0,0.3);
-      animation: fadeInUp 0.5s ease-out;
+      border-radius: 12px;
+      box-shadow: 0 4px 30px rgba(0, 0, 0, 0.2);
+      animation: popupFade 0.6s ease-out;
+      z-index: 2000;
     }
-    #thankyouPopup img {
-      width: 100px;
+    body.dark-mode #thankyou-cat {
+      background: #1e1e1e;
+      color: #fff;
+    }
+    #thankyou-cat img {
+      width: 120px;
       margin-top: 1rem;
+    }
+    @keyframes popupFade {
+      0% {
+        opacity: 0;
+        transform: translate(-50%, -60%) scale(0.8);
+      }
+      100% {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1);
+      }
     }
   </style>
 </head>
 <body>
   <div class="theme-toggle" onclick="toggleTheme()">🌞/🌙 Theme</div>
+
   <header>
     <h1>She Deserves the Best – A Journey Through Love, Pain, and Healing</h1>
   </header>
+
   <nav>
     <a href="#reviews">Reader Reviews</a>
     <a onclick="openModal('feedbackModal')">Share Your Thoughts</a>
     <a onclick="openModal('aboutModal')">About</a>
     <a onclick="openModal('contactModal')">Contact</a>
   </nav>
+
   <section class="section" id="reviews">
     <h2 class="highlight">Real Reader Reviews</h2>
     <div id="reviewContainer"></div>
   </section>
+
   <div id="feedbackModal" class="modal">
     <div class="modal-content">
       <span class="close" onclick="closeModal('feedbackModal')">&times;</span>
       <h2 class="highlight">We’d Love to Hear From You</h2>
-      <form action="https://formspree.io/f/xjkrzkrn" method="POST" onsubmit="return showThankYou();">
+      <form onsubmit="return showThankYou();">
         <label for="name">Your Name:</label>
         <input type="text" id="name" name="name" required>
         <label for="email">Email (optional):</label>
@@ -206,10 +242,15 @@
       </form>
     </div>
   </div>
-  <div id="thankyouPopup">
-    <h2>Thank You for Your Feedback! 💖</h2>
-    <img src="https://media.giphy.com/media/JIX9t2j0ZTN9S/giphy.gif" alt="Thank You Cat">
+
+  <div id="thankyou-cat">
+    <p>Thank you for your feedback! 💖</p>
+    <img src="https://media.giphy.com/media/JIX9t2j0ZTN9S/giphy.gif" alt="Cute Cat" />
+    <audio id="thankYouSound" autoplay>
+      <source src="https://cdn.pixabay.com/download/audio/2023/03/28/audio_51d19f5379.mp3" type="audio/mp3">
+    </audio>
   </div>
+
   <div id="aboutModal" class="modal">
     <div class="modal-content">
       <span class="close" onclick="closeModal('aboutModal')">&times;</span>
@@ -218,44 +259,48 @@
       <p><a href="https://www.amazon.in">Buy the Book</a> | <a href="https://github.com/nidhi-ai01">GitHub</a> | <a href="mailto:inkbynidhi@gmail.com">Email</a></p>
     </div>
   </div>
+
   <div id="contactModal" class="modal">
     <div class="modal-content">
       <span class="close" onclick="closeModal('contactModal')">&times;</span>
       <h2 class="highlight">Get in Touch</h2>
-      <p>Feel free to reach out for collaborations, queries, or just to share your love for the story.</p>
       <p>Email: <a href="mailto:inkbynidhi@gmail.com">inkbynidhi@gmail.com</a></p>
     </div>
   </div>
+
   <footer>
     &copy; 2025 Nidhi S | All Rights Reserved
   </footer>
-  <audio id="cuteSound" src="https://cdn.pixabay.com/audio/2021/08/04/audio_6655ab3792.mp3"></audio>
+
   <script>
     function toggleTheme() {
       document.body.classList.toggle('dark-mode');
     }
+
     function openModal(id) {
       document.getElementById(id).style.display = "block";
     }
+
     function closeModal(id) {
       document.getElementById(id).style.display = "none";
     }
+
     window.onclick = function(event) {
       ['feedbackModal', 'aboutModal', 'contactModal'].forEach(id => {
         const modal = document.getElementById(id);
         if (event.target == modal) closeModal(id);
       });
     }
+
     function showThankYou() {
-      const popup = document.getElementById('thankyouPopup');
-      popup.style.display = 'block';
-      document.getElementById('cuteSound').play();
+      document.getElementById('thankyou-cat').style.display = 'block';
       setTimeout(() => {
-        popup.style.display = 'none';
+        document.getElementById('thankyou-cat').style.display = 'none';
         closeModal('feedbackModal');
       }, 5000);
-      return true;
+      return false; // prevent actual form submission for demo
     }
+
     const reviews = [
       "Heart-touching, raw and real. Sanya's journey mirrored mine.",
       "Loved the emotional depth and honesty. A must-read for every woman.",
@@ -263,12 +308,14 @@
       "A soulful and empowering read. Truly inspiring.",
       "A literary hug for the broken-hearted."
     ];
+
     function displayRandomReviews() {
       const shuffled = reviews.sort(() => 0.5 - Math.random());
       const selected = shuffled.slice(0, 3);
       const container = document.getElementById('reviewContainer');
       container.innerHTML = selected.map(text => `<div class="reviews">“${text}”</div>`).join('');
     }
+
     window.onload = displayRandomReviews;
   </script>
 </body>
