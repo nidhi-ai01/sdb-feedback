@@ -8,11 +8,10 @@
   <style>
     :root {
       --primary: #c44569;
-      --secondary: #2b2d42;
-      --bg-light: #fdfcfb;
-      --bg-dark: #1c1c1e;
+      --background-light: linear-gradient(to right, #fdfcfb, #e2d1c3);
+      --background-dark: #1f1f2e;
       --text-light: #333;
-      --text-dark: #fff;
+      --text-dark: #fdfcfb;
     }
 
     * {
@@ -23,64 +22,85 @@
 
     body {
       font-family: 'Roboto', sans-serif;
-      background: url('/mnt/data/Untitled-1.jpg') no-repeat center center/cover;
-      backdrop-filter: blur(8px);
+      background: var(--background-light);
       color: var(--text-light);
       scroll-behavior: smooth;
-      transition: background 0.3s ease, color 0.3s ease;
+      transition: background 0.5s ease, color 0.5s ease;
     }
 
     body.dark {
-      background: var(--bg-dark);
+      background: var(--background-dark);
       color: var(--text-dark);
     }
 
     header {
-      background-color: var(--secondary);
+      background-color: #2b2d42;
       color: #fff;
       padding: 2rem;
       text-align: center;
       animation: fadeIn 2s ease-in-out;
     }
+
     header h1 {
       font-family: 'Playfair Display', serif;
       font-size: 2.5rem;
+    }
+
+    .theme-toggle {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      cursor: pointer;
+      background: #fff;
+      border: none;
+      padding: 0.5rem 1rem;
+      border-radius: 30px;
+      font-size: 1rem;
+      transition: all 0.3s ease;
+    }
+
+    body.dark .theme-toggle {
+      background: #333;
+      color: #fff;
     }
 
     nav {
       background: var(--primary);
       display: flex;
       justify-content: center;
-      flex-wrap: wrap;
       gap: 2rem;
       padding: 1rem;
+      position: relative;
+      z-index: 10;
     }
+
     nav a {
       color: white;
       text-decoration: none;
       font-weight: bold;
       transition: transform 0.3s ease, color 0.3s ease;
-      cursor: pointer;
+      position: relative;
     }
+
+    nav a::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      bottom: -5px;
+      width: 100%;
+      height: 2px;
+      background: #ffe6ea;
+      transform: scaleX(0);
+      transition: transform 0.3s ease;
+    }
+
     nav a:hover {
       color: #ffe6ea;
       transform: scale(1.1);
     }
 
-    .theme-toggle {
-      position: fixed;
-      top: 1rem;
-      right: 1rem;
-      background: var(--primary);
-      color: #fff;
-      padding: 0.5rem 1rem;
-      border-radius: 50px;
-      cursor: pointer;
-      z-index: 1001;
-      transition: background 0.3s ease;
-    }
-    .theme-toggle:hover {
-      background: #a83a58;
+    nav a:hover::after {
+      transform: scaleX(1);
     }
 
     .section {
@@ -88,12 +108,13 @@
       text-align: center;
       animation: fadeInUp 1.5s ease forwards;
     }
+
     .highlight {
       color: var(--primary);
     }
 
     .reviews {
-      background: rgba(255, 255, 255, 0.85);
+      background: #fff;
       border-radius: 10px;
       padding: 2rem;
       margin: 1rem auto;
@@ -101,6 +122,12 @@
       box-shadow: 0 4px 12px rgba(0,0,0,0.1);
       transition: transform 0.3s ease;
     }
+
+    body.dark .reviews {
+      background: #2f2f3f;
+      color: var(--text-dark);
+    }
+
     .reviews:hover {
       transform: scale(1.02);
     }
@@ -115,7 +142,9 @@
       height: 100%;
       overflow: auto;
       background-color: rgba(0,0,0,0.6);
+      animation: fadeIn 0.5s ease;
     }
+
     .modal-content {
       background-color: #fff;
       margin: 10% auto;
@@ -127,6 +156,12 @@
       position: relative;
       animation: zoomIn 0.5s ease;
     }
+
+    body.dark .modal-content {
+      background-color: #2b2d42;
+      color: #fff;
+    }
+
     .close {
       position: absolute;
       top: 10px;
@@ -136,6 +171,7 @@
       font-weight: bold;
       cursor: pointer;
     }
+
     .close:hover {
       color: black;
     }
@@ -145,6 +181,7 @@
       width: 100%;
       margin-top: 1rem;
     }
+
     input, textarea {
       padding: 0.75rem;
       border: 1px solid #ccc;
@@ -162,6 +199,7 @@
       cursor: pointer;
       transition: background 0.3s ease;
     }
+
     button:hover {
       background-color: #a83a58;
     }
@@ -173,22 +211,28 @@
       color: #888;
     }
 
+    body.dark footer {
+      color: #aaa;
+    }
+
     @keyframes fadeIn {
       from {opacity: 0;}
       to {opacity: 1;}
     }
+
     @keyframes fadeInUp {
       from {opacity: 0; transform: translateY(20px);}
       to {opacity: 1; transform: translateY(0);}
     }
+
     @keyframes zoomIn {
-      from {transform: scale(0.8); opacity: 0;}
+      from {transform: scale(0.7); opacity: 0;}
       to {transform: scale(1); opacity: 1;}
     }
   </style>
 </head>
 <body>
-  <div class="theme-toggle" onclick="toggleTheme()">🌞 / 🌙 Theme</div>
+  <button class="theme-toggle" onclick="toggleTheme()">🌞 / 🌙</button>
 
   <header>
     <h1>She Deserves the Best</h1>
@@ -267,8 +311,6 @@
       });
     }
     function showThankYou() {
-      const msg = new Audio('https://actions.google.com/sounds/v1/cartoon/clang_and_wobble.ogg');
-      msg.play();
       document.getElementById('thankyou').style.display = 'block';
       setTimeout(() => {
         document.getElementById('thankyou').style.display = 'none';
