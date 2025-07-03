@@ -59,11 +59,10 @@
       100% { transform: rotate(360deg); }
     }
     header {
-      background-color: #2b2d42;
+      background: url('https://images.unsplash.com/photo-1503264116251-35a269479413?auto=format&fit=crop&w=1470&q=80') center/cover fixed no-repeat;
       color: #fff;
-      padding: 2rem;
+      padding: 4rem 2rem;
       text-align: center;
-      animation: fadeIn 2s ease-in-out;
     }
     header h1 {
       font-family: 'Playfair Display', serif;
@@ -73,9 +72,9 @@
       background: var(--primary-color);
       display: flex;
       justify-content: center;
-      gap: 1.5rem;
-      padding: 1rem;
       flex-wrap: wrap;
+      gap: 1rem;
+      padding: 1rem;
     }
     nav a, nav button {
       color: white;
@@ -110,8 +109,14 @@
       transform: scale(1.1);
     }
     .section {
-      padding: 2.5rem 1rem;
+      padding: 3rem 1rem;
       text-align: center;
+      background-attachment: fixed;
+      background-size: cover;
+      background-repeat: no-repeat;
+    }
+    #reviews.section {
+      background-image: url('https://images.unsplash.com/photo-1526403228882-b4fba6c42c33?auto=format&fit=crop&w=1470&q=80');
     }
     .highlight {
       color: var(--primary-color);
@@ -195,17 +200,18 @@
       cursor: pointer;
       color: var(--primary-color);
     }
-    .toast {
-      position: fixed;
-      bottom: 20px;
-      right: 20px;
-      background: var(--primary-color);
-      color: white;
-      padding: 1rem 1.5rem;
-      border-radius: 5px;
+    #cat-thankyou {
       display: none;
-      z-index: 1000;
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+      text-align: center;
+      margin-top: 1rem;
+    }
+    #cat-thankyou img {
+      width: 150px;
+      animation: popIn 1s ease;
+    }
+    @keyframes popIn {
+      0% { transform: scale(0.5); opacity: 0; }
+      100% { transform: scale(1); opacity: 1; }
     }
   </style>
 </head>
@@ -213,8 +219,6 @@
   <div id="loader">
     <div class="spinner"></div>
   </div>
-
-  <div class="toast" id="toast">Thank you for your feedback! 💖</div>
 
   <header>
     <h1>She Deserves the Best</h1>
@@ -226,13 +230,11 @@
     <button onclick="openModal('feedbackModal')">Share Your Thoughts</button>
     <button onclick="openModal('aboutModal')">About</button>
     <button onclick="openModal('connectModal')">Contact</button>
-    <button class="theme-toggle" onclick="toggleTheme()">🌞/🌙 Theme</button>
+    <button class="theme-toggle" onclick="toggleTheme()">🌞 / 🌙 Theme</button>
   </nav>
 
-  <audio controls loop autoplay>
-    <source src="https://www.bensound.com/bensound-music/bensound-sweet.mp3" type="audio/mpeg">
-    Your browser does not support the audio element.
-  </audio>
+  <audio id="bgmusic" src="https://www.bensound.com/bensound-music/bensound-sweet.mp3" loop autoplay hidden></audio>
+  <audio id="thankyouSound" src="https://www.soundjay.com/human/sounds/applause-8.mp3" preload="auto"></audio>
 
   <section class="section" id="reviews" data-aos="fade-up">
     <h2 class="highlight">Real Reader Reviews</h2>
@@ -241,12 +243,11 @@
     <div class="reviews" data-aos="zoom-in">“I felt seen. I felt heard. This book made me feel less alone.”</div>
   </section>
 
-  <!-- Feedback Modal -->
   <div class="modal" id="feedbackModal">
     <div class="modal-content">
       <span class="close" onclick="closeModal('feedbackModal')">&times;</span>
       <h2 class="highlight">We’d Love to Hear From You</h2>
-      <form action="https://formspree.io/f/xjkrzkrn" method="POST" onsubmit="return showThankYou();">
+      <form onsubmit="return showThankYou();" action="https://formspree.io/f/xjkrzkrn" method="POST">
         <label for="name">Your Name:</label>
         <input type="text" id="name" name="name" required>
         <label for="email">Email (optional):</label>
@@ -254,11 +255,14 @@
         <label for="message">Your Feedback:</label>
         <textarea id="message" name="message" rows="5" required></textarea>
         <button type="submit">Submit</button>
+        <div id="cat-thankyou">
+          <p style="margin: 1rem 0;">Thank you! 🐾</p>
+          <img src="https://media.giphy.com/media/JIX9t2j0ZTN9S/giphy.gif" alt="Thank you cat">
+        </div>
       </form>
     </div>
   </div>
 
-  <!-- About Modal -->
   <div class="modal" id="aboutModal">
     <div class="modal-content">
       <span class="close" onclick="closeModal('aboutModal')">&times;</span>
@@ -268,7 +272,6 @@
     </div>
   </div>
 
-  <!-- Connect Modal -->
   <div class="modal" id="connectModal">
     <div class="modal-content">
       <span class="close" onclick="closeModal('connectModal')">&times;</span>
@@ -284,17 +287,16 @@
   <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
   <script>
     AOS.init();
-
     window.addEventListener("load", function() {
       document.getElementById("loader").style.display = "none";
     });
-
     function showThankYou() {
-      const toast = document.getElementById('toast');
-      toast.style.display = 'block';
+      document.getElementById("thankyouSound").play();
+      document.getElementById("cat-thankyou").style.display = "block";
       setTimeout(() => {
-        toast.style.display = 'none';
-      }, 4000);
+        document.getElementById("cat-thankyou").style.display = "none";
+        closeModal('feedbackModal');
+      }, 6000);
       return true;
     }
     function openModal(id) {
