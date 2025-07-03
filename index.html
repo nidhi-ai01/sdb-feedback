@@ -6,11 +6,7 @@
   <title>She Deserves the Best - Share & Feedback</title>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display&family=Roboto&display=swap" rel="stylesheet">
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
     body {
       font-family: 'Roboto', sans-serif;
       background: linear-gradient(135deg, #fff5f7, #fceef5);
@@ -27,10 +23,20 @@
       color: #fff;
       padding: 2rem;
       text-align: center;
+      animation: fadeIn 2s ease-in-out;
     }
     header h1 {
       font-family: 'Playfair Display', serif;
       font-size: 2rem;
+      white-space: nowrap;
+      overflow: hidden;
+      border-right: 0.15em solid white;
+      animation: typing 4s steps(40, end), blink-caret 0.75s step-end infinite;
+    }
+    @keyframes typing { from { width: 0 } to { width: 100% } }
+    @keyframes blink-caret {
+      from, to { border-color: transparent }
+      50% { border-color: white; }
     }
     nav {
       background: #c44569;
@@ -44,17 +50,41 @@
       color: white;
       text-decoration: none;
       font-weight: bold;
+      transition: color 0.3s ease, transform 0.3s ease;
       cursor: pointer;
+    }
+    nav a:hover, .theme-toggle:hover {
+      color: #ffe6ea;
+      transform: scale(1.1);
     }
     .theme-toggle {
       position: absolute;
       top: 1rem;
       right: 1rem;
+      font-size: 1.2rem;
     }
     .section {
       padding: 2rem;
       text-align: center;
+      animation: fadeInUp 1.5s ease forwards;
     }
+    .highlight { color: #c44569; }
+    .reviews {
+      background: rgba(255, 255, 255, 0.9);
+      border-radius: 10px;
+      padding: 2rem;
+      margin: 1rem auto;
+      max-width: 700px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      transition: transform 0.3s ease;
+      color: #000;
+    }
+    body.dark-mode .reviews {
+      background: rgba(255, 255, 255, 0.05);
+      color: #fff;
+      border: 1px solid #444;
+    }
+    .reviews:hover { transform: scale(1.02); }
     .modal {
       display: none;
       position: fixed;
@@ -93,6 +123,7 @@
     input, textarea {
       padding: 0.75rem;
       border-radius: 5px;
+      border: 1px solid #ccc;
     }
     button {
       background-color: #c44569;
@@ -104,7 +135,16 @@
       border-radius: 5px;
       cursor: pointer;
     }
-    #thankyou-feedback, #thankyou-story {
+    button:hover { background-color: #a83a58; }
+    footer {
+      text-align: center;
+      padding: 2rem;
+      font-size: 0.9rem;
+      color: #fff;
+    }
+    @keyframes fadeIn { from {opacity: 0;} to {opacity: 1;} }
+    @keyframes fadeInUp { from {opacity: 0; transform: translateY(20px);} to {opacity: 1; transform: translateY(0);} }
+    .thankyou-popup {
       display: none;
       text-align: center;
       position: fixed;
@@ -115,22 +155,14 @@
       padding: 2rem;
       border-radius: 12px;
       box-shadow: 0 4px 30px rgba(0, 0, 0, 0.2);
-      z-index: 2000;
       animation: popupFade 0.6s ease-out;
+      z-index: 2000;
     }
-    body.dark-mode #thankyou-feedback, body.dark-mode #thankyou-story {
-      background: #1e1e1e;
-      color: #fff;
-    }
+    body.dark-mode .thankyou-popup { background: #1e1e1e; color: #fff; }
+    .thankyou-popup img { width: 120px; margin-top: 1rem; }
     @keyframes popupFade {
-      0% {
-        opacity: 0;
-        transform: translate(-50%, -60%) scale(0.8);
-      }
-      100% {
-        opacity: 1;
-        transform: translate(-50%, -50%) scale(1);
-      }
+      0% { opacity: 0; transform: translate(-50%, -60%) scale(0.8); }
+      100% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
     }
   </style>
 </head>
@@ -138,32 +170,38 @@
   <div class="theme-toggle" onclick="toggleTheme()">🌞/🌙 Theme</div>
 
   <header>
-    <h1>She Deserves the Best – Share & Feedback</h1>
+    <h1>She Deserves the Best – A Journey Through Love, Pain, and Healing</h1>
   </header>
 
   <nav>
-    <a onclick="openModal('feedbackModal')">Give Feedback</a>
+    <a href="#reviews">Reader Reviews</a>
+    <a onclick="openModal('feedbackModal')">Share Feedback</a>
     <a onclick="openModal('storyModal')">Share Your Story</a>
+    <a onclick="openModal('aboutModal')">About</a>
+    <a onclick="openModal('contactModal')">Contact</a>
   </nav>
 
-  <section class="section">
-    <p>Thank you for being a part of this journey. Your stories and words matter 💫</p>
+  <section class="section" id="reviews">
+    <h2 class="highlight">Real Reader Reviews</h2>
+    <div id="reviewContainer"></div>
   </section>
 
+  <!-- Feedback Modal -->
   <div id="feedbackModal" class="modal">
     <div class="modal-content">
       <span class="close" onclick="closeModal('feedbackModal')">&times;</span>
-      <h2>Give Your Feedback</h2>
+      <h2>We’d Love to Hear From You</h2>
       <form onsubmit="return showThankYouFeedback();">
-        <label for="fbname">Your Name:</label>
-        <input type="text" id="fbname" name="fbname">
-        <label for="fbmessage">Message:</label>
-        <textarea id="fbmessage" name="fbmessage" rows="5" required></textarea>
+        <label for="name">Your Name:</label>
+        <input type="text" id="name" name="name" required>
+        <label for="message">Your Feedback:</label>
+        <textarea id="message" name="message" rows="5" required></textarea>
         <button type="submit">Submit</button>
       </form>
     </div>
   </div>
 
+  <!-- Story Modal -->
   <div id="storyModal" class="modal">
     <div class="modal-content">
       <span class="close" onclick="closeModal('storyModal')">&times;</span>
@@ -178,15 +216,39 @@
     </div>
   </div>
 
-  <div id="thankyou-feedback">
+  <!-- Popups -->
+  <div id="thankyou-feedback" class="thankyou-popup">
     <p>💖 Thank you for your kind feedback!</p>
-    <img src="https://media.giphy.com/media/JIX9t2j0ZTN9S/giphy.gif" width="120">
+    <img src="https://media.giphy.com/media/JIX9t2j0ZTN9S/giphy.gif">
   </div>
 
-  <div id="thankyou-story">
+  <div id="thankyou-story" class="thankyou-popup">
     <p>🌟 Great! It's nice to hear your story. Who knows? The next novel might be based on it!</p>
-    <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExNWkyb2J0Y25waTg0MHdqNTY2cWFqMWdsZ3YyZXdwb3RuNWIxZ2F3eiZlcD12MV9naWZzX3NlYXJjaCZjdD1n/WXB88TeARFVvi/giphy.gif" width="120">
+    <img src="https://media.giphy.com/media/WXB88TeARFVvi/giphy.gif">
   </div>
+
+  <!-- About Modal -->
+  <div id="aboutModal" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="closeModal('aboutModal')">&times;</span>
+      <h2 class="highlight">About the Author</h2>
+      <p>Nidhi S is a storyteller who believes in the power of emotions and soft healing.</p>
+      <p><a href="https://www.amazon.in">Buy the Book</a> | <a href="https://github.com/nidhi-ai01">GitHub</a> | <a href="mailto:inkbynidhi@gmail.com">Email</a></p>
+    </div>
+  </div>
+
+  <!-- Contact Modal -->
+  <div id="contactModal" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="closeModal('contactModal')">&times;</span>
+      <h2 class="highlight">Get in Touch</h2>
+      <p>Email: <a href="mailto:inkbynidhi@gmail.com">inkbynidhi@gmail.com</a></p>
+    </div>
+  </div>
+
+  <footer>
+    &copy; 2025 Nidhi S | All Rights Reserved
+  </footer>
 
   <script>
     function toggleTheme() {
@@ -199,7 +261,7 @@
       document.getElementById(id).style.display = "none";
     }
     window.onclick = function(event) {
-      ['feedbackModal', 'storyModal'].forEach(id => {
+      ['feedbackModal', 'storyModal', 'aboutModal', 'contactModal'].forEach(id => {
         const modal = document.getElementById(id);
         if (event.target === modal) closeModal(id);
       });
@@ -220,6 +282,20 @@
       }, 5000);
       return false;
     }
+    const reviews = [
+      "Heart-touching, raw and real. Sanya's journey mirrored mine.",
+      "Loved the emotional depth and honesty. A must-read for every woman.",
+      "I felt seen. I felt heard. This book made me feel less alone.",
+      "A soulful and empowering read. Truly inspiring.",
+      "A literary hug for the broken-hearted."
+    ];
+    function displayRandomReviews() {
+      const shuffled = reviews.sort(() => 0.5 - Math.random());
+      const selected = shuffled.slice(0, 3);
+      const container = document.getElementById('reviewContainer');
+      container.innerHTML = selected.map(text => `<div class="reviews">“${text}”</div>`).join('');
+    }
+    window.onload = displayRandomReviews;
   </script>
 </body>
 </html>
