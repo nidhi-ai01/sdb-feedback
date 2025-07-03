@@ -3,54 +3,35 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>She Deserves the Best - Feedback</title>
+  <title>She Deserves the Best - Share & Feedback</title>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display&family=Roboto&display=swap" rel="stylesheet">
-  <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
   <style>
     * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
     }
-
-    html, body {
+    body {
       font-family: 'Roboto', sans-serif;
-      height: 100%;
       background: linear-gradient(135deg, #fff5f7, #fceef5);
       color: #333;
       scroll-behavior: smooth;
       transition: background-color 0.5s, color 0.5s;
     }
-
     body.dark-mode {
       background: linear-gradient(135deg, #1a1a1a, #2c2c2c);
       color: #f0f0f0;
     }
-
-    #particles-js {
-      position: fixed;
-      width: 100%;
-      height: 100%;
-      z-index: -1;
-    }
-
     header {
       background-color: #2b2d42;
       color: #fff;
       padding: 2rem;
       text-align: center;
-      animation: fadeIn 2s ease-in-out;
     }
-
     header h1 {
       font-family: 'Playfair Display', serif;
       font-size: 2rem;
-      white-space: nowrap;
-      overflow: hidden;
-      border-right: 0.15em solid white;
-      animation: typing 4s steps(40, end), blink-caret 0.75s step-end infinite;
     }
-
     nav {
       background: #c44569;
       display: flex;
@@ -59,59 +40,21 @@
       gap: 2rem;
       padding: 1rem;
     }
-
     nav a, .theme-toggle {
       color: white;
       text-decoration: none;
       font-weight: bold;
-      transition: color 0.3s ease, transform 0.3s ease;
       cursor: pointer;
     }
-
-    nav a:hover, .theme-toggle:hover {
-      color: #ffe6ea;
-      transform: scale(1.1);
-    }
-
     .theme-toggle {
-      position: fixed;
+      position: absolute;
       top: 1rem;
       right: 1rem;
-      font-size: 1.2rem;
-      z-index: 10;
     }
-
     .section {
       padding: 2rem;
       text-align: center;
-      animation: fadeInUp 1.5s ease forwards;
     }
-
-    .highlight {
-      color: #c44569;
-    }
-
-    .reviews {
-      background: rgba(255, 255, 255, 0.9);
-      border-radius: 10px;
-      padding: 2rem;
-      margin: 1rem auto;
-      max-width: 700px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-      transition: transform 0.3s ease;
-      color: #000;
-    }
-
-    body.dark-mode .reviews {
-      background: rgba(255, 255, 255, 0.05);
-      color: #fff;
-      border: 1px solid #444;
-    }
-
-    .reviews:hover {
-      transform: scale(1.02);
-    }
-
     .modal {
       display: none;
       position: fixed;
@@ -120,87 +63,48 @@
       top: 0;
       width: 100%;
       height: 100%;
-      overflow: auto;
       background-color: rgba(0,0,0,0.6);
     }
-
     .modal-content {
       background-color: #fff;
       margin: 10% auto;
       padding: 2rem;
-      border: 1px solid #888;
-      width: 90%;
-      max-width: 700px;
       border-radius: 10px;
+      width: 90%;
+      max-width: 600px;
       position: relative;
-      color: #000;
     }
-
     body.dark-mode .modal-content {
-      background-color: #222;
+      background: #1e1e1e;
       color: #fff;
     }
-
     .close {
       position: absolute;
       top: 10px;
       right: 20px;
-      color: #aaa;
       font-size: 28px;
-      font-weight: bold;
       cursor: pointer;
     }
-
-    .close:hover {
-      color: black;
-    }
-
     label, input, textarea {
       display: block;
       width: 100%;
       margin-top: 1rem;
     }
-
     input, textarea {
       padding: 0.75rem;
-      border: 1px solid #ccc;
-      border-radius: 4px;
+      border-radius: 5px;
     }
-
     button {
       background-color: #c44569;
-      color: white;
+      color: #fff;
       padding: 0.8rem 1.5rem;
       border: none;
       margin-top: 1rem;
       font-size: 1rem;
       border-radius: 5px;
       cursor: pointer;
-      transition: background 0.3s ease;
     }
-
-    button:hover {
-      background-color: #a83a58;
-    }
-
-    footer {
-      text-align: center;
-      padding: 2rem;
-      font-size: 0.9rem;
-      color: #fff;
-    }
-
-    @keyframes fadeIn {
-      from {opacity: 0;}
-      to {opacity: 1;}
-    }
-
-    @keyframes fadeInUp {
-      from {opacity: 0; transform: translateY(20px);}
-      to {opacity: 1; transform: translateY(0);}
-    }
-
-    #thankyou-cat {
+    #thankyou-feedback, #thankyou-story {
       display: none;
       text-align: center;
       position: fixed;
@@ -211,20 +115,13 @@
       padding: 2rem;
       border-radius: 12px;
       box-shadow: 0 4px 30px rgba(0, 0, 0, 0.2);
-      animation: popupFade 0.6s ease-out;
       z-index: 2000;
+      animation: popupFade 0.6s ease-out;
     }
-
-    body.dark-mode #thankyou-cat {
+    body.dark-mode #thankyou-feedback, body.dark-mode #thankyou-story {
       background: #1e1e1e;
       color: #fff;
     }
-
-    #thankyou-cat img {
-      width: 120px;
-      margin-top: 1rem;
-    }
-
     @keyframes popupFade {
       0% {
         opacity: 0;
@@ -235,166 +132,94 @@
         transform: translate(-50%, -50%) scale(1);
       }
     }
-
-    #scrollTopBtn {
-      display: none;
-      position: fixed;
-      bottom: 30px;
-      right: 20px;
-      z-index: 999;
-      background-color: #c44569;
-      color: white;
-      border: none;
-      padding: 10px 15px;
-      border-radius: 50%;
-      font-size: 1.5rem;
-      cursor: pointer;
-      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
-    }
-
-    #scrollTopBtn:hover {
-      background-color: #a83a58;
-    }
   </style>
 </head>
 <body>
-  <div id="particles-js"></div>
   <div class="theme-toggle" onclick="toggleTheme()">🌞/🌙 Theme</div>
 
   <header>
-    <h1>She Deserves the Best – A Journey Through Love, Pain, and Healing</h1>
+    <h1>She Deserves the Best – Share & Feedback</h1>
   </header>
 
   <nav>
-    <a href="#reviews">Reader Reviews</a>
-    <a onclick="openModal('feedbackModal')">Share Your Thoughts</a>
-    <a onclick="openModal('aboutModal')">About</a>
-    <a onclick="openModal('contactModal')">Contact</a>
+    <a onclick="openModal('feedbackModal')">Give Feedback</a>
+    <a onclick="openModal('storyModal')">Share Your Story</a>
   </nav>
 
-  <section class="section" id="reviews">
-    <h2 class="highlight">Real Reader Reviews</h2>
-    <div id="reviewContainer"></div>
+  <section class="section">
+    <p>Thank you for being a part of this journey. Your stories and words matter 💫</p>
   </section>
 
   <div id="feedbackModal" class="modal">
     <div class="modal-content">
       <span class="close" onclick="closeModal('feedbackModal')">&times;</span>
-      <h2 class="highlight">We’d Love to Hear From You</h2>
-      <form onsubmit="return showThankYou();">
-        <label for="name">Your Name:</label>
-        <input type="text" id="name" name="name" required>
-        <label for="email">Email (optional):</label>
-        <input type="email" id="email" name="email">
-        <label for="message">Your Feedback:</label>
-        <textarea id="message" name="message" rows="5" required></textarea>
+      <h2>Give Your Feedback</h2>
+      <form onsubmit="return showThankYouFeedback();">
+        <label for="fbname">Your Name:</label>
+        <input type="text" id="fbname" name="fbname">
+        <label for="fbmessage">Message:</label>
+        <textarea id="fbmessage" name="fbmessage" rows="5" required></textarea>
         <button type="submit">Submit</button>
       </form>
     </div>
   </div>
 
-  <div id="thankyou-cat">
-    <p>Thank you for your feedback! 💖</p>
-    <img src="https://media.giphy.com/media/JIX9t2j0ZTN9S/giphy.gif" alt="Cute Cat" />
-    <audio id="thankYouSound" autoplay>
-      <source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_cdf9075234.mp3" type="audio/mp3">
-    </audio>
-  </div>
-
-  <div id="aboutModal" class="modal">
+  <div id="storyModal" class="modal">
     <div class="modal-content">
-      <span class="close" onclick="closeModal('aboutModal')">&times;</span>
-      <h2 class="highlight">About the Author</h2>
-      <p>Nidhi S is a storyteller who believes in the power of emotions and soft healing. This novel is a love letter to everyone who ever felt invisible and still chose to rise.</p>
-      <p><a href="https://www.amazon.in">Buy the Book</a> | <a href="https://github.com/nidhi-ai01">GitHub</a> | <a href="mailto:inkbynidhi@gmail.com">Email</a></p>
+      <span class="close" onclick="closeModal('storyModal')">&times;</span>
+      <h2>Share Your Story</h2>
+      <form onsubmit="return showThankYouStory();">
+        <label for="sname">Your Name (Optional):</label>
+        <input type="text" id="sname" name="sname">
+        <label for="scontent">Your Story:</label>
+        <textarea id="scontent" name="scontent" rows="6" required></textarea>
+        <button type="submit">Submit</button>
+      </form>
     </div>
   </div>
 
-  <div id="contactModal" class="modal">
-    <div class="modal-content">
-      <span class="close" onclick="closeModal('contactModal')">&times;</span>
-      <h2 class="highlight">Get in Touch</h2>
-      <p>Email: <a href="mailto:inkbynidhi@gmail.com">inkbynidhi@gmail.com</a></p>
-    </div>
+  <div id="thankyou-feedback">
+    <p>💖 Thank you for your kind feedback!</p>
+    <img src="https://media.giphy.com/media/JIX9t2j0ZTN9S/giphy.gif" width="120">
   </div>
 
-  <footer>
-    &copy; 2025 Nidhi S | All Rights Reserved
-  </footer>
-
-  <button onclick="scrollToTop()" id="scrollTopBtn" title="Go to top">↑</button>
+  <div id="thankyou-story">
+    <p>🌟 Great! It's nice to hear your story. Who knows? The next novel might be based on it!</p>
+    <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExNWkyb2J0Y25waTg0MHdqNTY2cWFqMWdsZ3YyZXdwb3RuNWIxZ2F3eiZlcD12MV9naWZzX3NlYXJjaCZjdD1n/WXB88TeARFVvi/giphy.gif" width="120">
+  </div>
 
   <script>
     function toggleTheme() {
       document.body.classList.toggle('dark-mode');
     }
-
     function openModal(id) {
       document.getElementById(id).style.display = "block";
     }
-
     function closeModal(id) {
       document.getElementById(id).style.display = "none";
     }
-
-    function showThankYou() {
-      document.getElementById('thankyou-cat').style.display = 'block';
-      document.getElementById('thankYouSound').play();
+    window.onclick = function(event) {
+      ['feedbackModal', 'storyModal'].forEach(id => {
+        const modal = document.getElementById(id);
+        if (event.target === modal) closeModal(id);
+      });
+    }
+    function showThankYouFeedback() {
+      document.getElementById('thankyou-feedback').style.display = 'block';
       setTimeout(() => {
-        document.getElementById('thankyou-cat').style.display = 'none';
+        document.getElementById('thankyou-feedback').style.display = 'none';
         closeModal('feedbackModal');
-      }, 4000);
+      }, 5000);
       return false;
     }
-
-    window.onclick = function(event) {
-      ['feedbackModal', 'aboutModal', 'contactModal'].forEach(id => {
-        const modal = document.getElementById(id);
-        if (event.target == modal) closeModal(id);
-      });
+    function showThankYouStory() {
+      document.getElementById('thankyou-story').style.display = 'block';
+      setTimeout(() => {
+        document.getElementById('thankyou-story').style.display = 'none';
+        closeModal('storyModal');
+      }, 5000);
+      return false;
     }
-
-    const reviews = [
-      "Heart-touching, raw and real. Sanya's journey mirrored mine.",
-      "Loved the emotional depth and honesty. A must-read for every woman.",
-      "I felt seen. I felt heard. This book made me feel less alone.",
-      "A soulful and empowering read. Truly inspiring.",
-      "A literary hug for the broken-hearted."
-    ];
-
-    function displayRandomReviews() {
-      const shuffled = reviews.sort(() => 0.5 - Math.random());
-      const selected = shuffled.slice(0, 3);
-      const container = document.getElementById('reviewContainer');
-      container.innerHTML = selected.map(text => `<div class="reviews">“${text}”</div>`).join('');
-    }
-
-    function scrollToTop() {
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    }
-
-    window.onscroll = function() {
-      document.getElementById("scrollTopBtn").style.display =
-        document.body.scrollTop > 100 || document.documentElement.scrollTop > 100
-          ? "block" : "none";
-    };
-
-    window.onload = () => {
-      displayRandomReviews();
-      particlesJS('particles-js', {
-        particles: {
-          number: { value: 60 },
-          color: { value: "#c44569" },
-          shape: { type: "circle" },
-          opacity: { value: 0.5 },
-          size: { value: 3 },
-          move: {
-            enable: true,
-            speed: 1.5
-          }
-        }
-      });
-    };
   </script>
 </body>
 </html>
