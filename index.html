@@ -5,6 +5,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>She Deserves the Best - Reader Corner</title>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display&family=Roboto&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display&display=swap" rel="stylesheet">
+
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display&family=Dancing+Script&display=swap" rel="stylesheet">
+
+
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body {
@@ -235,6 +241,16 @@
       </form>
     </div>
   </div>
+<div id="contactModal" class="modal">
+  <div class="modal-content">
+    <span class="close" onclick="closeModal('contactModal')">&times;</span>
+    <h2 class="highlight">Get in Touch</h2>
+   <p>You can connect with me directly—</p>
+<p><strong>📩 Email:</strong> <a href="mailto:inkbynidhi@gmail.com">inkbynidhi@gmail.com</a></p>
+<p>Your words might just start our next conversation.</p>
+
+  </div>
+</div>
 
   <div id="storyModal" class="modal">
     <div class="modal-content">
@@ -250,57 +266,164 @@
     </div>
   </div>
 
-  <div id="thankyou-cat">
-    <p>You didn’t just leave feedback—
-      you left a piece of your soul.
-      And we felt it. 
-      Thank you. 💖</p>
-    <img src="https://media.giphy.com/media/JIX9t2j0ZTN9S/giphy.gif" alt="Cute Cat" />
-    <audio autoplay>
-      <source src="https://cdn.pixabay.com/download/audio/2023/03/28/audio_51d19f5379.mp3" type="audio/mp3">
-    </audio>
+ <div id="thankyou-cat" style="
+  font-family: 'Playfair Display', serif;
+  font-size: 1.2rem;
+  line-height: 1.7;
+  color: #333;
+  text-align: center;
+  position: fixed;
+  top: 30%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: #fff;
+  padding: 2rem 2.5rem;
+  border-radius: 15px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.25);
+  animation: popupFade 0.6s ease-out;
+  z-index: 2000;
+  max-width: 500px;
+  width: 90%;
+">
+  <p style="font-style: italic; font-size: 1.25rem;">
+    You didn’t just leave feedback—<br>
+    <span style="color: #c44569; font-weight: 600;">you left a piece of your soul</span>.<br>
+    And we felt it.  
+  </p>
+
+  <p style="margin-top: 1rem; font-weight: bold; color: #c44569; font-size: 1.3rem;">
+    Thank you for showing up with your heart. 💖
+  </p>
+
+  <img src="https://media.giphy.com/media/JIX9t2j0ZTN9S/giphy.gif" alt="Cute Cat" style="width: 120px; margin-top: 1.2rem;" />
+
+  <audio autoplay>
+    <source src="https://cdn.pixabay.com/download/audio/2023/03/28/audio_51d19f5379.mp3" type="audio/mp3">
+  </audio>
+</div>
+
+
+ <div id="thankyou-story">
+  <p style="font-size: 1.25rem; line-height: 1.7; font-style: italic;">
+    Your story <span style="color: #c44569; font-weight: 600;">matters</span>. 💌<br>
+    And one day, someone might read it and feel a little less alone.
+  </p>
+  <p style="margin-top: 1.5rem; font-size: 1.4rem; font-weight: bold; color: #c44569;">
+    Who knows? <span style="text-decoration: underline;">The next theme</span> might begin with 
+    <span style="font-style: italic;">your words</span>. ✨
+  </p>
+  <img src="https://media.giphy.com/media/QBd2kLB5qDmysEXre9/giphy.gif" alt="Thank You" />
+</div>
+<div id="aboutModal" class="modal">
+  <div class="modal-content" style="
+    font-family: 'Playfair Display', serif;
+    font-size: 1.2rem;
+    line-height: 1.8;
+    position: relative;
+    transition: all 0.5s ease;
+    background-image: url('https://i.imgur.com/sStnMd3.png'); /* faded pen graphic */
+    background-repeat: no-repeat;
+    background-position: center bottom;
+    background-size: 120px;
+    background-blend-mode: lighten;
+    background-color: #fff;
+  ">
+    <span class="close" onclick="closeModal('aboutModal')">&times;</span>
+    <h2 class="highlight" style="font-size: 1.8rem; margin-bottom: 1rem;">About the Author</h2>
+    
+    <p>
+      Hi, I’m <strong style="color: #c44569;">Nidhi S</strong>—a quiet soul who feels deeply and writes from the tender spaces where emotions often go unheard.
+    </p>
+
+    <p style="margin-top: 1rem;">
+      <em><strong>She Deserves the Best</strong></em> isn’t just a story—it’s a piece of my soul, stitched with
+      <span style="color: #c44569; font-weight: bold;">soft ache</span>,
+      <span style="color: #c44569; font-weight: bold;">silent strength</span>,
+      and
+      <span style="color: #c44569; font-weight: bold;">healing hope</span>.
+    </p>
+
+    <p style="margin-top: 1rem;">
+      I write for the ones who <strong>cry quietly</strong>, <strong>love loudly</strong>, and carry storms behind calm smiles.
+    </p>
+
+    <p style="margin-top: 1rem;">
+      For every girl who ever felt invisible and still chose to rise—this book is for <span style="text-decoration: underline; font-weight: bold;">you</span>.
+    </p>
+
+    <p style="margin-top: 1rem;">
+      If my words find you, hold you, or help you breathe a little easier…  
+      then they’ve done what they came to do. 💫
+    </p>
+
+    <p style="margin-top: 1.5rem; font-style: italic; color: #c44569; font-weight: bold;">
+      You can also share your story—  
+      <br>
+      <span style="font-size: 1.1rem;">Who knows, it might become the heartbeat of my next novel.</span>
+    </p>
+
+    <p style="margin-top: 2rem; text-align: right; font-family: 'Dancing Script', cursive; font-size: 1.5rem;">
+      With warmth,<br><strong>Nidhi S</strong>
+    </p>
   </div>
+</div>
 
-  <div id="thankyou-story">
-    <p>Your story matters.
-And one day, someone might read it and feel a little less alone. 💖</p>
-    <p>Who knows? The next theme might begin with your words!!!</p>
-    <img src="https://media.giphy.com/media/QBd2kLB5qDmysEXre9/giphy.gif" alt="Thank You" />
-  </div>
-
-  <div id="aboutModal" class="modal">
-    <div class="modal-content">
-      <span class="close" onclick="closeModal('aboutModal')">&times;</span>
-      <h2 class="highlight">About the Author</h2>
-      <p>Hi, I’m Nidhi S—a quiet soul who feels deeply and writes from the spaces where emotions often go unheard.
-She Deserves the Best isn’t just a story—it’s a piece of my soul, stitched with soft ache, silent strength, and healing hope.
-
-I write for the ones who cry quietly, love loudly, and carry storms behind calm smiles.
-For every girl who ever felt invisible and still chose to rise—this book is for you.
-
-And if my words find you, hold you, or help you breathe a little easier, then they’ve done what they came to do.
-
-You can also share your story—who knows, it might become the heartbeat of my next novel.
-
-With warmth,
-Nidhi S
-
-</p>
-    </div>
-  </div>
+  
 <div id="notesModal" class="modal">
-    <div class="modal-content">
-      <span class="close" onclick="closeModal('notesModal')">&times;</span>
-      <h2 class="highlight">Author's Note</h2>
-      <p>She Deserves the Best is more than just a story—it's a piece of my heart poured onto pages. This novel was born out of silent tears, late-night thoughts, and the quiet strength it takes to heal. Through Sanya’s journey, I wanted to give voice to all the emotions we’re told to hide—grief, loneliness, longing, and the soft magic of friendship.
+  <div class="modal-content" style="
+    font-family: 'Playfair Display', serif;
+    font-size: 1.2rem;
+    line-height: 1.8;
+    background-image: url('https://i.imgur.com/yEyZkM8.png'); /* optional soft texture */
+    background-position: bottom right;
+    background-repeat: no-repeat;
+    background-size: 100px;
+    background-color: #fff;
+    transition: all 0.4s ease;
+    color: #333;
+  ">
+    <span class="close" onclick="closeModal('notesModal')">&times;</span>
+    <h2 class="highlight" style="font-size: 1.8rem; margin-bottom: 1rem;">Author's Note</h2>
 
-To every girl who ever felt unseen, unheard, or unloved: this story is for you. You deserve to be held, to be heard, and most importantly, to be loved the way you deserve—gently, wholly, and without conditions.
+    <p>
+      <em><strong>She Deserves the Best</strong></em> is more than a novel—  
+      it's a piece of my heart,  
+      stitched with <span style="color: #c44569; font-weight: 600;">quiet ache</span>,  
+      <span style="color: #c44569; font-weight: 600;">raw truths</span>, and  
+      the <span style="color: #c44569; font-weight: 600;">soft courage to heal</span>.
+    </p>
 
-Thank you for picking up this book. I hope it feels like a warm hug on your hardest days.
+    <p style="margin-top: 1rem;">
+      It was born from silent tears, late-night thoughts, and the unspoken battles so many carry within.  
+      Through Sanya’s journey, I wanted to give voice to the emotions we’re often told to hide—  
+      grief, loneliness, longing, and the soft magic of friendship.
+    </p>
 
-With love,
-Nidhi S</p>
-    </div>
+    <p style="margin-top: 1rem;">
+      To every girl who has ever felt <strong>unseen</strong>, <strong>unheard</strong>, or <strong>unloved</strong>:  
+      this story is for <span style="text-decoration: underline; font-weight: bold;">you</span>.
+    </p>
+
+    <p style="margin-top: 1rem;">
+      You deserve to be held.  
+      You deserve to be heard.  
+      You deserve to be loved—  
+      <span style="color: #c44569; font-weight: 600;">gently</span>,  
+      <span style="color: #c44569; font-weight: 600;">wholly</span>,  
+      and without conditions.
+    </p>
+
+    <p style="margin-top: 1.5rem;">
+      Thank you for picking up this book.  
+      I hope it feels like a <strong style="color: #c44569;">warm hug</strong> on your hardest days.
+    </p>
+
+    <p style="margin-top: 2rem; text-align: right; font-family: 'Dancing Script', cursive; font-size: 1.5rem;">
+      With love,<br><strong>Nidhi S</strong>
+    </p>
+  </div>
+</div>
+
   
 
   <div id="contactModal" class="modal">
