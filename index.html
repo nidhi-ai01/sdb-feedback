@@ -14,6 +14,31 @@
       scroll-behavior: smooth;
       transition: background-color 0.5s, color 0.5s;
     }
+    body::before {
+      content: "";
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      background: url('https://cdn.pixabay.com/photo/2018/05/08/21/28/background-3380603_1280.jpg') repeat;
+      opacity: 0.1;
+      z-index: 0;
+      animation: lightAnim 30s linear infinite;
+    }
+    body.dark-mode::before {
+      background: url('https://cdn.pixabay.com/photo/2017/08/30/07/52/night-2695561_1280.jpg') repeat;
+      animation: darkAnim 40s linear infinite;
+    }
+    @keyframes lightAnim {
+      0% { background-position: 0 0; }
+      100% { background-position: 1000px 1000px; }
+    }
+    @keyframes darkAnim {
+      0% { background-position: 0 0; }
+      100% { background-position: -1000px -1000px; }
+    }
     body.dark-mode {
       background: linear-gradient(135deg, #1a1a1a, #2c2c2c);
       color: #f0f0f0;
@@ -24,6 +49,8 @@
       padding: 2rem;
       text-align: center;
       animation: fadeIn 2s ease-in-out;
+      position: relative;
+      z-index: 1;
     }
     header h1 {
       font-family: 'Playfair Display', serif;
@@ -45,6 +72,8 @@
       flex-wrap: wrap;
       gap: 2rem;
       padding: 1rem;
+      position: relative;
+      z-index: 1;
     }
     nav a, .theme-toggle {
       color: white;
@@ -62,11 +91,14 @@
       top: 1rem;
       right: 1rem;
       font-size: 1.2rem;
+      z-index: 2;
     }
     .section {
       padding: 2rem;
       text-align: center;
       animation: fadeInUp 1.5s ease forwards;
+      position: relative;
+      z-index: 1;
     }
     .highlight { color: #c44569; }
     .reviews {
@@ -78,6 +110,8 @@
       box-shadow: 0 4px 12px rgba(0,0,0,0.1);
       transition: transform 0.3s ease;
       color: #000;
+      position: relative;
+      z-index: 1;
     }
     body.dark-mode .reviews {
       background: rgba(255, 255, 255, 0.05);
@@ -141,6 +175,8 @@
       padding: 2rem;
       font-size: 0.9rem;
       color: #fff;
+      z-index: 1;
+      position: relative;
     }
     @keyframes fadeIn { from {opacity: 0;} to {opacity: 1;} }
     @keyframes fadeInUp { from {opacity: 0; transform: translateY(20px);} to {opacity: 1; transform: translateY(0);} }
@@ -168,9 +204,11 @@
 </head>
 <body>
   <div class="theme-toggle" onclick="toggleTheme()">🌞/🌙 Theme</div>
+
   <header>
     <h1>She Deserves the Best – A Journey Through Love, Pain, and Healing</h1>
   </header>
+
   <nav>
     <a href="#reviews">Reader Reviews</a>
     <a onclick="openModal('feedbackModal')">Share Feedback</a>
@@ -178,10 +216,12 @@
     <a onclick="openModal('aboutModal')">About</a>
     <a onclick="openModal('contactModal')">Connect</a>
   </nav>
+
   <section class="section" id="reviews">
     <h2 class="highlight">Real Reader Reviews</h2>
     <div id="reviewContainer"></div>
   </section>
+
   <!-- Feedback Modal -->
   <div id="feedbackModal" class="modal">
     <div class="modal-content">
@@ -196,6 +236,7 @@
       </form>
     </div>
   </div>
+
   <!-- Story Modal -->
   <div id="storyModal" class="modal">
     <div class="modal-content">
@@ -210,41 +251,41 @@
       </form>
     </div>
   </div>
+
   <!-- Popups -->
   <div id="thankyou-feedback" class="thankyou-popup">
     <p>💖 Thank you for your kind feedback!</p>
     <img src="https://media.giphy.com/media/JIX9t2j0ZTN9S/giphy.gif">
   </div>
+
   <div id="thankyou-story" class="thankyou-popup">
     <p>🌟 Great! It's nice to hear your story. Who knows? The next novel might be based on it!</p>
     <img src="https://media.giphy.com/media/WXB88TeARFVvi/giphy.gif">
   </div>
+
   <!-- About Modal -->
   <div id="aboutModal" class="modal">
     <div class="modal-content">
       <span class="close" onclick="closeModal('aboutModal')">&times;</span>
       <h2 class="highlight">About the Author</h2>
-      <p style="font-size: 1.1rem; line-height: 1.6;">Nidhi S is a storyteller who believes in the power of emotions and soft healing. Her writing speaks to those who have walked through pain, found pieces of light, and dared to begin again. With this novel, she hopes to create a safe space for healing, connection, and quiet strength.</p>
+      <p style="font-size: 1.1rem;">Nidhi S is a storyteller who believes in the power of emotions and soft healing.</p>
     </div>
   </div>
+
   <!-- Contact Modal -->
   <div id="contactModal" class="modal">
     <div class="modal-content">
       <span class="close" onclick="closeModal('contactModal')">&times;</span>
-      <h2 class="highlight">Connect with Me</h2>
-      <p><a href="mailto:inkbynidhi@gmail.com">Email</a></p>
-      <p><a href="https://github.com/nidhi-ai01" target="_blank">GitHub</a></p>
-      <p><a href="https://www.linkedin.com/in/nidhis13/" target="_blank">LinkedIn</a></p>
+      <h2 class="highlight">Connect</h2>
+      <p>Email: <a href="mailto:inkbynidhi@gmail.com">inkbynidhi@gmail.com</a></p>
+      <p>Discord: <a href="https://discord.com/users/haxor_13" target="_blank">haxor_13</a></p>
     </div>
   </div>
-  <!-- Buy Section -->
-  <section class="section">
-    <h2 class="highlight">Buy the Book</h2>
-    <p>Support the story by grabbing your copy: <a href="https://www.amazon.in" target="_blank">Click here to buy</a></p>
-  </section>
+
   <footer>
     &copy; 2025 Nidhi S | All Rights Reserved
   </footer>
+
   <script>
     function toggleTheme() {
       document.body.classList.toggle('dark-mode');
