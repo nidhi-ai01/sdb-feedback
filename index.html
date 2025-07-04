@@ -205,6 +205,7 @@
     <a onclick="openModal('storyModal')">Your Story</a>
     <a onclick="openModal('aboutModal')">About</a>
     <a onclick="openModal('contactModal')">Contact</a>
+    <a href="#getbook">Get the Book</a>
   </nav>
 
   <section class="section" id="reviews">
@@ -212,7 +213,12 @@
     <div id="reviewContainer"></div>
   </section>
 
-  <!-- Feedback Modal -->
+  <section class="section" id="getbook">
+    <h2 class="highlight">Get the Book</h2>
+    <p>Experience the full story of love, resilience, and healing.</p>
+    <a href="https://www.amazon.in" target="_blank"><button>Buy Now on Amazon</button></a>
+  </section>
+
   <div id="feedbackModal" class="modal">
     <div class="modal-content">
       <span class="close" onclick="closeModal('feedbackModal')">&times;</span>
@@ -229,7 +235,6 @@
     </div>
   </div>
 
-  <!-- Story Modal -->
   <div id="storyModal" class="modal">
     <div class="modal-content">
       <span class="close" onclick="closeModal('storyModal')">&times;</span>
@@ -244,7 +249,6 @@
     </div>
   </div>
 
-  <!-- Feedback Thank You Popup -->
   <div id="thankyou-cat">
     <p>Thank you for your valuable feedback! 💖</p>
     <img src="https://media.giphy.com/media/JIX9t2j0ZTN9S/giphy.gif" alt="Cute Cat" />
@@ -253,24 +257,20 @@
     </audio>
   </div>
 
-  <!-- Story Thank You Popup -->
   <div id="thankyou-story">
     <p>Thank you for sharing your story! 💖</p>
     <p>Who knows… the next story might be yours!</p>
     <img src="https://media.giphy.com/media/QBd2kLB5qDmysEXre9/giphy.gif" alt="Thank You" />
   </div>
 
-  <!-- About Modal -->
   <div id="aboutModal" class="modal">
     <div class="modal-content">
       <span class="close" onclick="closeModal('aboutModal')">&times;</span>
       <h2 class="highlight">About the Author</h2>
       <p>Nidhi S is a storyteller who believes in the power of emotions and soft healing. This novel is a love letter to everyone who ever felt invisible and still chose to rise.</p>
-      <p><a href="https://www.amazon.in">Buy the Book</a> | <a href="https://github.com/nidhi-ai01">GitHub</a> | <a href="mailto:inkbynidhi@gmail.com">Email</a></p>
     </div>
   </div>
 
-  <!-- Contact Modal -->
   <div id="contactModal" class="modal">
     <div class="modal-content">
       <span class="close" onclick="closeModal('contactModal')">&times;</span>
