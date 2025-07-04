@@ -9,39 +9,44 @@
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body {
       font-family: 'Roboto', sans-serif;
-      background: linear-gradient(135deg, #fff5f7, #fceef5);
       color: #333;
       scroll-behavior: smooth;
       transition: background-color 0.5s, color 0.5s;
     }
-    body::before {
-      content: "";
+    body.light-mode {
+      background: linear-gradient(135deg, #fff5f7, #fceef5);
+    }
+    body.dark-mode {
+      background: linear-gradient(135deg, #1a1a1a, #2c2c2c);
+      color: #f0f0f0;
+    }
+    .animation-light, .animation-dark {
       position: fixed;
       top: 0;
       left: 0;
       width: 100%;
       height: 100%;
+      z-index: -1;
       pointer-events: none;
-      background: url('https://cdn.pixabay.com/photo/2018/05/08/21/28/background-3380603_1280.jpg') repeat;
-      opacity: 0.1;
-      z-index: 0;
-      animation: lightAnim 30s linear infinite;
     }
-    body.dark-mode::before {
-      background: url('https://cdn.pixabay.com/photo/2017/08/30/07/52/night-2695561_1280.jpg') repeat;
-      animation: darkAnim 40s linear infinite;
+    .animation-light {
+      background: radial-gradient(circle, rgba(255,255,200,0.3) 1px, transparent 1px);
+      background-size: 50px 50px;
+      animation: flicker 2s infinite;
     }
-    @keyframes lightAnim {
+    .animation-dark {
+      background: url('https://i.ibb.co/BK65t80/stars-moon.png') repeat;
+      background-size: cover;
+      opacity: 0.7;
+      animation: floatStars 60s linear infinite;
+    }
+    @keyframes flicker {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.7; }
+    }
+    @keyframes floatStars {
       0% { background-position: 0 0; }
-      100% { background-position: 1000px 1000px; }
-    }
-    @keyframes darkAnim {
-      0% { background-position: 0 0; }
-      100% { background-position: -1000px -1000px; }
-    }
-    body.dark-mode {
-      background: linear-gradient(135deg, #1a1a1a, #2c2c2c);
-      color: #f0f0f0;
+      100% { background-position: -1000px 1000px; }
     }
     header {
       background-color: #2b2d42;
@@ -49,8 +54,6 @@
       padding: 2rem;
       text-align: center;
       animation: fadeIn 2s ease-in-out;
-      position: relative;
-      z-index: 1;
     }
     header h1 {
       font-family: 'Playfair Display', serif;
@@ -72,8 +75,6 @@
       flex-wrap: wrap;
       gap: 2rem;
       padding: 1rem;
-      position: relative;
-      z-index: 1;
     }
     nav a, .theme-toggle {
       color: white;
@@ -91,14 +92,11 @@
       top: 1rem;
       right: 1rem;
       font-size: 1.2rem;
-      z-index: 2;
     }
     .section {
       padding: 2rem;
       text-align: center;
       animation: fadeInUp 1.5s ease forwards;
-      position: relative;
-      z-index: 1;
     }
     .highlight { color: #c44569; }
     .reviews {
@@ -110,8 +108,6 @@
       box-shadow: 0 4px 12px rgba(0,0,0,0.1);
       transition: transform 0.3s ease;
       color: #000;
-      position: relative;
-      z-index: 1;
     }
     body.dark-mode .reviews {
       background: rgba(255, 255, 255, 0.05);
@@ -175,8 +171,6 @@
       padding: 2rem;
       font-size: 0.9rem;
       color: #fff;
-      z-index: 1;
-      position: relative;
     }
     @keyframes fadeIn { from {opacity: 0;} to {opacity: 1;} }
     @keyframes fadeInUp { from {opacity: 0; transform: translateY(20px);} to {opacity: 1; transform: translateY(0);} }
@@ -202,7 +196,10 @@
     }
   </style>
 </head>
-<body>
+<body class="light-mode">
+  <div class="animation-light"></div>
+  <div class="animation-dark" style="display:none"></div>
+
   <div class="theme-toggle" onclick="toggleTheme()">🌞/🌙 Theme</div>
 
   <header>
@@ -268,7 +265,7 @@
     <div class="modal-content">
       <span class="close" onclick="closeModal('aboutModal')">&times;</span>
       <h2 class="highlight">About the Author</h2>
-      <p style="font-size: 1.1rem;">Nidhi S is a storyteller who believes in the power of emotions and soft healing.</p>
+      <p>Nidhi S is a storyteller who believes in the power of emotions and soft healing.</p>
     </div>
   </div>
 
@@ -276,9 +273,9 @@
   <div id="contactModal" class="modal">
     <div class="modal-content">
       <span class="close" onclick="closeModal('contactModal')">&times;</span>
-      <h2 class="highlight">Connect</h2>
-      <p>Email: <a href="mailto:inkbynidhi@gmail.com">inkbynidhi@gmail.com</a></p>
+      <h2 class="highlight">Connect with Me</h2>
       <p>Discord: <a href="https://discord.com/users/haxor_13" target="_blank">haxor_13</a></p>
+      <p>Email: <a href="mailto:inkbynidhi@gmail.com">inkbynidhi@gmail.com</a></p>
     </div>
   </div>
 
@@ -288,7 +285,11 @@
 
   <script>
     function toggleTheme() {
-      document.body.classList.toggle('dark-mode');
+      const body = document.body;
+      const isDark = body.classList.toggle('dark-mode');
+      body.classList.toggle('light-mode', !isDark);
+      document.querySelector('.animation-light').style.display = isDark ? 'none' : 'block';
+      document.querySelector('.animation-dark').style.display = isDark ? 'block' : 'none';
     }
     function openModal(id) {
       document.getElementById(id).style.display = "block";
