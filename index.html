@@ -3,14 +3,10 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>She Deserves the Best - Feedback</title>
+  <title>She Deserves the Best - Reader Corner</title>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display&family=Roboto&display=swap" rel="stylesheet">
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
     body {
       font-family: 'Roboto', sans-serif;
       background: linear-gradient(135deg, #fff5f7, #fceef5);
@@ -75,9 +71,7 @@
       text-align: center;
       animation: fadeInUp 1.5s ease forwards;
     }
-    .highlight {
-      color: #c44569;
-    }
+    .highlight { color: #c44569; }
     .reviews {
       background: rgba(255, 255, 255, 0.9);
       border-radius: 10px;
@@ -93,17 +87,14 @@
       color: #fff;
       border: 1px solid #444;
     }
-    .reviews:hover {
-      transform: scale(1.02);
-    }
+    .reviews:hover { transform: scale(1.02); }
+
     .modal {
       display: none;
       position: fixed;
       z-index: 1000;
-      left: 0;
-      top: 0;
-      width: 100%;
-      height: 100%;
+      left: 0; top: 0;
+      width: 100%; height: 100%;
       overflow: auto;
       background-color: rgba(0,0,0,0.6);
     }
@@ -131,9 +122,8 @@
       font-weight: bold;
       cursor: pointer;
     }
-    .close:hover {
-      color: black;
-    }
+    .close:hover { color: black; }
+
     label, input, textarea {
       display: block;
       width: 100%;
@@ -155,9 +145,8 @@
       cursor: pointer;
       transition: background 0.3s ease;
     }
-    button:hover {
-      background-color: #a83a58;
-    }
+    button:hover { background-color: #a83a58; }
+
     footer {
       text-align: center;
       padding: 2rem;
@@ -173,8 +162,12 @@
       from {opacity: 0; transform: translateY(20px);}
       to {opacity: 1; transform: translateY(0);}
     }
+    @keyframes popupFade {
+      0% { opacity: 0; transform: translate(-50%, -60%) scale(0.8); }
+      100% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+    }
 
-    #thankyou-cat {
+    #thankyou-cat, #thankyou-story {
       display: none;
       text-align: center;
       position: fixed;
@@ -188,23 +181,14 @@
       animation: popupFade 0.6s ease-out;
       z-index: 2000;
     }
-    body.dark-mode #thankyou-cat {
+    body.dark-mode #thankyou-cat,
+    body.dark-mode #thankyou-story {
       background: #1e1e1e;
       color: #fff;
     }
-    #thankyou-cat img {
+    #thankyou-cat img, #thankyou-story img {
       width: 120px;
       margin-top: 1rem;
-    }
-    @keyframes popupFade {
-      0% {
-        opacity: 0;
-        transform: translate(-50%, -60%) scale(0.8);
-      }
-      100% {
-        opacity: 1;
-        transform: translate(-50%, -50%) scale(1);
-      }
     }
   </style>
 </head>
@@ -217,7 +201,8 @@
 
   <nav>
     <a href="#reviews">Reader Reviews</a>
-    <a onclick="openModal('feedbackModal')">Share Your Thoughts</a>
+    <a onclick="openModal('feedbackModal')">Your Feedback</a>
+    <a onclick="openModal('storyModal')">Your Story</a>
     <a onclick="openModal('aboutModal')">About</a>
     <a onclick="openModal('contactModal')">Contact</a>
   </nav>
@@ -227,30 +212,55 @@
     <div id="reviewContainer"></div>
   </section>
 
+  <!-- Feedback Modal -->
   <div id="feedbackModal" class="modal">
     <div class="modal-content">
       <span class="close" onclick="closeModal('feedbackModal')">&times;</span>
       <h2 class="highlight">We’d Love to Hear From You</h2>
       <form onsubmit="return showThankYou();">
         <label for="name">Your Name:</label>
-        <input type="text" id="name" name="name" required>
+        <input type="text" id="name" required>
         <label for="email">Email (optional):</label>
-        <input type="email" id="email" name="email">
+        <input type="email" id="email">
         <label for="message">Your Feedback:</label>
-        <textarea id="message" name="message" rows="5" required></textarea>
+        <textarea id="message" rows="5" required></textarea>
         <button type="submit">Submit</button>
       </form>
     </div>
   </div>
 
+  <!-- Story Modal -->
+  <div id="storyModal" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="closeModal('storyModal')">&times;</span>
+      <h2 class="highlight">Share Your Story</h2>
+      <form onsubmit="return showStoryThankYou();">
+        <label for="story-name">Your Name:</label>
+        <input type="text" id="story-name" required>
+        <label for="story">Your Story:</label>
+        <textarea id="story" required rows="5"></textarea>
+        <button type="submit">Submit</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Feedback Thank You Popup -->
   <div id="thankyou-cat">
-    <p>Thank you for your feedback! 💖</p>
+    <p>Thank you for your valuable feedback! 💖</p>
     <img src="https://media.giphy.com/media/JIX9t2j0ZTN9S/giphy.gif" alt="Cute Cat" />
-    <audio id="thankYouSound" autoplay>
+    <audio autoplay>
       <source src="https://cdn.pixabay.com/download/audio/2023/03/28/audio_51d19f5379.mp3" type="audio/mp3">
     </audio>
   </div>
 
+  <!-- Story Thank You Popup -->
+  <div id="thankyou-story">
+    <p>Thank you for sharing your story! 💖</p>
+    <p>Who knows… the next story might be yours!</p>
+    <img src="https://media.giphy.com/media/QBd2kLB5qDmysEXre9/giphy.gif" alt="Thank You" />
+  </div>
+
+  <!-- About Modal -->
   <div id="aboutModal" class="modal">
     <div class="modal-content">
       <span class="close" onclick="closeModal('aboutModal')">&times;</span>
@@ -260,6 +270,7 @@
     </div>
   </div>
 
+  <!-- Contact Modal -->
   <div id="contactModal" class="modal">
     <div class="modal-content">
       <span class="close" onclick="closeModal('contactModal')">&times;</span>
@@ -286,9 +297,9 @@
     }
 
     window.onclick = function(event) {
-      ['feedbackModal', 'aboutModal', 'contactModal'].forEach(id => {
+      ['feedbackModal', 'aboutModal', 'contactModal', 'storyModal'].forEach(id => {
         const modal = document.getElementById(id);
-        if (event.target == modal) closeModal(id);
+        if (event.target === modal) closeModal(id);
       });
     }
 
@@ -298,20 +309,23 @@
         document.getElementById('thankyou-cat').style.display = 'none';
         closeModal('feedbackModal');
       }, 5000);
-      return false; // prevent actual form submission for demo
+      return false;
     }
 
-    const reviews = [
-      "Heart-touching, raw and real. Sanya's journey mirrored mine.",
-      "Loved the emotional depth and honesty. A must-read for every woman.",
-      "I felt seen. I felt heard. This book made me feel less alone.",
-      "A soulful and empowering read. Truly inspiring.",
-      "A literary hug for the broken-hearted."
-    ];
+    function showStoryThankYou() {
+      document.getElementById('thankyou-story').style.display = 'block';
+      setTimeout(() => {
+        document.getElementById('thankyou-story').style.display = 'none';
+        closeModal('storyModal');
+      }, 6000);
+      return false;
+    }
+
+    const reviews = Array.from({length: 100}, (_, i) => `Review #${i + 1}: This book touched my heart deeply.`);
 
     function displayRandomReviews() {
       const shuffled = reviews.sort(() => 0.5 - Math.random());
-      const selected = shuffled.slice(0, 3);
+      const selected = shuffled.slice(0, 6);
       const container = document.getElementById('reviewContainer');
       container.innerHTML = selected.map(text => `<div class="reviews">“${text}”</div>`).join('');
     }
