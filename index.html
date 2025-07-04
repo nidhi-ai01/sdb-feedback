@@ -2,81 +2,69 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>She Deserves the Best - Share & Feedback</title>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display&family=Roboto&display=swap" rel="stylesheet">
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body {
       font-family: 'Roboto', sans-serif;
-      background: #fff5f7;
       color: #333;
       scroll-behavior: smooth;
       transition: background-color 0.5s, color 0.5s;
       position: relative;
       overflow-x: hidden;
     }
-    body.dark-mode {
-      background: #1a1a1a;
-      color: #f0f0f0;
-    }
-    .background-light, .background-dark {
+    body::before {
+      content: '';
       position: fixed;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
       z-index: -1;
-      pointer-events: none;
+      background: radial-gradient(#ffebee, #fceef5);
+      animation: bulbFloat 20s linear infinite;
     }
-    .background-light {
-      background: url('https://i.ibb.co/MRkcWBr/lightbulbs.gif') repeat center center/cover;
-      display: block;
+    body.dark-mode::before {
+      background: radial-gradient(#0d1b2a, #1b263b);
+      animation: starTwinkle 20s linear infinite;
     }
-    .background-dark {
-      background: url('https://i.ibb.co/yVvSmJk/stars-moon.gif') repeat center center/cover;
-      display: none;
+    @keyframes bulbFloat {
+      0% { background-position: 0 0; }
+      100% { background-position: 100% 100%; }
     }
-    body.dark-mode .background-light { display: none; }
-    body.dark-mode .background-dark { display: block; }
-
+    @keyframes starTwinkle {
+      0%, 100% { opacity: 0.9; }
+      50% { opacity: 1; }
+    }
+    .theme-toggle {
+      position: fixed;
+      top: 1rem;
+      right: 1rem;
+      font-size: 1.5rem;
+      background: #c44569;
+      color: #fff;
+      padding: 0.5rem 1rem;
+      border-radius: 20px;
+      cursor: pointer;
+      transition: background 0.3s ease;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      z-index: 999;
+    }
+    .theme-toggle:hover {
+      background: #a83a58;
+    }
     header {
       background-color: #2b2d42;
       color: #fff;
       padding: 2rem;
       text-align: center;
-      animation: fadeIn 2s ease-in-out;
     }
     header h1 {
       font-family: 'Playfair Display', serif;
       font-size: 2rem;
-      white-space: nowrap;
-      overflow: hidden;
-      border-right: 0.15em solid white;
-      animation: typing 4s steps(40, end), blink-caret 0.75s step-end infinite;
     }
-    @keyframes typing { from { width: 0 } to { width: 100% } }
-    @keyframes blink-caret {
-      from, to { border-color: transparent }
-      50% { border-color: white; }
-    }
-
-    .theme-toggle {
-      position: absolute;
-      top: 1rem;
-      right: 1rem;
-      font-size: 1.4rem;
-      background: #c44569;
-      color: #fff;
-      border: none;
-      padding: 0.5rem 1rem;
-      border-radius: 20px;
-      cursor: pointer;
-      transition: all 0.3s ease;
-    }
-    .theme-toggle:hover {
-      background: #a83a58;
-      transform: scale(1.1);
-    }
-
     nav {
       background: #c44569;
       display: flex;
@@ -96,14 +84,11 @@
       color: #ffe6ea;
       transform: scale(1.1);
     }
-
     .section {
       padding: 2rem;
       text-align: center;
-      animation: fadeInUp 1.5s ease forwards;
     }
     .highlight { color: #c44569; }
-
     .reviews {
       background: rgba(255, 255, 255, 0.9);
       border-radius: 10px;
@@ -120,7 +105,6 @@
       border: 1px solid #444;
     }
     .reviews:hover { transform: scale(1.02); }
-
     .modal {
       display: none;
       position: fixed;
@@ -151,7 +135,6 @@
       font-size: 28px;
       cursor: pointer;
     }
-
     label, input, textarea {
       display: block;
       width: 100%;
@@ -173,7 +156,6 @@
       cursor: pointer;
     }
     button:hover { background-color: #a83a58; }
-
     .thankyou-popup {
       display: none;
       text-align: center;
@@ -190,26 +172,20 @@
     }
     body.dark-mode .thankyou-popup { background: #1e1e1e; color: #fff; }
     .thankyou-popup img { width: 120px; margin-top: 1rem; }
-
+    @keyframes popupFade {
+      0% { opacity: 0; transform: translate(-50%, -60%) scale(0.8); }
+      100% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+    }
     footer {
       text-align: center;
       padding: 2rem;
       font-size: 0.9rem;
       color: #fff;
     }
-
-    @keyframes fadeIn { from {opacity: 0;} to {opacity: 1;} }
-    @keyframes fadeInUp { from {opacity: 0; transform: translateY(20px);} to {opacity: 1; transform: translateY(0);} }
-    @keyframes popupFade {
-      0% { opacity: 0; transform: translate(-50%, -60%) scale(0.8); }
-      100% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
-    }
   </style>
 </head>
 <body>
-  <div class="background-light"></div>
-  <div class="background-dark"></div>
-  <button class="theme-toggle" onclick="toggleTheme()">🌞 / 🌙</button>
+  <div class="theme-toggle" onclick="toggleTheme()">🌞/🌙 Theme</div>
 
   <header>
     <h1>She Deserves the Best – A Journey Through Love, Pain, and Healing</h1>
@@ -263,7 +239,6 @@
     <p>💖 Thank you for your kind feedback!</p>
     <img src="https://media.giphy.com/media/JIX9t2j0ZTN9S/giphy.gif">
   </div>
-
   <div id="thankyou-story" class="thankyou-popup">
     <p>🌟 Great! It's nice to hear your story. Who knows? The next novel might be based on it!</p>
     <img src="https://media.giphy.com/media/WXB88TeARFVvi/giphy.gif">
@@ -275,7 +250,6 @@
       <span class="close" onclick="closeModal('aboutModal')">&times;</span>
       <h2 class="highlight">About the Author</h2>
       <p>Nidhi S is a storyteller who believes in the power of emotions and soft healing.</p>
-      <p><a href="https://www.amazon.in">Buy the Book</a></p>
     </div>
   </div>
 
@@ -284,8 +258,8 @@
     <div class="modal-content">
       <span class="close" onclick="closeModal('contactModal')">&times;</span>
       <h2 class="highlight">Get in Touch</h2>
-      <p>Email: <a href="mailto:inkbynidhi@gmail.com">inkbynidhi@gmail.com</a></p>
-      <p>Discord: <a href="https://discord.com/users/haxor_13" target="_blank">haxor_13</a></p>
+      <p>Discord: <a href="https://discord.com/users/haxor_13" target="_blank">@haxor_13</a><br>
+         Email: <a href="mailto:inkbynidhi@gmail.com">inkbynidhi@gmail.com</a></p>
     </div>
   </div>
 
