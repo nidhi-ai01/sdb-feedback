@@ -2,48 +2,74 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>She Deserves the Best - Share & Feedback</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>She Deserves the Best - Feedback</title>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display&family=Roboto&display=swap" rel="stylesheet">
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
-    html { scroll-behavior: smooth; }
     body {
       font-family: 'Roboto', sans-serif;
+      background: linear-gradient(135deg, #fff5f7, #fceef5);
       color: #333;
+      scroll-behavior: smooth;
       transition: background-color 0.5s, color 0.5s;
       position: relative;
       overflow-x: hidden;
-      background: #fff5f7;
     }
     body.dark-mode {
-      background: #1a1a1a;
+      background: linear-gradient(135deg, #1a1a1a, #2c2c2c);
       color: #f0f0f0;
     }
-    #backgroundCanvas {
+    canvas#backgroundCanvas {
       position: fixed;
       top: 0;
       left: 0;
-      width: 100%;
-      height: 100%;
       z-index: -1;
     }
     .theme-toggle {
       position: fixed;
       top: 1rem;
       right: 1rem;
-      font-size: 1.5rem;
-      background: #c44569;
-      color: #fff;
-      padding: 0.5rem 1rem;
-      border-radius: 20px;
       cursor: pointer;
-      transition: background 0.3s ease;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-      z-index: 999;
+      z-index: 1000;
     }
-    .theme-toggle:hover {
-      background: #a83a58;
+    .toggle-switch {
+      position: relative;
+      width: 60px;
+      height: 34px;
+    }
+    .toggle-switch input { display: none; }
+    .slider {
+      position: absolute;
+      cursor: pointer;
+      background-color: #ccc;
+      border-radius: 34px;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      transition: 0.4s;
+    }
+    .slider:before {
+      position: absolute;
+      content: "";
+      height: 26px;
+      width: 26px;
+      left: 4px;
+      bottom: 4px;
+      background-color: white;
+      border-radius: 50%;
+      transition: 0.4s;
+    }
+    input:checked + .slider {
+      background-color: #c44569;
+    }
+    input:checked + .slider:before {
+      transform: translateX(26px);
+    }
+    .section {
+      padding: 2rem;
+      text-align: center;
     }
     header {
       background-color: #2b2d42;
@@ -54,6 +80,18 @@
     header h1 {
       font-family: 'Playfair Display', serif;
       font-size: 2rem;
+      white-space: nowrap;
+      overflow: hidden;
+      border-right: 0.15em solid white;
+      animation: typing 4s steps(40, end), blink-caret 0.75s step-end infinite;
+    }
+    @keyframes typing {
+      from { width: 0 }
+      to { width: 100% }
+    }
+    @keyframes blink-caret {
+      from, to { border-color: transparent }
+      50% { border-color: white; }
     }
     nav {
       background: #c44569;
@@ -74,10 +112,6 @@
       color: #ffe6ea;
       transform: scale(1.1);
     }
-    .section {
-      padding: 2rem;
-      text-align: center;
-    }
     .highlight { color: #c44569; }
     .reviews {
       background: rgba(255, 255, 255, 0.9);
@@ -86,7 +120,6 @@
       margin: 1rem auto;
       max-width: 700px;
       box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-      transition: transform 0.3s ease;
       color: #000;
     }
     body.dark-mode .reviews {
@@ -103,6 +136,7 @@
       top: 0;
       width: 100%;
       height: 100%;
+      overflow: auto;
       background-color: rgba(0,0,0,0.6);
     }
     .modal-content {
@@ -115,7 +149,7 @@
       position: relative;
     }
     body.dark-mode .modal-content {
-      background: #1e1e1e;
+      background-color: #1e1e1e;
       color: #fff;
     }
     .close {
@@ -125,27 +159,6 @@
       font-size: 28px;
       cursor: pointer;
     }
-    label, input, textarea {
-      display: block;
-      width: 100%;
-      margin-top: 1rem;
-    }
-    input, textarea {
-      padding: 0.75rem;
-      border-radius: 5px;
-      border: 1px solid #ccc;
-    }
-    button {
-      background-color: #c44569;
-      color: #fff;
-      padding: 0.8rem 1.5rem;
-      border: none;
-      margin-top: 1rem;
-      font-size: 1rem;
-      border-radius: 5px;
-      cursor: pointer;
-    }
-    button:hover { background-color: #a83a58; }
     .thankyou-popup {
       display: none;
       text-align: center;
@@ -160,29 +173,21 @@
       animation: popupFade 0.6s ease-out;
       z-index: 2000;
     }
-    body.dark-mode .thankyou-popup { background: #1e1e1e; color: #fff; }
-    .thankyou-popup img { width: 120px; margin-top: 1rem; }
-    #scrollTopBtn {
-      display: none;
-      position: fixed;
-      bottom: 20px;
-      right: 20px;
-      z-index: 1001;
-      background: #c44569;
-      color: white;
-      border: none;
-      border-radius: 50%;
-      width: 40px;
-      height: 40px;
-      font-size: 1.5rem;
-      cursor: pointer;
+    body.dark-mode .thankyou-popup {
+      background: #1e1e1e; color: #fff;
     }
-    #scrollTopBtn:hover {
-      background: #a83a58;
+    .thankyou-popup img {
+      width: 150px;
+      margin-top: 1rem;
+      animation: bounce 1s infinite alternate;
     }
     @keyframes popupFade {
       0% { opacity: 0; transform: translate(-50%, -60%) scale(0.8); }
       100% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+    }
+    @keyframes bounce {
+      0% { transform: translateY(0); }
+      100% { transform: translateY(-10px); }
     }
     footer {
       text-align: center;
@@ -194,15 +199,19 @@
 </head>
 <body>
   <canvas id="backgroundCanvas"></canvas>
-  <div class="theme-toggle" onclick="toggleTheme()">🌞/🌙</div>
-  <button id="scrollTopBtn" onclick="window.scrollTo({ top: 0, behavior: 'smooth' });">↑</button>
+  <div class="theme-toggle">
+    <label class="toggle-switch">
+      <input type="checkbox" onchange="toggleTheme()">
+      <span class="slider"></span>
+    </label>
+  </div>
   <header>
     <h1>She Deserves the Best – A Journey Through Love, Pain, and Healing</h1>
   </header>
   <nav>
     <a href="#reviews">Reader Reviews</a>
     <a onclick="openModal('feedbackModal')">Share Feedback</a>
-    <a onclick="openModal('storyModal')">Share Your Story</a>
+    <a onclick="openModal('ratingModal')">Rate the Novel</a>
     <a onclick="openModal('aboutModal')">About</a>
     <a onclick="openModal('contactModal')">Contact</a>
   </nav>
@@ -210,80 +219,110 @@
     <h2 class="highlight">Real Reader Reviews</h2>
     <div id="reviewContainer"></div>
   </section>
+  <div id="feedbackModal" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="closeModal('feedbackModal')">&times;</span>
+      <h2>We’d Love to Hear From You</h2>
+      <form onsubmit="return showThankYouFeedback();">
+        <label for="name">Your Name:</label>
+        <input type="text" id="name" name="name" required>
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email">
+        <label for="message">Your Feedback:</label>
+        <textarea id="message" name="message" rows="4" required></textarea>
+        <button type="submit">Submit</button>
+      </form>
+    </div>
+  </div>
+  <div id="ratingModal" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="closeModal('ratingModal')">&times;</span>
+      <h2>Rate the Novel</h2>
+      <form action="https://formspree.io/f/xjkrzkrn" method="POST">
+        <label for="rating-name">Your Name (Optional):</label>
+        <input type="text" id="rating-name" name="name">
+        <label for="rating-stars">Your Rating (1-5):</label>
+        <input type="number" id="rating-stars" name="rating" min="1" max="5" required>
+        <label for="rating-msg">Comments:</label>
+        <textarea id="rating-msg" name="message" rows="4" required></textarea>
+        <button type="submit">Submit</button>
+      </form>
+    </div>
+  </div>
+  <div class="thankyou-popup" id="thankyou-feedback">
+    <p>Thank you for your feedback! 💖</p>
+    <img src="https://media.giphy.com/media/JIX9t2j0ZTN9S/giphy.gif" alt="Cat GIF">
+  </div>
   <div id="aboutModal" class="modal">
     <div class="modal-content">
       <span class="close" onclick="closeModal('aboutModal')">&times;</span>
-      <h2 class="highlight">About the Author</h2>
-      <p>Nidhi S is a storyteller who believes in the power of emotions and soft healing. This novel is a love letter to everyone who ever felt invisible and still chose to rise.</p>
+      <h2>About the Author</h2>
+      <p>Nidhi S is a storyteller who believes in the power of emotions and soft healing.</p>
     </div>
   </div>
   <div id="contactModal" class="modal">
     <div class="modal-content">
       <span class="close" onclick="closeModal('contactModal')">&times;</span>
-      <h2 class="highlight">Connect with Me</h2>
+      <h2>Contact</h2>
       <p>Email: <a href="mailto:inkbynidhi@gmail.com">inkbynidhi@gmail.com</a></p>
-      <p>Discord: <a href="https://discord.com/users/haxor_13" target="_blank">@haxor_13</a></p>
+      <p>Discord: <a href="https://discord.com/users/haxor_13" target="_blank">haxor_13</a></p>
     </div>
   </div>
+  <footer>&copy; 2025 Nidhi S | All Rights Reserved</footer>
   <script>
-    const reviews = Array.from({ length: 100 }, (_, i) => `Review #${i + 1}: This story moved me deeply.`);
-
-    function displayRandomReviews() {
-      const shuffled = reviews.sort(() => 0.5 - Math.random());
-      const selected = shuffled.slice(0, 3);
-      const container = document.getElementById('reviewContainer');
-      container.innerHTML = selected.map(text => `<div class="reviews">“${text}”</div>`).join('');
-    }
-
     function toggleTheme() {
       document.body.classList.toggle('dark-mode');
     }
-
     function openModal(id) {
       document.getElementById(id).style.display = "block";
     }
-
     function closeModal(id) {
       document.getElementById(id).style.display = "none";
     }
-
-    function animateParticles() {
+    function showThankYouFeedback() {
+      document.getElementById('thankyou-feedback').style.display = 'block';
+      setTimeout(() => {
+        document.getElementById('thankyou-feedback').style.display = 'none';
+        closeModal('feedbackModal');
+      }, 5000);
+      return false;
+    }
+    const reviews = Array.from({length: 120}, (_, i) => `Review ${i+1}: This book touched my soul.`);
+    function displayRandomReviews() {
+      const shuffled = reviews.sort(() => 0.5 - Math.random());
+      const selected = shuffled.slice(0, 3);
+      document.getElementById('reviewContainer').innerHTML = selected.map(r => `<div class="reviews">“${r}”</div>`).join('');
+    }
+    function initBackgroundParticles() {
       const canvas = document.getElementById('backgroundCanvas');
       const ctx = canvas.getContext('2d');
       canvas.width = window.innerWidth;
       canvas.height = window.innerHeight;
-      let particles = Array.from({ length: 120 }, () => ({
+      const isDark = document.body.classList.contains('dark-mode');
+      const color = isDark ? '#ccc' : '#ffc0cb';
+      const stars = Array.from({length: 100}, () => ({
         x: Math.random() * canvas.width,
         y: Math.random() * canvas.height,
         r: Math.random() * 2 + 1,
-        speedY: Math.random() * 1 + 0.5,
-        color: document.body.classList.contains('dark-mode') ? '#ffffff' : '#ffb6c1'
+        dy: Math.random() * 1 + 0.5
       }));
-
-      function draw() {
+      function animate() {
         ctx.clearRect(0, 0, canvas.width, canvas.height);
-        particles.forEach(p => {
+        ctx.fillStyle = color;
+        stars.forEach(s => {
           ctx.beginPath();
-          ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-          ctx.fillStyle = p.color;
-          ctx.shadowColor = p.color;
-          ctx.shadowBlur = 6;
+          ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
           ctx.fill();
-          p.y += p.speedY;
-          if (p.y > canvas.height) {
-            p.y = 0;
-            p.x = Math.random() * canvas.width;
-          }
+          s.y += s.dy;
+          if (s.y > canvas.height) s.y = 0;
         });
-        requestAnimationFrame(draw);
+        requestAnimationFrame(animate);
       }
-
-      draw();
+      animate();
     }
-
     window.onload = () => {
       displayRandomReviews();
-      animateParticles();
+      initBackgroundParticles();
     };
   </script>
 </body>
