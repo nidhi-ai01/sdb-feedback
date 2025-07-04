@@ -9,45 +9,35 @@
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body {
       font-family: 'Roboto', sans-serif;
+      background: #fff5f7;
       color: #333;
       scroll-behavior: smooth;
       transition: background-color 0.5s, color 0.5s;
-    }
-    body.light-mode {
-      background: linear-gradient(135deg, #fff5f7, #fceef5);
+      position: relative;
+      overflow-x: hidden;
     }
     body.dark-mode {
-      background: linear-gradient(135deg, #1a1a1a, #2c2c2c);
+      background: #1a1a1a;
       color: #f0f0f0;
     }
-    .animation-light, .animation-dark {
+    .background-light, .background-dark {
       position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
       z-index: -1;
       pointer-events: none;
     }
-    .animation-light {
-      background: radial-gradient(circle, rgba(255,255,200,0.3) 1px, transparent 1px);
-      background-size: 50px 50px;
-      animation: flicker 2s infinite;
+    .background-light {
+      background: url('https://i.ibb.co/MRkcWBr/lightbulbs.gif') repeat center center/cover;
+      display: block;
     }
-    .animation-dark {
-      background: url('https://i.ibb.co/BK65t80/stars-moon.png') repeat;
-      background-size: cover;
-      opacity: 0.7;
-      animation: floatStars 60s linear infinite;
+    .background-dark {
+      background: url('https://i.ibb.co/yVvSmJk/stars-moon.gif') repeat center center/cover;
+      display: none;
     }
-    @keyframes flicker {
-      0%, 100% { opacity: 1; }
-      50% { opacity: 0.7; }
-    }
-    @keyframes floatStars {
-      0% { background-position: 0 0; }
-      100% { background-position: -1000px 1000px; }
-    }
+    body.dark-mode .background-light { display: none; }
+    body.dark-mode .background-dark { display: block; }
+
     header {
       background-color: #2b2d42;
       color: #fff;
@@ -68,6 +58,25 @@
       from, to { border-color: transparent }
       50% { border-color: white; }
     }
+
+    .theme-toggle {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      font-size: 1.4rem;
+      background: #c44569;
+      color: #fff;
+      border: none;
+      padding: 0.5rem 1rem;
+      border-radius: 20px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    .theme-toggle:hover {
+      background: #a83a58;
+      transform: scale(1.1);
+    }
+
     nav {
       background: #c44569;
       display: flex;
@@ -76,29 +85,25 @@
       gap: 2rem;
       padding: 1rem;
     }
-    nav a, .theme-toggle {
+    nav a {
       color: white;
       text-decoration: none;
       font-weight: bold;
       transition: color 0.3s ease, transform 0.3s ease;
       cursor: pointer;
     }
-    nav a:hover, .theme-toggle:hover {
+    nav a:hover {
       color: #ffe6ea;
       transform: scale(1.1);
     }
-    .theme-toggle {
-      position: absolute;
-      top: 1rem;
-      right: 1rem;
-      font-size: 1.2rem;
-    }
+
     .section {
       padding: 2rem;
       text-align: center;
       animation: fadeInUp 1.5s ease forwards;
     }
     .highlight { color: #c44569; }
+
     .reviews {
       background: rgba(255, 255, 255, 0.9);
       border-radius: 10px;
@@ -115,6 +120,7 @@
       border: 1px solid #444;
     }
     .reviews:hover { transform: scale(1.02); }
+
     .modal {
       display: none;
       position: fixed;
@@ -145,6 +151,7 @@
       font-size: 28px;
       cursor: pointer;
     }
+
     label, input, textarea {
       display: block;
       width: 100%;
@@ -166,14 +173,7 @@
       cursor: pointer;
     }
     button:hover { background-color: #a83a58; }
-    footer {
-      text-align: center;
-      padding: 2rem;
-      font-size: 0.9rem;
-      color: #fff;
-    }
-    @keyframes fadeIn { from {opacity: 0;} to {opacity: 1;} }
-    @keyframes fadeInUp { from {opacity: 0; transform: translateY(20px);} to {opacity: 1; transform: translateY(0);} }
+
     .thankyou-popup {
       display: none;
       text-align: center;
@@ -190,17 +190,26 @@
     }
     body.dark-mode .thankyou-popup { background: #1e1e1e; color: #fff; }
     .thankyou-popup img { width: 120px; margin-top: 1rem; }
+
+    footer {
+      text-align: center;
+      padding: 2rem;
+      font-size: 0.9rem;
+      color: #fff;
+    }
+
+    @keyframes fadeIn { from {opacity: 0;} to {opacity: 1;} }
+    @keyframes fadeInUp { from {opacity: 0; transform: translateY(20px);} to {opacity: 1; transform: translateY(0);} }
     @keyframes popupFade {
       0% { opacity: 0; transform: translate(-50%, -60%) scale(0.8); }
       100% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
     }
   </style>
 </head>
-<body class="light-mode">
-  <div class="animation-light"></div>
-  <div class="animation-dark" style="display:none"></div>
-
-  <div class="theme-toggle" onclick="toggleTheme()">🌞/🌙 Theme</div>
+<body>
+  <div class="background-light"></div>
+  <div class="background-dark"></div>
+  <button class="theme-toggle" onclick="toggleTheme()">🌞 / 🌙</button>
 
   <header>
     <h1>She Deserves the Best – A Journey Through Love, Pain, and Healing</h1>
@@ -211,7 +220,7 @@
     <a onclick="openModal('feedbackModal')">Share Feedback</a>
     <a onclick="openModal('storyModal')">Share Your Story</a>
     <a onclick="openModal('aboutModal')">About</a>
-    <a onclick="openModal('contactModal')">Connect</a>
+    <a onclick="openModal('contactModal')">Contact</a>
   </nav>
 
   <section class="section" id="reviews">
@@ -266,6 +275,7 @@
       <span class="close" onclick="closeModal('aboutModal')">&times;</span>
       <h2 class="highlight">About the Author</h2>
       <p>Nidhi S is a storyteller who believes in the power of emotions and soft healing.</p>
+      <p><a href="https://www.amazon.in">Buy the Book</a></p>
     </div>
   </div>
 
@@ -273,9 +283,9 @@
   <div id="contactModal" class="modal">
     <div class="modal-content">
       <span class="close" onclick="closeModal('contactModal')">&times;</span>
-      <h2 class="highlight">Connect with Me</h2>
-      <p>Discord: <a href="https://discord.com/users/haxor_13" target="_blank">haxor_13</a></p>
+      <h2 class="highlight">Get in Touch</h2>
       <p>Email: <a href="mailto:inkbynidhi@gmail.com">inkbynidhi@gmail.com</a></p>
+      <p>Discord: <a href="https://discord.com/users/haxor_13" target="_blank">haxor_13</a></p>
     </div>
   </div>
 
@@ -285,11 +295,7 @@
 
   <script>
     function toggleTheme() {
-      const body = document.body;
-      const isDark = body.classList.toggle('dark-mode');
-      body.classList.toggle('light-mode', !isDark);
-      document.querySelector('.animation-light').style.display = isDark ? 'none' : 'block';
-      document.querySelector('.animation-dark').style.display = isDark ? 'block' : 'none';
+      document.body.classList.toggle('dark-mode');
     }
     function openModal(id) {
       document.getElementById(id).style.display = "block";
