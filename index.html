@@ -12,16 +12,6 @@
 
 
   <style>
-    #particles-js {
-  position: fixed;
-  width: 100%;
-  height: 100%;
-  top: 0;
-  left: 0;
-  z-index: -1;
-}
-
-
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body {
       font-family: 'Roboto', sans-serif;
@@ -209,8 +199,6 @@
   </style>
 </head>
 <body>
-  <div id="particles-js"></div>
-
   <div class="theme-toggle" onclick="toggleTheme()">🌞/🌙 Theme</div>
 
   <header>
@@ -487,39 +475,8 @@
       const container = document.getElementById('reviewContainer');
       container.innerHTML = selected.map(text => `<div class="reviews">“${text}”</div>`).join('');
     }
-<!-- Load tsParticles from CDN -->
-<script src="https://cdn.jsdelivr.net/npm/tsparticles@2.11.1/tsparticles.bundle.min.js"></script>
-
-
 
     window.onload = displayRandomReviews;
   </script>
-  <script src="https://cdn.jsdelivr.net/npm/tsparticles@2.11.1/tsparticles.bundle.min.js"></script>
-
-<script>
-  window.onload = () => {
-    displayRandomReviews(); // your existing review loader
-
-    tsParticles.load("particles-js", {
-      background: {
-        color: { value: "transparent" }
-      },
-      particles: {
-        number: { value: 60 },
-        color: { value: "#c44569" },
-        shape: { type: "circle" },
-        opacity: { value: 0.5 },
-        size: { value: { min: 2, max: 4 } },
-        move: {
-          enable: true,
-          speed: 1.5,
-          direction: "bottom",
-          outModes: { default: "out" }
-        }
-      }
-    });
-  };
-</script>
-
 </body>
-</html>
+</html> 
