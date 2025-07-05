@@ -231,8 +231,7 @@
     <div class="modal-content">
       <span class="close" onclick="closeModal('feedbackModal')">&times;</span>
       <h2 class="highlight">We’d Love to Hear From You</h2>
-      <form action="https://formspree.io/f/xkgbajwb" method="POST">
-      <form onsubmit="return showThankYou();">
+      <form action="https://formspree.io/f/xkgbajwb" method="POST" onsubmit="return showThankYou();">
         <label for="name">Your Name:</label>
         <input type="text" id="name" required>
         <label for="email">Email (optional):</label>
@@ -258,9 +257,7 @@
     <div class="modal-content">
       <span class="close" onclick="closeModal('storyModal')">&times;</span>
       <h2 class="highlight">Share Your Story</h2>
-      <form action="https://formspree.io/f/xkgbajwb" method="POST">
-
-      <form onsubmit="return showStoryThankYou();">
+      <form action="https://formspree.io/f/xkgbajwb" method="POST" onsubmit="return showStoryThankYou();">
         <label for="story-name">Your Name:</label>
         <input type="text" id="story-name" required>
         <label for="story">Your Story:</label>
