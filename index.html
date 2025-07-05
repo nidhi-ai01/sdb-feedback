@@ -3,16 +3,14 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>She Deserves the Best - Reader Corner</title>
+  <title>She Deserves the Best - Feedback</title>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display&family=Roboto&display=swap" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script&display=swap" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display&display=swap" rel="stylesheet">
-
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display&family=Dancing+Script&display=swap" rel="stylesheet">
-
-
   <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
     body {
       font-family: 'Roboto', sans-serif;
       background: linear-gradient(135deg, #fff5f7, #fceef5);
@@ -77,7 +75,9 @@
       text-align: center;
       animation: fadeInUp 1.5s ease forwards;
     }
-    .highlight { color: #c44569; }
+    .highlight {
+      color: #c44569;
+    }
     .reviews {
       background: rgba(255, 255, 255, 0.9);
       border-radius: 10px;
@@ -93,14 +93,17 @@
       color: #fff;
       border: 1px solid #444;
     }
-    .reviews:hover { transform: scale(1.02); }
-
+    .reviews:hover {
+      transform: scale(1.02);
+    }
     .modal {
       display: none;
       position: fixed;
       z-index: 1000;
-      left: 0; top: 0;
-      width: 100%; height: 100%;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
       overflow: auto;
       background-color: rgba(0,0,0,0.6);
     }
@@ -128,8 +131,9 @@
       font-weight: bold;
       cursor: pointer;
     }
-    .close:hover { color: black; }
-
+    .close:hover {
+      color: black;
+    }
     label, input, textarea {
       display: block;
       width: 100%;
@@ -151,8 +155,9 @@
       cursor: pointer;
       transition: background 0.3s ease;
     }
-    button:hover { background-color: #a83a58; }
-
+    button:hover {
+      background-color: #a83a58;
+    }
     footer {
       text-align: center;
       padding: 2rem;
@@ -168,12 +173,8 @@
       from {opacity: 0; transform: translateY(20px);}
       to {opacity: 1; transform: translateY(0);}
     }
-    @keyframes popupFade {
-      0% { opacity: 0; transform: translate(-50%, -60%) scale(0.8); }
-      100% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
-    }
 
-    #thankyou-cat, #thankyou-story {
+    #thankyou-cat {
       display: none;
       text-align: center;
       position: fixed;
@@ -187,14 +188,23 @@
       animation: popupFade 0.6s ease-out;
       z-index: 2000;
     }
-    body.dark-mode #thankyou-cat,
-    body.dark-mode #thankyou-story {
+    body.dark-mode #thankyou-cat {
       background: #1e1e1e;
       color: #fff;
     }
-    #thankyou-cat img, #thankyou-story img {
+    #thankyou-cat img {
       width: 120px;
       margin-top: 1rem;
+    }
+    @keyframes popupFade {
+      0% {
+        opacity: 0;
+        transform: translate(-50%, -60%) scale(0.8);
+      }
+      100% {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1);
+      }
     }
   </style>
 </head>
@@ -207,23 +217,14 @@
 
   <nav>
     <a href="#reviews">Reader Reviews</a>
-    <a onclick="openModal('feedbackModal')">Your Feedback</a>
-    <a onclick="openModal('storyModal')">Your Story</a>
+    <a onclick="openModal('feedbackModal')">Share Your Thoughts</a>
     <a onclick="openModal('aboutModal')">About</a>
-    <a onclick="openModal('notesModal')">Author's Note</a>
     <a onclick="openModal('contactModal')">Contact</a>
-    <a href="#getbook">Get the Book</a>
   </nav>
 
   <section class="section" id="reviews">
     <h2 class="highlight">Real Reader Reviews</h2>
     <div id="reviewContainer"></div>
-  </section>
-
-  <section class="section" id="getbook">
-    <h2 class="highlight">Get the Book</h2>
-    <p>Experience the full story of love, resilience, and healing.</p>
-    <a href="https://www.amazon.in" target="_blank"><button>Buy Now on Amazon</button></a>
   </section>
 
   <div id="feedbackModal" class="modal">
@@ -232,190 +233,32 @@
       <h2 class="highlight">We’d Love to Hear From You</h2>
       <form onsubmit="return showThankYou();">
         <label for="name">Your Name:</label>
-        <input type="text" id="name" required>
+        <input type="text" id="name" name="name" required>
         <label for="email">Email (optional):</label>
-        <input type="email" id="email">
+        <input type="email" id="email" name="email">
         <label for="message">Your Feedback:</label>
-        <textarea id="message" rows="5" required></textarea>
+        <textarea id="message" name="message" rows="5" required></textarea>
         <button type="submit">Submit</button>
       </form>
     </div>
   </div>
-<div id="contactModal" class="modal">
-  <div class="modal-content">
-    <span class="close" onclick="closeModal('contactModal')">&times;</span>
-    <h2 class="highlight">Get in Touch</h2>
-   <p>You can connect with me directly—</p>
-<p><strong>📩 Email:</strong> <a href="mailto:inkbynidhi@gmail.com">inkbynidhi@gmail.com</a></p>
-<p>Your words might just start our next conversation.</p>
 
+  <div id="thankyou-cat">
+    <p>Thank you for your feedback! 💖</p>
+    <img src="https://media.giphy.com/media/JIX9t2j0ZTN9S/giphy.gif" alt="Cute Cat" />
+    <audio id="thankYouSound" autoplay>
+      <source src="https://cdn.pixabay.com/download/audio/2023/03/28/audio_51d19f5379.mp3" type="audio/mp3">
+    </audio>
   </div>
-</div>
 
-  <div id="storyModal" class="modal">
+  <div id="aboutModal" class="modal">
     <div class="modal-content">
-      <span class="close" onclick="closeModal('storyModal')">&times;</span>
-      <h2 class="highlight">Share Your Story</h2>
-      <form onsubmit="return showStoryThankYou();">
-        <label for="story-name">Your Name:</label>
-        <input type="text" id="story-name" required>
-        <label for="story">Your Story:</label>
-        <textarea id="story" required rows="5"></textarea>
-        <button type="submit">Submit</button>
-      </form>
+      <span class="close" onclick="closeModal('aboutModal')">&times;</span>
+      <h2 class="highlight">About the Author</h2>
+      <p>Nidhi S is a storyteller who believes in the power of emotions and soft healing. This novel is a love letter to everyone who ever felt invisible and still chose to rise.</p>
+      <p><a href="https://www.amazon.in">Buy the Book</a> | <a href="https://github.com/nidhi-ai01">GitHub</a> | <a href="mailto:inkbynidhi@gmail.com">Email</a></p>
     </div>
   </div>
-
- <div id="thankyou-cat" style="
-  font-family: 'Playfair Display', serif;
-  font-size: 1.2rem;
-  line-height: 1.7;
-  color: #333;
-  text-align: center;
-  position: fixed;
-  top: 30%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  background: #fff;
-  padding: 2rem 2.5rem;
-  border-radius: 15px;
-  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.25);
-  animation: popupFade 0.6s ease-out;
-  z-index: 2000;
-  max-width: 500px;
-  width: 90%;
-">
-  <p style="font-style: italic; font-size: 1.25rem;">
-    You didn’t just leave feedback—<br>
-    <span style="color: #c44569; font-weight: 600;">you left a piece of your soul</span>.<br>
-    And we felt it.  
-  </p>
-
-  <p style="margin-top: 1rem; font-weight: bold; color: #c44569; font-size: 1.3rem;">
-    Thank you for showing up with your heart. 💖
-  </p>
-</div>
-
-
- <div id="thankyou-story">
-  <p style="font-size: 1.25rem; line-height: 1.7; font-style: italic;">
-    Your story <span style="color: #c44569; font-weight: 600;">matters</span>. 💌<br>
-    And one day, someone might read it and feel a little less alone.
-  </p>
-  <p style="margin-top: 1.5rem; font-size: 1.4rem; font-weight: bold; color: #c44569;">
-    Who knows? <span style="text-decoration: underline;">The next theme</span> might begin with 
-    <span style="font-style: italic;">your words</span>. ✨
-  </p>
-</div>
-<div id="aboutModal" class="modal">
-  <div class="modal-content" style="
-    font-family: 'Playfair Display', serif;
-    font-size: 1.2rem;
-    line-height: 1.8;
-    position: relative;
-    transition: all 0.5s ease;
-    background-image: url('https://i.imgur.com/sStnMd3.png'); /* faded pen graphic */
-    background-repeat: no-repeat;
-    background-position: center bottom;
-    background-size: 120px;
-    background-blend-mode: lighten;
-    background-color: #fff;
-  ">
-    <span class="close" onclick="closeModal('aboutModal')">&times;</span>
-    <h2 class="highlight" style="font-size: 1.8rem; margin-bottom: 1rem;">About the Author</h2>
-    
-    <p>
-      Hi, I’m <strong style="color: #c44569;">Nidhi S</strong>—a quiet soul who feels deeply and writes from the tender spaces where emotions often go unheard.
-    </p>
-
-    <p style="margin-top: 1rem;">
-      <em><strong>She Deserves the Best</strong></em> isn’t just a story—it’s a piece of my soul, stitched with
-      <span style="color: #c44569; font-weight: bold;">soft ache</span>,
-      <span style="color: #c44569; font-weight: bold;">silent strength</span>,
-      and
-      <span style="color: #c44569; font-weight: bold;">healing hope</span>.
-    </p>
-
-    <p style="margin-top: 1rem;">
-      I write for the ones who <strong>cry quietly</strong>, <strong>love loudly</strong>, and carry storms behind calm smiles.
-    </p>
-
-    <p style="margin-top: 1rem;">
-      For every girl who ever felt invisible and still chose to rise—this book is for <span style="text-decoration: underline; font-weight: bold;">you</span>.
-    </p>
-
-    <p style="margin-top: 1rem;">
-      If my words find you, hold you, or help you breathe a little easier…  
-      then they’ve done what they came to do. 💫
-    </p>
-
-    <p style="margin-top: 1.5rem; font-style: italic; color: #c44569; font-weight: bold;">
-      You can also share your story—  
-      <br>
-      <span style="font-size: 1.1rem;">Who knows, it might become the heartbeat of my next novel.</span>
-    </p>
-
-    <p style="margin-top: 2rem; text-align: right; font-family: 'Dancing Script', cursive; font-size: 1.5rem;">
-      With warmth,<br><strong>Nidhi S</strong>
-    </p>
-  </div>
-</div>
-
-  
-<div id="notesModal" class="modal">
-  <div class="modal-content" style="
-    font-family: 'Playfair Display', serif;
-    font-size: 1.2rem;
-    line-height: 1.8;
-    
-    background-size: 100px;
-    background-color: #fff;
-    transition: all 0.4s ease;
-    color: #333;
-  ">
-    <span class="close" onclick="closeModal('notesModal')">&times;</span>
-    <h2 class="highlight" style="font-size: 1.8rem; margin-bottom: 1rem;">Author's Note</h2>
-
-    <p>
-      <em><strong>She Deserves the Best</strong></em> is more than a novel—  
-      it's a piece of my heart,  
-      stitched with <span style="color: #c44569; font-weight: 600;">quiet ache</span>,  
-      <span style="color: #c44569; font-weight: 600;">raw truths</span>, and  
-      the <span style="color: #c44569; font-weight: 600;">soft courage to heal</span>.
-    </p>
-
-    <p style="margin-top: 1rem;">
-      It was born from silent tears, late-night thoughts, and the unspoken battles so many carry within.  
-      Through Sanya’s journey, I wanted to give voice to the emotions we’re often told to hide—  
-      grief, loneliness, longing, and the soft magic of friendship.
-    </p>
-
-    <p style="margin-top: 1rem;">
-      To every girl who has ever felt <strong>unseen</strong>, <strong>unheard</strong>, or <strong>unloved</strong>:  
-      this story is for <span style="text-decoration: underline; font-weight: bold;">you</span>.
-    </p>
-
-    <p style="margin-top: 1rem;">
-      You deserve to be held.  
-      You deserve to be heard.  
-      You deserve to be loved—  
-      <span style="color: #c44569; font-weight: 600;">gently</span>,  
-      <span style="color: #c44569; font-weight: 600;">wholly</span>,  
-      and without conditions.
-    </p>
-
-    <p style="margin-top: 1.5rem;">
-      Thank you for picking up this book.  
-      I hope it feels like a <strong style="color: #c44569;">warm hug</strong> on your hardest days.
-    </p>
-
-    <p style="margin-top: 2rem; text-align: right; font-family: 'Dancing Script', cursive; font-size: 1.5rem;">
-      With love,<br><strong>Nidhi S</strong>
-    </p>
-  </div>
-</div>
-
-  
 
   <div id="contactModal" class="modal">
     <div class="modal-content">
@@ -443,9 +286,9 @@
     }
 
     window.onclick = function(event) {
-      ['feedbackModal', 'aboutModal', 'contactModal', 'storyModal'].forEach(id => {
+      ['feedbackModal', 'aboutModal', 'contactModal'].forEach(id => {
         const modal = document.getElementById(id);
-        if (event.target === modal) closeModal(id);
+        if (event.target == modal) closeModal(id);
       });
     }
 
@@ -455,32 +298,129 @@
         document.getElementById('thankyou-cat').style.display = 'none';
         closeModal('feedbackModal');
       }, 5000);
-      return false;
+      return false; // prevent actual form submission for demo
     }
 
-    function showStoryThankYou() {
-      document.getElementById('thankyou-story').style.display = 'block';
-      setTimeout(() => {
-        document.getElementById('thankyou-story').style.display = 'none';
-        closeModal('storyModal');
-      }, 6000);
-      return false;
-    }
-
- 
- const reviews = [
+    const reviews = [
       "Heart-touching, raw and real. Sanya's journey mirrored mine.",
       "Loved the emotional depth and honesty. A must-read for every woman.",
       "I felt seen. I felt heard. This book made me feel less alone.",
       "A soulful and empowering read. Truly inspiring.",
       "A literary hug for the broken-hearted."
+      "This book touched my heart deeply.",
+  "An emotional rollercoaster from start to finish.",
+  "I cried, I smiled, and I healed while reading.",
+  "Beautifully written and soul-stirring.",
+  "Sanya’s journey felt so real to me.",
+  "A story every woman should read once.",
+  "This book gave me hope again.",
+  "I couldn’t put it down—it spoke to my soul.",
+  "Raw, honest, and incredibly moving.",
+  "The characters felt like friends by the end.",
+  "Every page carried so much emotion.",
+  "Made me reflect on my own healing journey.",
+  "The words stayed with me long after I finished.",
+  "An unforgettable reading experience.",
+  "Heartbreaking yet healing.",
+  "Delicate and powerful storytelling.",
+  "I saw myself in the pages.",
+  "The writing is like poetry.",
+  "Perfect for a quiet, emotional weekend.",
+  "I’ll be recommending this to everyone I know.",
+  "My heart is full. Thank you for this book.",
+  "It felt like the author was speaking directly to me.",
+  "The most honest portrayal of silent strength.",
+  "A masterpiece of emotion and resilience.",
+  "Each chapter pulled me in deeper.",
+  "This story deserves to be shared far and wide.",
+  "So much pain, yet so much beauty.",
+  "Left me in tears, in the best way.",
+  "A gentle reminder that healing is possible.",
+  "The book hugged my soul.",
+  "It felt like therapy through words.",
+  "This was more than a novel—it was a mirror.",
+  "A quiet strength echoes through every line.",
+  "I connected with every emotion on the page.",
+  "Some books entertain. This one heals.",
+  "A safe space for every hurting heart.",
+  "The metaphors hit me like a wave.",
+  "The rawness is what makes it perfect.",
+  "I’ll read it again when I need to feel seen.",
+  "It found me at the perfect time.",
+  "Felt like a conversation I never had but always needed.",
+  "Love, loss, and recovery—so beautifully portrayed.",
+  "Sanya’s pain was my own. So relatable.",
+  "Thank you for writing what many can’t express.",
+  "You gave a voice to silent hearts.",
+  "It’s rare to find something this honest.",
+  "Simple language, powerful message.",
+  "I smiled through my tears.",
+  "I was not ready for how much this book would affect me.",
+  "Emotional in the best possible way.",
+  "I found comfort between the lines.",
+  "Every girl deserves a book like this.",
+  "Unapologetically real.",
+  "The kind of story you carry with you.",
+  "You don’t just read it—you feel it.",
+  "Poignant, tender, unforgettable.",
+  "This is what healing literature looks like.",
+  "It spoke to my inner child.",
+  "Every chapter felt like a poem.",
+  "I related more than I expected.",
+  "A quiet revolution wrapped in pages.",
+  "I’ve never highlighted so many lines before.",
+  "The depth of feeling in this book is unmatched.",
+  "An ode to every woman who loved silently.",
+  "It hurts in the best way.",
+  "You gave pain a beautiful language.",
+  "The healing was slow and real—just like life.",
+  "This is more than fiction. It’s art.",
+  "Raw truths I didn’t know I needed.",
+  "Sanya’s courage gave me courage.",
+  "I felt held throughout the story.",
+  "You gave grief a gentle space.",
+  "One of the most honest books I’ve read.",
+  "Your writing is a balm.",
+  "It made me want to write again.",
+  "A treasure chest of emotions.",
+  "Every sentence is soaked in meaning.",
+  "This book wrapped around me like a warm shawl.",
+  "I didn’t want it to end.",
+  "The softness in pain was beautifully captured.",
+  "You made me cry, then smile through it.",
+  "Some stories are meant to change you. This is one.",
+  "Truly soul-satisfying literature.",
+  "The silence in the story said so much.",
+  "So gentle, yet so powerful.",
+  "I will carry this book in my heart.",
+  "It made me brave in my own story.",
+  "One of those books that lingers.",
+  "A beautiful, brave piece of writing.",
+  "It comforted me like an old friend.",
+  "A novel filled with real magic—the human kind.",
+  "I read it in one sitting, couldn't stop.",
+  "Pure, unfiltered emotion.",
+  "The emotional depth is astounding.",
+  "I wish I could unread and read it again fresh.",
+  "Sanya’s story mirrored my past. Thank you.",
+  "Soft, sharp, unforgettable.",
+  "Your story gave me peace I didn’t know I needed.",
+  "I saw my younger self in every line.",
+  "This book listens to your heart.",
+  "A story of grief, and still, of grace.",
+  "This isn't just fiction. It's feeling.",
+  "You’ve written a sanctuary for the hurting.",
+  "A tender reminder that we are not alone.",
+  "It healed something I didn’t know was broken.",
+  "A love letter to every girl who has suffered silently.",
+  "Beautiful. Brave. Brilliant."
     ];
 
     function displayRandomReviews() {
       const shuffled = reviews.sort(() => 0.5 - Math.random());
       const selected = shuffled.slice(0, 3);
       const container = document.getElementById('reviewContainer');
-      container.innerHTML = selected.map(text => <div class="reviews">“${text}”</div>).join('');
+      container.innerHTML = selected.map(text => `<div class="reviews">“${text}”</div>`).join('');
     }
 
     window.onload = displayRandomReviews;
