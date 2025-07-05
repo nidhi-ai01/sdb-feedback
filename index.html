@@ -467,7 +467,7 @@
       return false;
     }
 
-   const reviewSamples = [
+   const reviews= [
   "This book touched my heart deeply.",
   "An emotional rollercoaster from start to finish.",
   "I cried, I smiled, and I healed while reading.",
@@ -687,19 +687,11 @@
   "I was shattered—and this book became my glue."
     
 ];
-
-const reviews = Array.from({length: 7}, () => {
-  const randomIndex = Math.floor(Math.random() * reviewSamples.length);
-  return reviewSamples[randomIndex];
-});
-
-
-    function displayRandomReviews() {
+ function displayRandomReviews() {
       const shuffled = reviews.sort(() => 0.5 - Math.random());
-      const selected = shuffled.slice(0, 1000); 
-
+      const selected = shuffled.slice(0, 3);
       const container = document.getElementById('reviewContainer');
-      container.innerHTML = selected.map(text => `<div class="reviews">“${text}”</div>`).join('');
+      container.innerHTML = selected.map(text => <div class="reviews">“${text}”</div>).join('');
     }
 
     window.onload = displayRandomReviews;
