@@ -6,28 +6,76 @@
   <title>She Deserves the Best - Feedback</title>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display&family=Roboto&display=swap" rel="stylesheet">
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
     body {
       font-family: 'Roboto', sans-serif;
       background: linear-gradient(135deg, #fff5f7, #fceef5);
       color: #333;
       scroll-behavior: smooth;
       transition: background-color 0.5s, color 0.5s;
+      position: relative;
+      overflow-x: hidden;
     }
     body.dark-mode {
       background: linear-gradient(135deg, #1a1a1a, #2c2c2c);
       color: #f0f0f0;
+    }
+    canvas#backgroundCanvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: -1;
+    }
+    .theme-toggle {
+      position: fixed;
+      top: 1rem;
+      right: 1rem;
+      cursor: pointer;
+      z-index: 1000;
+    }
+    .toggle-switch {
+      position: relative;
+      width: 60px;
+      height: 34px;
+    }
+    .toggle-switch input { display: none; }
+    .slider {
+      position: absolute;
+      cursor: pointer;
+      background-color: #ccc;
+      border-radius: 34px;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      transition: 0.4s;
+    }
+    .slider:before {
+      position: absolute;
+      content: "";
+      height: 26px;
+      width: 26px;
+      left: 4px;
+      bottom: 4px;
+      background-color: white;
+      border-radius: 50%;
+      transition: 0.4s;
+    }
+    input:checked + .slider {
+      background-color: #c44569;
+    }
+    input:checked + .slider:before {
+      transform: translateX(26px);
+    }
+    .section {
+      padding: 2rem;
+      text-align: center;
     }
     header {
       background-color: #2b2d42;
       color: #fff;
       padding: 2rem;
       text-align: center;
-      animation: fadeIn 2s ease-in-out;
     }
     header h1 {
       font-family: 'Playfair Display', serif;
@@ -53,31 +101,18 @@
       gap: 2rem;
       padding: 1rem;
     }
-    nav a, .theme-toggle {
+    nav a {
       color: white;
       text-decoration: none;
       font-weight: bold;
       transition: color 0.3s ease, transform 0.3s ease;
       cursor: pointer;
     }
-    nav a:hover, .theme-toggle:hover {
+    nav a:hover {
       color: #ffe6ea;
       transform: scale(1.1);
     }
-    .theme-toggle {
-      position: absolute;
-      top: 1rem;
-      right: 1rem;
-      font-size: 1.2rem;
-    }
-    .section {
-      padding: 2rem;
-      text-align: center;
-      animation: fadeInUp 1.5s ease forwards;
-    }
-    .highlight {
-      color: #c44569;
-    }
+    .highlight { color: #c44569; }
     .reviews {
       background: rgba(255, 255, 255, 0.9);
       border-radius: 10px;
@@ -85,7 +120,6 @@
       margin: 1rem auto;
       max-width: 700px;
       box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-      transition: transform 0.3s ease;
       color: #000;
     }
     body.dark-mode .reviews {
@@ -93,9 +127,7 @@
       color: #fff;
       border: 1px solid #444;
     }
-    .reviews:hover {
-      transform: scale(1.02);
-    }
+    .reviews:hover { transform: scale(1.02); }
     .modal {
       display: none;
       position: fixed;
@@ -111,70 +143,23 @@
       background-color: #fff;
       margin: 10% auto;
       padding: 2rem;
-      border: 1px solid #888;
-      width: 90%;
-      max-width: 700px;
       border-radius: 10px;
+      width: 90%;
+      max-width: 600px;
       position: relative;
-      color: #000;
     }
     body.dark-mode .modal-content {
-      background-color: #222;
+      background-color: #1e1e1e;
       color: #fff;
     }
     .close {
       position: absolute;
       top: 10px;
       right: 20px;
-      color: #aaa;
       font-size: 28px;
-      font-weight: bold;
       cursor: pointer;
     }
-    .close:hover {
-      color: black;
-    }
-    label, input, textarea {
-      display: block;
-      width: 100%;
-      margin-top: 1rem;
-    }
-    input, textarea {
-      padding: 0.75rem;
-      border: 1px solid #ccc;
-      border-radius: 4px;
-    }
-    button {
-      background-color: #c44569;
-      color: white;
-      padding: 0.8rem 1.5rem;
-      border: none;
-      margin-top: 1rem;
-      font-size: 1rem;
-      border-radius: 5px;
-      cursor: pointer;
-      transition: background 0.3s ease;
-    }
-    button:hover {
-      background-color: #a83a58;
-    }
-    footer {
-      text-align: center;
-      padding: 2rem;
-      font-size: 0.9rem;
-      color: #fff;
-    }
-
-    @keyframes fadeIn {
-      from {opacity: 0;}
-      to {opacity: 1;}
-    }
-    @keyframes fadeInUp {
-      from {opacity: 0; transform: translateY(20px);}
-      to {opacity: 1; transform: translateY(0);}
-    }
-
-    #thankyou-cat {
+    .thankyou-popup {
       display: none;
       text-align: center;
       position: fixed;
@@ -188,242 +173,157 @@
       animation: popupFade 0.6s ease-out;
       z-index: 2000;
     }
-    body.dark-mode #thankyou-cat {
-      background: #1e1e1e;
-      color: #fff;
+    body.dark-mode .thankyou-popup {
+      background: #1e1e1e; color: #fff;
     }
-    #thankyou-cat img {
-      width: 120px;
+    .thankyou-popup img {
+      width: 150px;
       margin-top: 1rem;
+      animation: bounce 1s infinite alternate;
     }
     @keyframes popupFade {
-      0% {
-        opacity: 0;
-        transform: translate(-50%, -60%) scale(0.8);
-      }
-      100% {
-        opacity: 1;
-        transform: translate(-50%, -50%) scale(1);
-      }
+      0% { opacity: 0; transform: translate(-50%, -60%) scale(0.8); }
+      100% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+    }
+    @keyframes bounce {
+      0% { transform: translateY(0); }
+      100% { transform: translateY(-10px); }
+    }
+    footer {
+      text-align: center;
+      padding: 2rem;
+      font-size: 0.9rem;
+      color: #fff;
     }
   </style>
 </head>
 <body>
-  <div class="theme-toggle" onclick="toggleTheme()">🌞/🌙 Theme</div>
-
+  <canvas id="backgroundCanvas"></canvas>
+  <div class="theme-toggle">
+    <label class="toggle-switch">
+      <input type="checkbox" onchange="toggleTheme()">
+      <span class="slider"></span>
+    </label>
+  </div>
   <header>
     <h1>She Deserves the Best – A Journey Through Love, Pain, and Healing</h1>
   </header>
-
   <nav>
     <a href="#reviews">Reader Reviews</a>
-    <a onclick="openModal('feedbackModal')">Share Your Thoughts</a>
+    <a onclick="openModal('feedbackModal')">Share Feedback</a>
+    <a onclick="openModal('ratingModal')">Rate the Novel</a>
     <a onclick="openModal('aboutModal')">About</a>
     <a onclick="openModal('contactModal')">Contact</a>
   </nav>
-
   <section class="section" id="reviews">
     <h2 class="highlight">Real Reader Reviews</h2>
     <div id="reviewContainer"></div>
   </section>
-
   <div id="feedbackModal" class="modal">
     <div class="modal-content">
       <span class="close" onclick="closeModal('feedbackModal')">&times;</span>
-      <h2 class="highlight">We’d Love to Hear From You</h2>
-      <form onsubmit="return showThankYou();">
+      <h2>We’d Love to Hear From You</h2>
+      <form onsubmit="return showThankYouFeedback();">
         <label for="name">Your Name:</label>
         <input type="text" id="name" name="name" required>
-        <label for="email">Email (optional):</label>
+        <label for="email">Email:</label>
         <input type="email" id="email" name="email">
         <label for="message">Your Feedback:</label>
-        <textarea id="message" name="message" rows="5" required></textarea>
+        <textarea id="message" name="message" rows="4" required></textarea>
         <button type="submit">Submit</button>
       </form>
     </div>
   </div>
-
-  <div id="thankyou-cat">
-    <p>Thank you for your feedback! 💖</p>
-    <img src="https://media.giphy.com/media/JIX9t2j0ZTN9S/giphy.gif" alt="Cute Cat" />
-    <audio id="thankYouSound" autoplay>
-      <source src="https://cdn.pixabay.com/download/audio/2023/03/28/audio_51d19f5379.mp3" type="audio/mp3">
-    </audio>
+  <div id="ratingModal" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="closeModal('ratingModal')">&times;</span>
+      <h2>Rate the Novel</h2>
+      <form action="https://formspree.io/f/xjkrzkrn" method="POST">
+        <label for="rating-name">Your Name (Optional):</label>
+        <input type="text" id="rating-name" name="name">
+        <label for="rating-stars">Your Rating (1-5):</label>
+        <input type="number" id="rating-stars" name="rating" min="1" max="5" required>
+        <label for="rating-msg">Comments:</label>
+        <textarea id="rating-msg" name="message" rows="4" required></textarea>
+        <button type="submit">Submit</button>
+      </form>
+    </div>
   </div>
-
+  <div class="thankyou-popup" id="thankyou-feedback">
+    <p>Thank you for your feedback! 💖</p>
+    <img src="https://media.giphy.com/media/JIX9t2j0ZTN9S/giphy.gif" alt="Cat GIF">
+  </div>
   <div id="aboutModal" class="modal">
     <div class="modal-content">
       <span class="close" onclick="closeModal('aboutModal')">&times;</span>
-      <h2 class="highlight">About the Author</h2>
-      <p>Nidhi S is a storyteller who believes in the power of emotions and soft healing. This novel is a love letter to everyone who ever felt invisible and still chose to rise.</p>
-      <p><a href="https://www.amazon.in">Buy the Book</a> | <a href="https://github.com/nidhi-ai01">GitHub</a> | <a href="mailto:inkbynidhi@gmail.com">Email</a></p>
+      <h2>About the Author</h2>
+      <p>Nidhi S is a storyteller who believes in the power of emotions and soft healing.</p>
     </div>
   </div>
-
   <div id="contactModal" class="modal">
     <div class="modal-content">
       <span class="close" onclick="closeModal('contactModal')">&times;</span>
-      <h2 class="highlight">Get in Touch</h2>
+      <h2>Contact</h2>
       <p>Email: <a href="mailto:inkbynidhi@gmail.com">inkbynidhi@gmail.com</a></p>
+      <p>Discord: <a href="https://discord.com/users/haxor_13" target="_blank">haxor_13</a></p>
     </div>
   </div>
-
-  <footer>
-    &copy; 2025 Nidhi S | All Rights Reserved
-  </footer>
-
+  <footer>&copy; 2025 Nidhi S | All Rights Reserved</footer>
   <script>
     function toggleTheme() {
       document.body.classList.toggle('dark-mode');
     }
-
     function openModal(id) {
       document.getElementById(id).style.display = "block";
     }
-
     function closeModal(id) {
       document.getElementById(id).style.display = "none";
     }
-
-    window.onclick = function(event) {
-      ['feedbackModal', 'aboutModal', 'contactModal'].forEach(id => {
-        const modal = document.getElementById(id);
-        if (event.target == modal) closeModal(id);
-      });
-    }
-
-    function showThankYou() {
-      document.getElementById('thankyou-cat').style.display = 'block';
+    function showThankYouFeedback() {
+      document.getElementById('thankyou-feedback').style.display = 'block';
       setTimeout(() => {
-        document.getElementById('thankyou-cat').style.display = 'none';
+        document.getElementById('thankyou-feedback').style.display = 'none';
         closeModal('feedbackModal');
       }, 5000);
-      return false; // prevent actual form submission for demo
+      return false;
     }
-
-    const reviews = [
-      "Heart-touching, raw and real. Sanya's journey mirrored mine.",
-      "Loved the emotional depth and honesty. A must-read for every woman.",
-      "I felt seen. I felt heard. This book made me feel less alone.",
-      "A soulful and empowering read. Truly inspiring.",
-      "A literary hug for the broken-hearted."
-      "This book touched my heart deeply.",
-  "An emotional rollercoaster from start to finish.",
-  "I cried, I smiled, and I healed while reading.",
-  "Beautifully written and soul-stirring.",
-  "Sanya’s journey felt so real to me.",
-  "A story every woman should read once.",
-  "This book gave me hope again.",
-  "I couldn’t put it down—it spoke to my soul.",
-  "Raw, honest, and incredibly moving.",
-  "The characters felt like friends by the end.",
-  "Every page carried so much emotion.",
-  "Made me reflect on my own healing journey.",
-  "The words stayed with me long after I finished.",
-  "An unforgettable reading experience.",
-  "Heartbreaking yet healing.",
-  "Delicate and powerful storytelling.",
-  "I saw myself in the pages.",
-  "The writing is like poetry.",
-  "Perfect for a quiet, emotional weekend.",
-  "I’ll be recommending this to everyone I know.",
-  "My heart is full. Thank you for this book.",
-  "It felt like the author was speaking directly to me.",
-  "The most honest portrayal of silent strength.",
-  "A masterpiece of emotion and resilience.",
-  "Each chapter pulled me in deeper.",
-  "This story deserves to be shared far and wide.",
-  "So much pain, yet so much beauty.",
-  "Left me in tears, in the best way.",
-  "A gentle reminder that healing is possible.",
-  "The book hugged my soul.",
-  "It felt like therapy through words.",
-  "This was more than a novel—it was a mirror.",
-  "A quiet strength echoes through every line.",
-  "I connected with every emotion on the page.",
-  "Some books entertain. This one heals.",
-  "A safe space for every hurting heart.",
-  "The metaphors hit me like a wave.",
-  "The rawness is what makes it perfect.",
-  "I’ll read it again when I need to feel seen.",
-  "It found me at the perfect time.",
-  "Felt like a conversation I never had but always needed.",
-  "Love, loss, and recovery—so beautifully portrayed.",
-  "Sanya’s pain was my own. So relatable.",
-  "Thank you for writing what many can’t express.",
-  "You gave a voice to silent hearts.",
-  "It’s rare to find something this honest.",
-  "Simple language, powerful message.",
-  "I smiled through my tears.",
-  "I was not ready for how much this book would affect me.",
-  "Emotional in the best possible way.",
-  "I found comfort between the lines.",
-  "Every girl deserves a book like this.",
-  "Unapologetically real.",
-  "The kind of story you carry with you.",
-  "You don’t just read it—you feel it.",
-  "Poignant, tender, unforgettable.",
-  "This is what healing literature looks like.",
-  "It spoke to my inner child.",
-  "Every chapter felt like a poem.",
-  "I related more than I expected.",
-  "A quiet revolution wrapped in pages.",
-  "I’ve never highlighted so many lines before.",
-  "The depth of feeling in this book is unmatched.",
-  "An ode to every woman who loved silently.",
-  "It hurts in the best way.",
-  "You gave pain a beautiful language.",
-  "The healing was slow and real—just like life.",
-  "This is more than fiction. It’s art.",
-  "Raw truths I didn’t know I needed.",
-  "Sanya’s courage gave me courage.",
-  "I felt held throughout the story.",
-  "You gave grief a gentle space.",
-  "One of the most honest books I’ve read.",
-  "Your writing is a balm.",
-  "It made me want to write again.",
-  "A treasure chest of emotions.",
-  "Every sentence is soaked in meaning.",
-  "This book wrapped around me like a warm shawl.",
-  "I didn’t want it to end.",
-  "The softness in pain was beautifully captured.",
-  "You made me cry, then smile through it.",
-  "Some stories are meant to change you. This is one.",
-  "Truly soul-satisfying literature.",
-  "The silence in the story said so much.",
-  "So gentle, yet so powerful.",
-  "I will carry this book in my heart.",
-  "It made me brave in my own story.",
-  "One of those books that lingers.",
-  "A beautiful, brave piece of writing.",
-  "It comforted me like an old friend.",
-  "A novel filled with real magic—the human kind.",
-  "I read it in one sitting, couldn't stop.",
-  "Pure, unfiltered emotion.",
-  "The emotional depth is astounding.",
-  "I wish I could unread and read it again fresh.",
-  "Sanya’s story mirrored my past. Thank you.",
-  "Soft, sharp, unforgettable.",
-  "Your story gave me peace I didn’t know I needed.",
-  "I saw my younger self in every line.",
-  "This book listens to your heart.",
-  "A story of grief, and still, of grace.",
-  "This isn't just fiction. It's feeling.",
-  "You’ve written a sanctuary for the hurting.",
-  "A tender reminder that we are not alone.",
-  "It healed something I didn’t know was broken.",
-  "A love letter to every girl who has suffered silently.",
-  "Beautiful. Brave. Brilliant."
-    ];
-
+    const reviews = Array.from({length: 120}, (_, i) => `Review ${i+1}: This book touched my soul.`);
     function displayRandomReviews() {
       const shuffled = reviews.sort(() => 0.5 - Math.random());
       const selected = shuffled.slice(0, 3);
-      const container = document.getElementById('reviewContainer');
-      container.innerHTML = selected.map(text => `<div class="reviews">“${text}”</div>`).join('');
+      document.getElementById('reviewContainer').innerHTML = selected.map(r => `<div class="reviews">“${r}”</div>`).join('');
     }
-
-    window.onload = displayRandomReviews;
+    function initBackgroundParticles() {
+      const canvas = document.getElementById('backgroundCanvas');
+      const ctx = canvas.getContext('2d');
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+      const isDark = document.body.classList.contains('dark-mode');
+      const color = isDark ? '#ccc' : '#ffc0cb';
+      const stars = Array.from({length: 100}, () => ({
+        x: Math.random() * canvas.width,
+        y: Math.random() * canvas.height,
+        r: Math.random() * 2 + 1,
+        dy: Math.random() * 1 + 0.5
+      }));
+      function animate() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        ctx.fillStyle = color;
+        stars.forEach(s => {
+          ctx.beginPath();
+          ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
+          ctx.fill();
+          s.y += s.dy;
+          if (s.y > canvas.height) s.y = 0;
+        });
+        requestAnimationFrame(animate);
+      }
+      animate();
+    }
+    window.onload = () => {
+      displayRandomReviews();
+      initBackgroundParticles();
+    };
   </script>
 </body>
 </html>
