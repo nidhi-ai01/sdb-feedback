@@ -466,15 +466,35 @@
       }, 6000);
       return false;
     }
+const reviewMessages = [
+  "This book touched my heart deeply.",
+  "A journey I didn’t know I needed.",
+  "Truly inspiring and beautifully written.",
+  "The emotions felt so real.",
+  "Every word resonated with my soul.",
+  "A story that stays with you.",
+  "It made me cry, but in the best way.",
+  "Such raw and honest writing.",
+  "Absolutely unforgettable.",
+  "Left me speechless and healing."
+];
 
-    const reviews = Array.from({length: 100}, (_, i) => `Review #${i + 1}: This book touched my heart deeply.`);
+const reviews = Array.from({ length: 100 }, (_, i) => {
+  const randomMessage = reviewMessages[Math.floor(Math.random() * reviewMessages.length)];
+  return `Review #${i + 1}: ${randomMessage}`;
+});
 
-    function displayRandomReviews() {
-      const shuffled = reviews.sort(() => 0.5 - Math.random());
-      const selected = shuffled.slice(0, 6);
-      const container = document.getElementById('reviewContainer');
-      container.innerHTML = selected.map(text => `<div class="reviews">“${text}”</div>`).join('');
-    }
+
+function displayRandomReviews() {
+  const shuffled = reviews.sort(() => 0.5 - Math.random());
+  const selected = shuffled.slice(0, 6);
+  const container = document.getElementById('reviewContainer');
+  container.innerHTML = selected.map(text => `<div class="reviews">“${text}”</div>`).join('');
+}
+
+setInterval(displayRandomReviews, 5000); // Updates every 5 seconds
+window.onload = displayRandomReviews;
+
 
     window.onload = displayRandomReviews;
   </script>
