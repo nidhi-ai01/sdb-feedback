@@ -467,11 +467,237 @@
       return false;
     }
 
-    const reviews = Array.from({length: 100}, (_, i) => `Review #${i + 1}: This book touched my heart deeply.`);
+   const reviewSamples = [
+  "This book touched my heart deeply.",
+  "An emotional rollercoaster from start to finish.",
+  "I cried, I smiled, and I healed while reading.",
+  "Beautifully written and soul-stirring.",
+  "Sanya’s journey felt so real to me.",
+  "A story every woman should read once.",
+  "This book gave me hope again.",
+  "I couldn’t put it down—it spoke to my soul.",
+  "Raw, honest, and incredibly moving.",
+  "The characters felt like friends by the end.",
+  "Every page carried so much emotion.",
+  "Made me reflect on my own healing journey.",
+  "The words stayed with me long after I finished.",
+  "An unforgettable reading experience.",
+  "Heartbreaking yet healing.",
+  "Delicate and powerful storytelling.",
+  "I saw myself in the pages.",
+  "The writing is like poetry.",
+  "Perfect for a quiet, emotional weekend.",
+  "I’ll be recommending this to everyone I know."
+      "This book touched my heart deeply.",
+  "An emotional rollercoaster from start to finish.",
+  "I cried, I smiled, and I healed while reading.",
+  "Beautifully written and soul-stirring.",
+  "Sanya’s journey felt so real to me.",
+  "A story every woman should read once.",
+  "This book gave me hope again.",
+  "I couldn’t put it down—it spoke to my soul.",
+  "Raw, honest, and incredibly moving.",
+  "The characters felt like friends by the end.",
+  "Every page carried so much emotion.",
+  "Made me reflect on my own healing journey.",
+  "The words stayed with me long after I finished.",
+  "An unforgettable reading experience.",
+  "Heartbreaking yet healing.",
+  "Delicate and powerful storytelling.",
+  "I saw myself in the pages.",
+  "The writing is like poetry.",
+  "Perfect for a quiet, emotional weekend.",
+  "I’ll be recommending this to everyone I know.",
+  "My heart is full. Thank you for this book.",
+  "It felt like the author was speaking directly to me.",
+  "The most honest portrayal of silent strength.",
+  "A masterpiece of emotion and resilience.",
+  "Each chapter pulled me in deeper.",
+  "This story deserves to be shared far and wide.",
+  "So much pain, yet so much beauty.",
+  "Left me in tears, in the best way.",
+  "A gentle reminder that healing is possible.",
+  "The book hugged my soul.",
+  "It felt like therapy through words.",
+  "This was more than a novel—it was a mirror.",
+  "A quiet strength echoes through every line.",
+  "I connected with every emotion on the page.",
+  "Some books entertain. This one heals.",
+  "A safe space for every hurting heart.",
+  "The metaphors hit me like a wave.",
+  "The rawness is what makes it perfect.",
+  "I’ll read it again when I need to feel seen.",
+  "It found me at the perfect time.",
+  "Felt like a conversation I never had but always needed.",
+  "Love, loss, and recovery—so beautifully portrayed.",
+  "Sanya’s pain was my own. So relatable.",
+  "Thank you for writing what many can’t express.",
+  "You gave a voice to silent hearts.",
+  "It’s rare to find something this honest.",
+  "Simple language, powerful message.",
+  "I smiled through my tears.",
+  "I was not ready for how much this book would affect me.",
+  "Emotional in the best possible way.",
+  "I found comfort between the lines.",
+  "Every girl deserves a book like this.",
+  "Unapologetically real.",
+  "The kind of story you carry with you.",
+  "You don’t just read it—you feel it.",
+  "Poignant, tender, unforgettable.",
+  "This is what healing literature looks like.",
+  "It spoke to my inner child.",
+  "Every chapter felt like a poem.",
+  "I related more than I expected.",
+  "A quiet revolution wrapped in pages.",
+  "I’ve never highlighted so many lines before.",
+  "The depth of feeling in this book is unmatched.",
+  "An ode to every woman who loved silently.",
+  "It hurts in the best way.",
+  "You gave pain a beautiful language.",
+  "The healing was slow and real—just like life.",
+  "This is more than fiction. It’s art.",
+  "Raw truths I didn’t know I needed.",
+  "Sanya’s courage gave me courage.",
+  "I felt held throughout the story.",
+  "You gave grief a gentle space.",
+  "One of the most honest books I’ve read.",
+  "Your writing is a balm.",
+  "It made me want to write again.",
+  "A treasure chest of emotions.",
+  "Every sentence is soaked in meaning.",
+  "This book wrapped around me like a warm shawl.",
+  "I didn’t want it to end.",
+  "The softness in pain was beautifully captured.",
+  "You made me cry, then smile through it.",
+  "Some stories are meant to change you. This is one.",
+  "Truly soul-satisfying literature.",
+  "The silence in the story said so much.",
+  "So gentle, yet so powerful.",
+  "I will carry this book in my heart.",
+  "It made me brave in my own story.",
+  "One of those books that lingers.",
+  "A beautiful, brave piece of writing.",
+  "It comforted me like an old friend.",
+  "A novel filled with real magic—the human kind.",
+  "I read it in one sitting, couldn't stop.",
+  "Pure, unfiltered emotion.",
+  "The emotional depth is astounding.",
+  "I wish I could unread and read it again fresh.",
+  "Sanya’s story mirrored my past. Thank you.",
+  "Soft, sharp, unforgettable.",
+  "Your story gave me peace I didn’t know I needed.",
+  "I saw my younger self in every line.",
+  "This book listens to your heart.",
+  "A story of grief, and still, of grace.",
+  "This isn't just fiction. It's feeling.",
+  "You’ve written a sanctuary for the hurting.",
+  "A tender reminder that we are not alone.",
+  "It healed something I didn’t know was broken.",
+  "A love letter to every girl who has suffered silently.",
+  "Beautiful. Brave. Brilliant."
+    "I didn’t just read the story—I felt it."
+
+"A warm hug in the form of pages."
+
+"This book whispered things I never said aloud."
+
+"It broke me... then gently put me back together."
+
+"Some books entertain. This one heals."
+
+"I saw my scars in her story—and my strength too."
+
+"A quiet masterpiece for the loudest emotions."
+
+"Not just words. It’s soul ink."
+
+"I didn’t want the last page to arrive."
+
+"I cried... and somehow smiled through it."
+
+"It reads like a poem, but hits like truth."
+
+"A sanctuary for every silenced voice."
+
+"You don’t just turn pages—you turn emotions."
+
+"The softness in sorrow was breathtaking."
+
+"She wrote what many of us feel—but never say."
+
+"A literary mirror to every hurting heart."
+
+"Delicate, devastating, and deeply beautiful."
+
+"This isn’t fiction—it’s emotional alchemy."
+
+"For every girl who ever felt invisible—this one’s for you."
+
+"A quiet thunder of truth and tenderness."
+
+"Feels like it knows me better than I know myself."
+
+"The kind of book you press to your chest after finishing."
+
+"This story didn’t end. It stayed with me."
+
+"Reading this felt like finally exhaling."
+
+"Painfully real, achingly beautiful."
+
+"Each sentence: a heartbeat. Each page: a revelation."
+
+"She turned heartbreak into art."
+
+"If healing had a voice—it would sound like this."
+
+"It made me want to be softer with myself."
+
+"More than a story. It's a shared heartbeat."
+
+"A symphony of unspoken emotions wrapped in ink.",
+  "Each line felt like a whisper from the soul.",
+  "It read like a poem written with quiet pain and loud hope.",
+  "The pages bled poetry and stitched me together.",
+  "She turned silence into soft stanzas of survival.",
+  "A lullaby for the broken-hearted.",
+  "Ink dripped like rain—and healed like sunlight.",
+  "Words floated like petals and pierced like truth.",
+  "It wasn’t just read—it was felt like music in stillness.",
+  "She wrote like the moon—gentle, glowing, and always there."
+     "A fierce reminder that softness is strength.",
+  "For every girl who forgot her worth—this book remembers.",
+  "I saw a mirror and a map—guiding me back to myself.",
+  "She fell, but she rose—and so did I.",
+  "A love letter to resilience and rising anyway.",
+  "Her voice reminded me: I am allowed to heal.",
+  "Strength doesn’t roar—it sometimes writes.",
+  "This book lit a fire I thought I lost.",
+  "A survival anthem in story form.",
+  "I closed the book—but opened a new part of myself."
+     "It broke me gently, then held me while I cried.",
+  "I didn’t know how much I needed these words.",
+  "She wrote my ache before I even admitted it existed.",
+  "Grief, loneliness, healing—woven like thread through skin.",
+  "The pain was familiar. The hope was new.",
+  "It hurt... but like cleaning a wound.",
+  "Each page was a tear—and a balm.",
+  "This book cracked me open in the softest way.",
+  "I cried for the character. Then I cried for myself.",
+  "I was shattered—and this book became my glue."
+    
+];
+
+const reviews = Array.from({length: 7}, () => {
+  const randomIndex = Math.floor(Math.random() * reviewSamples.length);
+  return reviewSamples[randomIndex];
+});
+
 
     function displayRandomReviews() {
       const shuffled = reviews.sort(() => 0.5 - Math.random());
-      const selected = shuffled.slice(0, 6);
+      const selected = shuffled.slice(0, 1000); 
+
       const container = document.getElementById('reviewContainer');
       container.innerHTML = selected.map(text => `<div class="reviews">“${text}”</div>`).join('');
     }
