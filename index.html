@@ -21,6 +21,7 @@
   z-index: -1;
 }
 
+
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body {
       font-family: 'Roboto', sans-serif;
@@ -489,29 +490,36 @@
 <!-- Load tsParticles from CDN -->
 <script src="https://cdn.jsdelivr.net/npm/tsparticles@2.11.1/tsparticles.bundle.min.js"></script>
 
-<script>
-  // Inside window.onload or after DOM content is ready
-  tsParticles.load("particles-js", {
-    background: {
-      color: { value: "transparent" }
-    },
-    particles: {
-      number: { value: 60 },
-      color: { value: "#c44569" },
-      shape: { type: "circle" },
-      opacity: { value: 0.5 },
-      size: { value: { min: 2, max: 4 } },
-      move: {
-        enable: true,
-        speed: 1.5,
-        direction: "bottom",
-        outModes: { default: "out" }
-      }
-    }
-  });
-</script>
+
 
     window.onload = displayRandomReviews;
   </script>
+  <script src="https://cdn.jsdelivr.net/npm/tsparticles@2.11.1/tsparticles.bundle.min.js"></script>
+
+<script>
+  window.onload = () => {
+    displayRandomReviews(); // your existing review loader
+
+    tsParticles.load("particles-js", {
+      background: {
+        color: { value: "transparent" }
+      },
+      particles: {
+        number: { value: 60 },
+        color: { value: "#c44569" },
+        shape: { type: "circle" },
+        opacity: { value: 0.5 },
+        size: { value: { min: 2, max: 4 } },
+        move: {
+          enable: true,
+          speed: 1.5,
+          direction: "bottom",
+          outModes: { default: "out" }
+        }
+      }
+    });
+  };
+</script>
+
 </body>
 </html>
