@@ -485,9 +485,38 @@ const reviewMessages = [
   "Such raw and honest writing.",
   "Absolutely unforgettable.",
   "Left me speechless and healing."
+  "This book gave me strenth."
+  "Loved the way it ended!!"
+  "An emotional rollercoaster."
+  "A story every woman should read."
+
+"Raw, real, and beautifully written."
+
+"Made me cry, smile, and heal."
+
+"So relatable — felt like my own story."
+
+"Couldn’t stop reading!"
+
+"Each page gave me goosebumps."
+
+"She really did deserve the best."
+
+"Thank you for writing this."
+
+"Simple words, deep impact."
+"I saw myself in her."
+"Too real… it hurt to read."
+"A silent scream between the lines."
+"Not just fiction. This is someone’s truth."
+
+"I cried for a stranger, and for myself."
+
+ "This book is not easy to read — but it’s necessary."
+
 ];
 
-const reviews = Array.from({ length: 100 }, (_, i) => {
+const reviews = Array.from({ length: 1000 }, (_, i) => {
   const randomMessage = reviewMessages[Math.floor(Math.random() * reviewMessages.length)];
   return `Review #${i + 1}: ${randomMessage}`;
 });
