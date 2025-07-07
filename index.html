@@ -436,45 +436,63 @@
   <footer>
     &copy; 2025 Nidhi S | All Rights Reserved
   </footer>
+<script>
+  function toggleTheme() {
+    document.body.classList.toggle('dark-mode');
+  }
 
-  <script>
-    function toggleTheme() {
-      document.body.classList.toggle('dark-mode');
-    }
+  function openModal(id) {
+    document.getElementById(id).style.display = "block";
+  }
 
-    function openModal(id) {
-      document.getElementById(id).style.display = "block";
-    }
+  function closeModal(id) {
+    document.getElementById(id).style.display = "none";
+  }
 
-    function closeModal(id) {
-      document.getElementById(id).style.display = "none";
-    }
+  function showThankYou() {
+    document.getElementById('thankyou-cat').style.display = 'block';
+    setTimeout(() => {
+      document.getElementById('thankyou-cat').style.display = 'none';
+      closeModal('feedbackModal');
+    }, 5000);
+    return true;
+  }
 
-    window.onclick = function(event) {
-      ['feedbackModal', 'aboutModal', 'contactModal', 'storyModal'].forEach(id => {
-        const modal = document.getElementById(id);
-        if (event.target === modal) closeModal(id);
-      });
-    }
+  function showStoryThankYou() {
+    document.getElementById('thankyou-story').style.display = 'block';
+    setTimeout(() => {
+      document.getElementById('thankyou-story').style.display = 'none';
+      closeModal('storyModal');
+    }, 6000);
+    return true;
+  }
 
-    function showThankYou() {
-      document.getElementById('thankyou-cat').style.display = 'block';
-      setTimeout(() => {
-        document.getElementById('thankyou-cat').style.display = 'none';
-        closeModal('feedbackModal');
-      }, 5000);
-        return true;
-    }
-
-    function showStoryThankYou() {
-      document.getElementById('thankyou-story').style.display = 'block';
-      setTimeout(() => {
-        document.getElementById('thankyou-story').style.display = 'none';
-        closeModal('storyModal');
-      }, 6000);
-       return true;
-    }
-const reviews = [
+  const reviews = [
+    "She Deserves the Best broke me and healed me in the same breath.",
+    "Every page felt like my own story unfolding. Painful yet powerful.",
+    "It’s not just a novel—it’s therapy in words.",
+    "I cried silently while reading this. So many emotions.",
+    "The author has poured her soul into these pages. Beautiful and raw.",
+    "This book gave me the courage to leave a toxic relationship.",
+    "Sanya's journey felt too real. I'm still in tears.",
+    "The story lingered long after I finished the last page.",
+    "It made me feel seen after years of silence.",
+    "This novel is for every woman who's ever felt invisible.",
+    "Some stories leave scars, this one left hope.",
+    "I saw my younger self in every line of this book.",
+    "A raw, tender journey through pain and healing.",
+    "The silence in this story was louder than words.",
+    "I never thought a book would understand me so deeply.",
+    "It felt like someone finally wrote my truth.",
+    "This book didn’t just speak to me—it screamed and whispered all at once.",
+    "Her pain felt like my pain. Her strength, my inspiration.",
+    "So beautifully broken, yet powerful.",
+    "It taught me that healing is messy and beautiful.",
+    "I hugged this book after I finished it.",
+    "Pages soaked with tears, but worth every drop.",
+    "Every girl needs to read this at least once.",
+    "The kind of story that lingers in your chest.",
+    "This wasn’t just a book—it was a soft place to land."
   "She Deserves the Best broke me and healed me in the same breath.",
   "Every page felt like my own story unfolding. Painful yet powerful.",
   "It’s not just a novel—it’s therapy in words.",
@@ -504,28 +522,28 @@ const reviews = [
   "I cried for a stranger, and for myself."
   "This book is not easy to read — but it’s necessary."
     
-];
+  ];
 
+  function displayRandomReviews() {
+    const shuffled = reviews.sort(() => 0.5 - Math.random());
+    const selected = shuffled.slice(0, 6);
+    const container = document.getElementById('reviewContainer');
+    container.innerHTML = selected.map(text => `<div class="reviews">“${text}”</div>`).join('');
+  }
 
+  window.onload = function () {
+    displayRandomReviews();
 
-const reviews = Array.from({ length: 100 }, (_, i) => {
-  const randomMessage = reviewMessages[Math.floor(Math.random() * reviewMessages.length)];
-  return `Review #${i + 1}: ${randomMessage}`;
-});
+    window.onclick = function (event) {
+      ['feedbackModal', 'aboutModal', 'contactModal', 'storyModal', 'notesModal'].forEach(id => {
+        const modal = document.getElementById(id);
+        if (event.target === modal) closeModal(id);
+      });
+    };
+  };
 
-function displayRandomReviews() {
-  const shuffled = reviews.sort(() => 0.5 - Math.random());
-  const selected = shuffled.slice(0, 6);
-  const container = document.getElementById('reviewContainer');
-  container.innerHTML = selected.map(text => `<div class="reviews">“${text}”</div>`).join('');
-}
-
-
-setInterval(displayRandomReviews, 5000); // Updates every 5 seconds
-window.onload = displayRandomReviews;
-
-
-    window.onload = displayRandomReviews;
-  </script>
+  // Refresh reviews every 5 seconds
+  setInterval(displayRandomReviews, 5000);
+</script>
 </body>
 </html> 
