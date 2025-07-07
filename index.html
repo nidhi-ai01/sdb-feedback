@@ -474,18 +474,18 @@
       }, 6000);
        return true;
     }
-const reviewMessages = [
-  "This book touched my heart deeply.",
-  "A journey I didn’t know I needed.",
-  "Truly inspiring and beautifully written.",
-  "The emotions felt so real.",
-  "Every word resonated with my soul.",
-  "A story that stays with you.",
-  "It made me cry, but in the best way.",
-  "Such raw and honest writing.",
-  "Absolutely unforgettable.",
-  "Left me speechless and healing."
-  "This book gave me strenth."
+const reviews = [
+  "She Deserves the Best broke me and healed me in the same breath.",
+  "Every page felt like my own story unfolding. Painful yet powerful.",
+  "It’s not just a novel—it’s therapy in words.",
+  "I cried silently while reading this. So many emotions.",
+  "The author has poured her soul into these pages. Beautiful and raw.",
+  "This book gave me the courage to leave a toxic relationship.",
+  "Sanya's journey felt too real. I'm still in tears.",
+  "The story lingered long after I finished the last page.",
+  "It made me feel seen after years of silence.",
+  "This novel is for every woman who's ever felt invisible."
+   "This book gave me strenth."
   "Loved the way it ended!!"
   "An emotional rollercoaster."
   "A story every woman should read."
@@ -503,14 +503,15 @@ const reviewMessages = [
   "Not just fiction. This is someone’s truth."
   "I cried for a stranger, and for myself."
   "This book is not easy to read — but it’s necessary."
-
+    
 ];
+
+
 
 const reviews = Array.from({ length: 100 }, (_, i) => {
   const randomMessage = reviewMessages[Math.floor(Math.random() * reviewMessages.length)];
   return `Review #${i + 1}: ${randomMessage}`;
 });
-
 
 function displayRandomReviews() {
   const shuffled = reviews.sort(() => 0.5 - Math.random());
@@ -518,6 +519,7 @@ function displayRandomReviews() {
   const container = document.getElementById('reviewContainer');
   container.innerHTML = selected.map(text => `<div class="reviews">“${text}”</div>`).join('');
 }
+
 
 setInterval(displayRandomReviews, 5000); // Updates every 5 seconds
 window.onload = displayRandomReviews;
