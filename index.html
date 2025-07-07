@@ -436,7 +436,7 @@
   <footer>
     &copy; 2025 Nidhi S | All Rights Reserved
   </footer>
-<script>
+  <script>
   function toggleTheme() {
     document.body.classList.toggle('dark-mode');
   }
@@ -493,39 +493,11 @@
     "Every girl needs to read this at least once.",
     "The kind of story that lingers in your chest.",
     "This wasn’t just a book—it was a soft place to land."
-  "She Deserves the Best broke me and healed me in the same breath.",
-  "Every page felt like my own story unfolding. Painful yet powerful.",
-  "It’s not just a novel—it’s therapy in words.",
-  "I cried silently while reading this. So many emotions.",
-  "The author has poured her soul into these pages. Beautiful and raw.",
-  "This book gave me the courage to leave a toxic relationship.",
-  "Sanya's journey felt too real. I'm still in tears.",
-  "The story lingered long after I finished the last page.",
-  "It made me feel seen after years of silence.",
-  "This novel is for every woman who's ever felt invisible."
-   "This book gave me strenth."
-  "Loved the way it ended!!"
-  "An emotional rollercoaster."
-  "A story every woman should read."
-  "Raw, real, and beautifully written."
-  "Made me cry, smile, and heal."
-  "So relatable — felt like my own story."
-  "Couldn’t stop reading!"
-  "Each page gave me goosebumps."
-  "She really did deserve the best."
-  "Thank you for writing this."
-  "Simple words, deep impact."
-  "I saw myself in her."
-  "Too real… it hurt to read."
-  "A silent scream between the lines."
-  "Not just fiction. This is someone’s truth."
-  "I cried for a stranger, and for myself."
-  "This book is not easy to read — but it’s necessary."
-    
   ];
 
   function displayRandomReviews() {
-    const shuffled = reviews.sort(() => 0.5 - Math.random());
+    if (!document.getElementById('reviewContainer')) return;
+    const shuffled = [...reviews].sort(() => 0.5 - Math.random());
     const selected = shuffled.slice(0, 6);
     const container = document.getElementById('reviewContainer');
     container.innerHTML = selected.map(text => `<div class="reviews">“${text}”</div>`).join('');
